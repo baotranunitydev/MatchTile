@@ -11,14 +11,14 @@ namespace Cysharp.Threading.Tasks
         static readonly Action<object> cancellationTokenCallback = Callback;
         static readonly Action<object> disposeCallback = DisposeCallback;
 
-        public static CancellationToken ToCancellationToken(this UniTask task)
+        public static CancellationToken ToCancellationToken(this UnitaskVoid task)
         {
             var cts = new CancellationTokenSource();
             ToCancellationTokenCore(task, cts).Forget();
             return cts.Token;
         }
 
-        public static CancellationToken ToCancellationToken(this UniTask task, CancellationToken linkToken)
+        public static CancellationToken ToCancellationToken(this UnitaskVoid task, CancellationToken linkToken)
         {
             if (linkToken.IsCancellationRequested)
             {
@@ -46,7 +46,7 @@ namespace Cysharp.Threading.Tasks
             return ToCancellationToken(task.AsUniTask(), linkToken);
         }
 
-        static async UniTaskVoid ToCancellationTokenCore(UniTask task, CancellationTokenSource cts)
+        static async UniTaskVoid ToCancellationTokenCore(UnitaskVoid task, CancellationTokenSource cts)
         {
             try
             {
@@ -60,11 +60,11 @@ namespace Cysharp.Threading.Tasks
             cts.Dispose();
         }
 
-        public static (UniTask, CancellationTokenRegistration) ToUniTask(this CancellationToken cancellationToken)
+        public static (UnitaskVoid, CancellationTokenRegistration) ToUniTask(this CancellationToken cancellationToken)
         {
             if (cancellationToken.IsCancellationRequested)
             {
-                return (UniTask.FromCanceled(cancellationToken), default(CancellationTokenRegistration));
+                return (UnitaskVoid.FromCanceled(cancellationToken), default(CancellationTokenRegistration));
             }
 
             var promise = new UniTaskCompletionSource();

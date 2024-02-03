@@ -47,7 +47,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 return tcs.Task;
             }
 
-            public UniTask DisposeAsync()
+            public UnitaskVoid DisposeAsync()
             {
                 return default;
             }

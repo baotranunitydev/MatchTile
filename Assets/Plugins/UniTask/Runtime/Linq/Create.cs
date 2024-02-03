@@ -6,7 +6,7 @@ namespace Cysharp.Threading.Tasks.Linq
 {
     public static partial class UniTaskAsyncEnumerable
     {
-        public static IUniTaskAsyncEnumerable<T> Create<T>(Func<IAsyncWriter<T>, CancellationToken, UniTask> create)
+        public static IUniTaskAsyncEnumerable<T> Create<T>(Func<IAsyncWriter<T>, CancellationToken, UnitaskVoid> create)
         {
             Error.ThrowArgumentNullException(create, nameof(create));
             return new Create<T>(create);
@@ -15,14 +15,14 @@ namespace Cysharp.Threading.Tasks.Linq
 
     public interface IAsyncWriter<T>
     {
-        UniTask YieldAsync(T value);
+        UnitaskVoid YieldAsync(T value);
     }
 
     internal sealed class Create<T> : IUniTaskAsyncEnumerable<T>
     {
-        readonly Func<IAsyncWriter<T>, CancellationToken, UniTask> create;
+        readonly Func<IAsyncWriter<T>, CancellationToken, UnitaskVoid> create;
 
-        public Create(Func<IAsyncWriter<T>, CancellationToken, UniTask> create)
+        public Create(Func<IAsyncWriter<T>, CancellationToken, UnitaskVoid> create)
         {
             this.create = create;
         }
@@ -34,13 +34,13 @@ namespace Cysharp.Threading.Tasks.Linq
 
         sealed class _Create : MoveNextSource, IUniTaskAsyncEnumerator<T>
         {
-            readonly Func<IAsyncWriter<T>, CancellationToken, UniTask> create;
+            readonly Func<IAsyncWriter<T>, CancellationToken, UnitaskVoid> create;
             readonly CancellationToken cancellationToken;
 
             int state = -1;
             AsyncWriter writer;
 
-            public _Create(Func<IAsyncWriter<T>, CancellationToken, UniTask> create, CancellationToken cancellationToken)
+            public _Create(Func<IAsyncWriter<T>, CancellationToken, UnitaskVoid> create, CancellationToken cancellationToken)
             {
                 this.create = create;
                 this.cancellationToken = cancellationToken;
@@ -49,7 +49,7 @@ namespace Cysharp.Threading.Tasks.Linq
 
             public T Current { get; private set; }
 
-            public UniTask DisposeAsync()
+            public UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 writer.Dispose();
@@ -102,7 +102,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 return;
             }
 
-            async UniTaskVoid RunWriterTask(UniTask task)
+            async UniTaskVoid RunWriterTask(UnitaskVoid task)
             {
                 try
                 {
@@ -168,11 +168,11 @@ namespace Cysharp.Threading.Tasks.Linq
                 core.OnCompleted(continuation, state, token);
             }
 
-            public UniTask YieldAsync(T value)
+            public UnitaskVoid YieldAsync(T value)
             {
                 core.Reset();
                 enumerator.SetResult(value);
-                return new UniTask(this, core.Version);
+                return new UnitaskVoid(this, core.Version);
             }
 
             public void SignalWriter()

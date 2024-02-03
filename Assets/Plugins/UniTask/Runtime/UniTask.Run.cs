@@ -5,30 +5,30 @@ using System.Threading;
 
 namespace Cysharp.Threading.Tasks
 {
-    public partial struct UniTask
+    public partial struct UnitaskVoid
     {
         #region OBSOLETE_RUN
 
         [Obsolete("UniTask.Run is similar as Task.Run, it uses ThreadPool. For equivalent behaviour, use UniTask.RunOnThreadPool instead. If you don't want to use ThreadPool, you can use UniTask.Void(async void) or UniTask.Create(async UniTask) too.")]
-        public static UniTask Run(Action action, bool configureAwait = true, CancellationToken cancellationToken = default)
+        public static UnitaskVoid Run(Action action, bool configureAwait = true, CancellationToken cancellationToken = default)
         {
             return RunOnThreadPool(action, configureAwait, cancellationToken);
         }
 
         [Obsolete("UniTask.Run is similar as Task.Run, it uses ThreadPool. For equivalent behaviour, use UniTask.RunOnThreadPool instead. If you don't want to use ThreadPool, you can use UniTask.Void(async void) or UniTask.Create(async UniTask) too.")]
-        public static UniTask Run(Action<object> action, object state, bool configureAwait = true, CancellationToken cancellationToken = default)
+        public static UnitaskVoid Run(Action<object> action, object state, bool configureAwait = true, CancellationToken cancellationToken = default)
         {
             return RunOnThreadPool(action, state, configureAwait, cancellationToken);
         }
 
         [Obsolete("UniTask.Run is similar as Task.Run, it uses ThreadPool. For equivalent behaviour, use UniTask.RunOnThreadPool instead. If you don't want to use ThreadPool, you can use UniTask.Void(async void) or UniTask.Create(async UniTask) too.")]
-        public static UniTask Run(Func<UniTask> action, bool configureAwait = true, CancellationToken cancellationToken = default)
+        public static UnitaskVoid Run(Func<UnitaskVoid> action, bool configureAwait = true, CancellationToken cancellationToken = default)
         {
             return RunOnThreadPool(action, configureAwait, cancellationToken);
         }
 
         [Obsolete("UniTask.Run is similar as Task.Run, it uses ThreadPool. For equivalent behaviour, use UniTask.RunOnThreadPool instead. If you don't want to use ThreadPool, you can use UniTask.Void(async void) or UniTask.Create(async UniTask) too.")]
-        public static UniTask Run(Func<object, UniTask> action, object state, bool configureAwait = true, CancellationToken cancellationToken = default)
+        public static UnitaskVoid Run(Func<object, UnitaskVoid> action, object state, bool configureAwait = true, CancellationToken cancellationToken = default)
         {
             return RunOnThreadPool(action, state, configureAwait, cancellationToken);
         }
@@ -60,11 +60,11 @@ namespace Cysharp.Threading.Tasks
         #endregion
 
         /// <summary>Run action on the threadPool and return to main thread if configureAwait = true.</summary>
-        public static async UniTask RunOnThreadPool(Action action, bool configureAwait = true, CancellationToken cancellationToken = default)
+        public static async UnitaskVoid RunOnThreadPool(Action action, bool configureAwait = true, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            await UniTask.SwitchToThreadPool();
+            await UnitaskVoid.SwitchToThreadPool();
 
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -76,7 +76,7 @@ namespace Cysharp.Threading.Tasks
                 }
                 finally
                 {
-                    await UniTask.Yield();
+                    await UnitaskVoid.Yield();
                 }
             }
             else
@@ -88,11 +88,11 @@ namespace Cysharp.Threading.Tasks
         }
 
         /// <summary>Run action on the threadPool and return to main thread if configureAwait = true.</summary>
-        public static async UniTask RunOnThreadPool(Action<object> action, object state, bool configureAwait = true, CancellationToken cancellationToken = default)
+        public static async UnitaskVoid RunOnThreadPool(Action<object> action, object state, bool configureAwait = true, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            await UniTask.SwitchToThreadPool();
+            await UnitaskVoid.SwitchToThreadPool();
 
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -104,7 +104,7 @@ namespace Cysharp.Threading.Tasks
                 }
                 finally
                 {
-                    await UniTask.Yield();
+                    await UnitaskVoid.Yield();
                 }
             }
             else
@@ -116,11 +116,11 @@ namespace Cysharp.Threading.Tasks
         }
 
         /// <summary>Run action on the threadPool and return to main thread if configureAwait = true.</summary>
-        public static async UniTask RunOnThreadPool(Func<UniTask> action, bool configureAwait = true, CancellationToken cancellationToken = default)
+        public static async UnitaskVoid RunOnThreadPool(Func<UnitaskVoid> action, bool configureAwait = true, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            await UniTask.SwitchToThreadPool();
+            await UnitaskVoid.SwitchToThreadPool();
 
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -132,7 +132,7 @@ namespace Cysharp.Threading.Tasks
                 }
                 finally
                 {
-                    await UniTask.Yield();
+                    await UnitaskVoid.Yield();
                 }
             }
             else
@@ -144,11 +144,11 @@ namespace Cysharp.Threading.Tasks
         }
 
         /// <summary>Run action on the threadPool and return to main thread if configureAwait = true.</summary>
-        public static async UniTask RunOnThreadPool(Func<object, UniTask> action, object state, bool configureAwait = true, CancellationToken cancellationToken = default)
+        public static async UnitaskVoid RunOnThreadPool(Func<object, UnitaskVoid> action, object state, bool configureAwait = true, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            await UniTask.SwitchToThreadPool();
+            await UnitaskVoid.SwitchToThreadPool();
 
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -160,7 +160,7 @@ namespace Cysharp.Threading.Tasks
                 }
                 finally
                 {
-                    await UniTask.Yield();
+                    await UnitaskVoid.Yield();
                 }
             }
             else
@@ -176,7 +176,7 @@ namespace Cysharp.Threading.Tasks
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            await UniTask.SwitchToThreadPool();
+            await UnitaskVoid.SwitchToThreadPool();
 
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -188,7 +188,7 @@ namespace Cysharp.Threading.Tasks
                 }
                 finally
                 {
-                    await UniTask.Yield();
+                    await UnitaskVoid.Yield();
                     cancellationToken.ThrowIfCancellationRequested();
                 }
             }
@@ -203,7 +203,7 @@ namespace Cysharp.Threading.Tasks
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            await UniTask.SwitchToThreadPool();
+            await UnitaskVoid.SwitchToThreadPool();
 
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -216,7 +216,7 @@ namespace Cysharp.Threading.Tasks
                 finally
                 {
                     cancellationToken.ThrowIfCancellationRequested();
-                    await UniTask.Yield();
+                    await UnitaskVoid.Yield();
                     cancellationToken.ThrowIfCancellationRequested();
                 }
             }
@@ -233,7 +233,7 @@ namespace Cysharp.Threading.Tasks
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            await UniTask.SwitchToThreadPool();
+            await UnitaskVoid.SwitchToThreadPool();
 
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -245,7 +245,7 @@ namespace Cysharp.Threading.Tasks
                 }
                 finally
                 {
-                    await UniTask.Yield();
+                    await UnitaskVoid.Yield();
                     cancellationToken.ThrowIfCancellationRequested();
                 }
             }
@@ -260,7 +260,7 @@ namespace Cysharp.Threading.Tasks
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            await UniTask.SwitchToThreadPool();
+            await UnitaskVoid.SwitchToThreadPool();
 
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -273,7 +273,7 @@ namespace Cysharp.Threading.Tasks
                 finally
                 {
                     cancellationToken.ThrowIfCancellationRequested();
-                    await UniTask.Yield();
+                    await UnitaskVoid.Yield();
                     cancellationToken.ThrowIfCancellationRequested();
                 }
             }

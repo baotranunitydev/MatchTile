@@ -46,7 +46,7 @@ namespace Cysharp.Threading.Tasks
             }
         }
 
-        protected bool TryGetResult(UniTask.Awaiter awaiter)
+        protected bool TryGetResult(UnitaskVoid.Awaiter awaiter)
         {
             try
             {

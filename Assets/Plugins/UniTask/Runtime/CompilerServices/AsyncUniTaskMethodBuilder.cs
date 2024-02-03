@@ -24,7 +24,7 @@ namespace Cysharp.Threading.Tasks.CompilerServices
         }
 
         // 2. TaskLike Task property.
-        public UniTask Task
+        public UnitaskVoid Task
         {
             [DebuggerHidden]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -36,11 +36,11 @@ namespace Cysharp.Threading.Tasks.CompilerServices
                 }
                 else if (ex != null)
                 {
-                    return UniTask.FromException(ex);
+                    return UnitaskVoid.FromException(ex);
                 }
                 else
                 {
-                    return UniTask.CompletedTask;
+                    return UnitaskVoid.CompletedTask;
                 }
             }
         }
@@ -163,11 +163,11 @@ namespace Cysharp.Threading.Tasks.CompilerServices
                 }
                 else if (ex != null)
                 {
-                    return UniTask.FromException<T>(ex);
+                    return UnitaskVoid.FromException<T>(ex);
                 }
                 else
                 {
-                    return UniTask.FromResult(result);
+                    return UnitaskVoid.FromResult(result);
                 }
             }
         }

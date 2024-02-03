@@ -155,7 +155,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 return;
             }
 
-            public UniTask DisposeAsync()
+            public UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 return enumerator.DisposeAsync();
@@ -264,7 +264,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 return;
             }
 
-            public UniTask DisposeAsync()
+            public UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 return enumerator.DisposeAsync();
@@ -385,7 +385,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 return;
             }
 
-            public UniTask DisposeAsync()
+            public UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 return enumerator.DisposeAsync();
@@ -507,7 +507,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 return;
             }
 
-            public UniTask DisposeAsync()
+            public UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 return enumerator.DisposeAsync();
@@ -628,7 +628,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 return;
             }
 
-            public UniTask DisposeAsync()
+            public UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 return enumerator.DisposeAsync();
@@ -750,7 +750,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 return;
             }
 
-            public UniTask DisposeAsync()
+            public UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 return enumerator.DisposeAsync();

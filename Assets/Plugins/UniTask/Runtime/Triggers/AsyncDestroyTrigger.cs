@@ -54,9 +54,9 @@ namespace Cysharp.Threading.Tasks.Triggers
             cancellationTokenSource?.Dispose();
         }
 
-        public UniTask OnDestroyAsync()
+        public UnitaskVoid OnDestroyAsync()
         {
-            if (called) return UniTask.CompletedTask;
+            if (called) return UnitaskVoid.CompletedTask;
 
             var tcs = new UniTaskCompletionSource();
 

@@ -140,7 +140,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 return new UniTask<bool>(this, completionSource.Version);
             }
 
-            public async UniTask DisposeAsync()
+            public async UnitaskVoid DisposeAsync()
             {
                 for (var i = 0; i < length; i++)
                 {

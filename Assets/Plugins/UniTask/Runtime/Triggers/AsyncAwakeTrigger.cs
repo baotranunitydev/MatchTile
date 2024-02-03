@@ -21,9 +21,9 @@ namespace Cysharp.Threading.Tasks.Triggers
     [DisallowMultipleComponent]
     public sealed class AsyncAwakeTrigger : AsyncTriggerBase<AsyncUnit>
     {
-        public UniTask AwakeAsync()
+        public UnitaskVoid AwakeAsync()
         {
-            if (calledAwake) return UniTask.CompletedTask;
+            if (calledAwake) return UnitaskVoid.CompletedTask;
 
             return ((IAsyncOneShotTrigger)new AsyncTriggerHandler<AsyncUnit>(this, true)).OneShotAsync();
         }

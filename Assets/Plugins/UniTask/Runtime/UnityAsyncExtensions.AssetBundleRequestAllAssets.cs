@@ -32,8 +32,8 @@ namespace Cysharp.Threading.Tasks
         public static UniTask<UnityEngine.Object[]> AwaitForAllAssets(this AssetBundleRequest asyncOperation, IProgress<float> progress = null, PlayerLoopTiming timing = PlayerLoopTiming.Update, CancellationToken cancellationToken = default(CancellationToken), bool cancelImmediately = false)
         {
             Error.ThrowArgumentNullException(asyncOperation, nameof(asyncOperation));
-            if (cancellationToken.IsCancellationRequested) return UniTask.FromCanceled<UnityEngine.Object[]>(cancellationToken);
-            if (asyncOperation.isDone) return UniTask.FromResult(asyncOperation.allAssets);
+            if (cancellationToken.IsCancellationRequested) return UnitaskVoid.FromCanceled<UnityEngine.Object[]>(cancellationToken);
+            if (asyncOperation.isDone) return UnitaskVoid.FromResult(asyncOperation.allAssets);
             return new UniTask<UnityEngine.Object[]>(AssetBundleRequestAllAssetsConfiguredSource.Create(asyncOperation, timing, progress, cancellationToken, cancelImmediately, out var token), token);
         }
 

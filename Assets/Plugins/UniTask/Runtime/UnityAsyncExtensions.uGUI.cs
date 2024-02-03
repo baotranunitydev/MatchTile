@@ -15,7 +15,7 @@ namespace Cysharp.Threading.Tasks
             return new AsyncUnityEventHandler(unityEvent, cancellationToken, false);
         }
 
-        public static UniTask OnInvokeAsync(this UnityEvent unityEvent, CancellationToken cancellationToken)
+        public static UnitaskVoid OnInvokeAsync(this UnityEvent unityEvent, CancellationToken cancellationToken)
         {
             return new AsyncUnityEventHandler(unityEvent, cancellationToken, true).OnInvokeAsync();
         }
@@ -50,12 +50,12 @@ namespace Cysharp.Threading.Tasks
             return new AsyncUnityEventHandler(button.onClick, cancellationToken, false);
         }
 
-        public static UniTask OnClickAsync(this Button button)
+        public static UnitaskVoid OnClickAsync(this Button button)
         {
             return new AsyncUnityEventHandler(button.onClick, button.GetCancellationTokenOnDestroy(), true).OnInvokeAsync();
         }
 
-        public static UniTask OnClickAsync(this Button button, CancellationToken cancellationToken)
+        public static UnitaskVoid OnClickAsync(this Button button, CancellationToken cancellationToken)
         {
             return new AsyncUnityEventHandler(button.onClick, cancellationToken, true).OnInvokeAsync();
         }
@@ -283,7 +283,7 @@ namespace Cysharp.Threading.Tasks
 
     public interface IAsyncClickEventHandler : IDisposable
     {
-        UniTask OnClickAsync();
+        UnitaskVoid OnClickAsync();
     }
 
     public interface IAsyncValueChangedEventHandler<T> : IDisposable
@@ -385,14 +385,14 @@ namespace Cysharp.Threading.Tasks
             TaskTracker.TrackActiveTask(this, 3);
         }
 
-        public UniTask OnInvokeAsync()
+        public UnitaskVoid OnInvokeAsync()
         {
             core.Reset();
             if (isDisposed)
             {
                 core.TrySetCanceled(this.cancellationToken);
             }
-            return new UniTask(this, core.Version);
+            return new UnitaskVoid(this, core.Version);
         }
 
         void Invoke()
@@ -421,7 +421,7 @@ namespace Cysharp.Threading.Tasks
             }
         }
 
-        UniTask IAsyncClickEventHandler.OnClickAsync()
+        UnitaskVoid IAsyncClickEventHandler.OnClickAsync()
         {
             return OnInvokeAsync();
         }
@@ -711,7 +711,7 @@ namespace Cysharp.Threading.Tasks
                 }
             }
 
-            public UniTask DisposeAsync()
+            public UnitaskVoid DisposeAsync()
             {
                 if (!isDisposed)
                 {
@@ -832,7 +832,7 @@ namespace Cysharp.Threading.Tasks
                 }
             }
 
-            public UniTask DisposeAsync()
+            public UnitaskVoid DisposeAsync()
             {
                 if (!isDisposed)
                 {

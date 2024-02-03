@@ -460,7 +460,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public async UniTask DisposeAsync()
+            public async UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (enumerator1 != null)
@@ -790,7 +790,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public async UniTask DisposeAsync()
+            public async UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (enumerator1 != null)
@@ -1204,7 +1204,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public async UniTask DisposeAsync()
+            public async UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (enumerator1 != null)
@@ -1702,7 +1702,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public async UniTask DisposeAsync()
+            public async UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (enumerator1 != null)
@@ -2284,7 +2284,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public async UniTask DisposeAsync()
+            public async UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (enumerator1 != null)
@@ -2950,7 +2950,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public async UniTask DisposeAsync()
+            public async UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (enumerator1 != null)
@@ -3700,7 +3700,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public async UniTask DisposeAsync()
+            public async UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (enumerator1 != null)
@@ -4534,7 +4534,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public async UniTask DisposeAsync()
+            public async UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (enumerator1 != null)
@@ -5452,7 +5452,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public async UniTask DisposeAsync()
+            public async UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (enumerator1 != null)
@@ -6454,7 +6454,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public async UniTask DisposeAsync()
+            public async UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (enumerator1 != null)
@@ -7540,7 +7540,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public async UniTask DisposeAsync()
+            public async UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (enumerator1 != null)
@@ -8710,7 +8710,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public async UniTask DisposeAsync()
+            public async UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (enumerator1 != null)
@@ -9964,7 +9964,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public async UniTask DisposeAsync()
+            public async UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (enumerator1 != null)
@@ -11302,7 +11302,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public async UniTask DisposeAsync()
+            public async UnitaskVoid DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (enumerator1 != null)

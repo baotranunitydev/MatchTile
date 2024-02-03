@@ -42,10 +42,10 @@ namespace Cysharp.Threading.Tasks.Linq
             public UniTask<bool> MoveNextAsync()
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                return UniTask.FromException<bool>(exception);
+                return UnitaskVoid.FromException<bool>(exception);
             }
 
-            public UniTask DisposeAsync()
+            public UnitaskVoid DisposeAsync()
             {
                 return default;
             }

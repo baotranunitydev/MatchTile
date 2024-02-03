@@ -83,7 +83,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 return CompletedTasks.False;
             }
 
-            public UniTask DisposeAsync()
+            public UnitaskVoid DisposeAsync()
             {
                 enumerator.Dispose();
                 return default;
@@ -137,7 +137,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 return true;
             }
 
-            public UniTask DisposeAsync()
+            public UnitaskVoid DisposeAsync()
             {
                 return default;
             }
@@ -190,7 +190,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 return true;
             }
 
-            public UniTask DisposeAsync()
+            public UnitaskVoid DisposeAsync()
             {
                 return default;
             }
@@ -272,7 +272,7 @@ namespace Cysharp.Threading.Tasks.Linq
 
                     if (cancellationToken.IsCancellationRequested)
                     {
-                        return UniTask.FromCanceled<bool>(cancellationToken);
+                        return UnitaskVoid.FromCanceled<bool>(cancellationToken);
                     }
 
                     if (subscription == null)
@@ -282,7 +282,7 @@ namespace Cysharp.Threading.Tasks.Linq
 
                     if (error != null)
                     {
-                        return UniTask.FromException<bool>(error);
+                        return UnitaskVoid.FromException<bool>(error);
                     }
 
                     if (queuedResult.Count != 0)
@@ -300,7 +300,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public UniTask DisposeAsync()
+            public UnitaskVoid DisposeAsync()
             {
                 subscription.Dispose();
                 cancellationTokenRegistration.Dispose();

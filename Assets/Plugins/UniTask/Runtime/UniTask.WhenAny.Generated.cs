@@ -7,7 +7,7 @@ using Cysharp.Threading.Tasks.Internal;
 
 namespace Cysharp.Threading.Tasks
 {
-    public partial struct UniTask
+    public partial struct UnitaskVoid
     {
         public static UniTask<(int winArgumentIndex, T1 result1, T2 result2)> WhenAny<T1, T2>(UniTask<T1> task1, UniTask<T2> task2)
         {

@@ -196,7 +196,7 @@ namespace Cysharp.Threading.Tasks
         public short Version => version;
 
         /// <summary>Gets the status of the operation.</summary>
-        /// <param name="token">Opaque value that was provided to the <see cref="UniTask"/>'s constructor.</param>
+        /// <param name="token">Opaque value that was provided to the <see cref="UnitaskVoid"/>'s constructor.</param>
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public UniTaskStatus GetStatus(short token)
@@ -220,7 +220,7 @@ namespace Cysharp.Threading.Tasks
         }
 
         /// <summary>Gets the result of the operation.</summary>
-        /// <param name="token">Opaque value that was provided to the <see cref="UniTask"/>'s constructor.</param>
+        /// <param name="token">Opaque value that was provided to the <see cref="UnitaskVoid"/>'s constructor.</param>
         // [StackTraceHidden]
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -253,7 +253,7 @@ namespace Cysharp.Threading.Tasks
         /// <summary>Schedules the continuation action for this operation.</summary>
         /// <param name="continuation">The continuation to invoke when the operation has completed.</param>
         /// <param name="state">The state object to pass to <paramref name="continuation"/> when it's invoked.</param>
-        /// <param name="token">Opaque value that was provided to the <see cref="UniTask"/>'s constructor.</param>
+        /// <param name="token">Opaque value that was provided to the <see cref="UnitaskVoid"/>'s constructor.</param>
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void OnCompleted(Action<object> continuation, object state, short token /*, ValueTaskSourceOnCompletedFlags flags */)
@@ -373,12 +373,12 @@ namespace Cysharp.Threading.Tasks
             return source;
         }
 
-        public UniTask Task
+        public UnitaskVoid Task
         {
             [DebuggerHidden]
             get
             {
-                return new UniTask(this, core.Version);
+                return new UnitaskVoid(this, core.Version);
             }
         }
 
@@ -597,12 +597,12 @@ namespace Cysharp.Threading.Tasks
             }
         }
 
-        public UniTask Task
+        public UnitaskVoid Task
         {
             [DebuggerHidden]
             get
             {
-                return new UniTask(this, 0);
+                return new UnitaskVoid(this, 0);
             }
         }
 

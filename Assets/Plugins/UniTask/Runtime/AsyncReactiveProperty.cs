@@ -271,7 +271,7 @@ namespace Cysharp.Threading.Tasks
                 return new UniTask<bool>(this, completionSource.Version);
             }
 
-            public UniTask DisposeAsync()
+            public UnitaskVoid DisposeAsync()
             {
                 if (!isDisposed)
                 {
@@ -588,7 +588,7 @@ namespace Cysharp.Threading.Tasks
                 return new UniTask<bool>(this, completionSource.Version);
             }
 
-            public UniTask DisposeAsync()
+            public UnitaskVoid DisposeAsync()
             {
                 if (!isDisposed)
                 {

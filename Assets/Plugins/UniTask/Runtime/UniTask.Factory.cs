@@ -8,11 +8,11 @@ using System.Threading;
 
 namespace Cysharp.Threading.Tasks
 {
-    public partial struct UniTask
+    public partial struct UnitaskVoid
     {
-        static readonly UniTask CanceledUniTask = new Func<UniTask>(() =>
+        static readonly UnitaskVoid CanceledUniTask = new Func<UnitaskVoid>(() =>
         {
-            return new UniTask(new CanceledResultSource(CancellationToken.None), 0);
+            return new UnitaskVoid(new CanceledResultSource(CancellationToken.None), 0);
         })();
 
         static class CanceledUniTaskCache<T>
@@ -25,16 +25,16 @@ namespace Cysharp.Threading.Tasks
             }
         }
 
-        public static readonly UniTask CompletedTask = new UniTask();
+        public static readonly UnitaskVoid CompletedTask = new UnitaskVoid();
 
-        public static UniTask FromException(Exception ex)
+        public static UnitaskVoid FromException(Exception ex)
         {
             if (ex is OperationCanceledException oce)
             {
                 return FromCanceled(oce.CancellationToken);
             }
 
-            return new UniTask(new ExceptionResultSource(ex), 0);
+            return new UnitaskVoid(new ExceptionResultSource(ex), 0);
         }
 
         public static UniTask<T> FromException<T>(Exception ex)
@@ -52,7 +52,7 @@ namespace Cysharp.Threading.Tasks
             return new UniTask<T>(value);
         }
 
-        public static UniTask FromCanceled(CancellationToken cancellationToken = default)
+        public static UnitaskVoid FromCanceled(CancellationToken cancellationToken = default)
         {
             if (cancellationToken == CancellationToken.None)
             {
@@ -60,7 +60,7 @@ namespace Cysharp.Threading.Tasks
             }
             else
             {
-                return new UniTask(new CanceledResultSource(cancellationToken), 0);
+                return new UnitaskVoid(new CanceledResultSource(cancellationToken), 0);
             }
         }
 
@@ -76,7 +76,7 @@ namespace Cysharp.Threading.Tasks
             }
         }
 
-        public static UniTask Create(Func<UniTask> factory)
+        public static UnitaskVoid Create(Func<UnitaskVoid> factory)
         {
             return factory();
         }
@@ -86,7 +86,7 @@ namespace Cysharp.Threading.Tasks
             return factory();
         }
 
-        public static AsyncLazy Lazy(Func<UniTask> factory)
+        public static AsyncLazy Lazy(Func<UnitaskVoid> factory)
         {
             return new AsyncLazy(factory);
         }
@@ -162,9 +162,9 @@ namespace Cysharp.Threading.Tasks
         /// <summary>
         /// Defer the task creation just before call await.
         /// </summary>
-        public static UniTask Defer(Func<UniTask> factory)
+        public static UnitaskVoid Defer(Func<UnitaskVoid> factory)
         {
-            return new UniTask(new DeferPromise(factory), 0);
+            return new UnitaskVoid(new DeferPromise(factory), 0);
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace Cysharp.Threading.Tasks
         /// <summary>
         /// Never complete.
         /// </summary>
-        public static UniTask Never(CancellationToken cancellationToken)
+        public static UnitaskVoid Never(CancellationToken cancellationToken)
         {
             return new UniTask<AsyncUnit>(new NeverPromise<AsyncUnit>(cancellationToken), 0);
         }
@@ -357,11 +357,11 @@ namespace Cysharp.Threading.Tasks
 
         sealed class DeferPromise : IUniTaskSource
         {
-            Func<UniTask> factory;
-            UniTask task;
-            UniTask.Awaiter awaiter;
+            Func<UnitaskVoid> factory;
+            UnitaskVoid task;
+            UnitaskVoid.Awaiter awaiter;
 
-            public DeferPromise(Func<UniTask> factory)
+            public DeferPromise(Func<UnitaskVoid> factory)
             {
                 this.factory = factory;
             }
@@ -489,11 +489,11 @@ namespace Cysharp.Threading.Tasks
 
     internal static class CompletedTasks
     {
-        public static readonly UniTask<AsyncUnit> AsyncUnit = UniTask.FromResult(Cysharp.Threading.Tasks.AsyncUnit.Default);
-        public static readonly UniTask<bool> True = UniTask.FromResult(true);
-        public static readonly UniTask<bool> False = UniTask.FromResult(false);
-        public static readonly UniTask<int> Zero = UniTask.FromResult(0);
-        public static readonly UniTask<int> MinusOne = UniTask.FromResult(-1);
-        public static readonly UniTask<int> One = UniTask.FromResult(1);
+        public static readonly UniTask<AsyncUnit> AsyncUnit = UnitaskVoid.FromResult(Cysharp.Threading.Tasks.AsyncUnit.Default);
+        public static readonly UniTask<bool> True = UnitaskVoid.FromResult(true);
+        public static readonly UniTask<bool> False = UnitaskVoid.FromResult(false);
+        public static readonly UniTask<int> Zero = UnitaskVoid.FromResult(0);
+        public static readonly UniTask<int> MinusOne = UnitaskVoid.FromResult(-1);
+        public static readonly UniTask<int> One = UnitaskVoid.FromResult(1);
     }
 }

@@ -135,7 +135,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 self.DisposeAsync().Forget();
             }
 
-            public UniTask DisposeAsync()
+            public UnitaskVoid DisposeAsync()
             {
                 if (!isDisposed)
                 {

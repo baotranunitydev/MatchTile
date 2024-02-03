@@ -9,7 +9,7 @@ namespace Cysharp.Threading.Tasks
     {
         // overload resolver - .Select(async x => { }) : IEnumerable<UniTask<T>>
 
-        public static IEnumerable<UniTask> Select<T>(this IEnumerable<T> source, Func<T, UniTask> selector)
+        public static IEnumerable<UnitaskVoid> Select<T>(this IEnumerable<T> source, Func<T, UnitaskVoid> selector)
         {
             return System.Linq.Enumerable.Select(source, selector);
         }
@@ -19,7 +19,7 @@ namespace Cysharp.Threading.Tasks
             return System.Linq.Enumerable.Select(source, selector);
         }
 
-        public static IEnumerable<UniTask> Select<T>(this IEnumerable<T> source, Func<T, int, UniTask> selector)
+        public static IEnumerable<UnitaskVoid> Select<T>(this IEnumerable<T> source, Func<T, int, UnitaskVoid> selector)
         {
             return System.Linq.Enumerable.Select(source, selector);
         }

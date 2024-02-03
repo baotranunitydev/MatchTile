@@ -7,9 +7,9 @@ using Cysharp.Threading.Tasks.Internal;
 
 namespace Cysharp.Threading.Tasks
 {
-    public partial struct UniTask
+    public partial struct UnitaskVoid
     {
-        public static UniTask<(bool hasResultLeft, T result)> WhenAny<T>(UniTask<T> leftTask, UniTask rightTask)
+        public static UniTask<(bool hasResultLeft, T result)> WhenAny<T>(UniTask<T> leftTask, UnitaskVoid rightTask)
         {
             return new UniTask<(bool, T)>(new WhenAnyLRPromise<T>(leftTask, rightTask), 0);
         }
@@ -28,13 +28,13 @@ namespace Cysharp.Threading.Tasks
         }
 
         /// <summary>Return value is winArgumentIndex</summary>
-        public static UniTask<int> WhenAny(params UniTask[] tasks)
+        public static UniTask<int> WhenAny(params UnitaskVoid[] tasks)
         {
             return new UniTask<int>(new WhenAnyPromise(tasks, tasks.Length), 0);
         }
 
         /// <summary>Return value is winArgumentIndex</summary>
-        public static UniTask<int> WhenAny(IEnumerable<UniTask> tasks)
+        public static UniTask<int> WhenAny(IEnumerable<UnitaskVoid> tasks)
         {
             using (var span = ArrayPoolUtil.Materialize(tasks))
             {
@@ -47,7 +47,7 @@ namespace Cysharp.Threading.Tasks
             int completedCount;
             UniTaskCompletionSourceCore<(bool, T)> core;
 
-            public WhenAnyLRPromise(UniTask<T> leftTask, UniTask rightTask)
+            public WhenAnyLRPromise(UniTask<T> leftTask, UnitaskVoid rightTask)
             {
                 TaskTracker.TrackActiveTask(this, 3);
 
@@ -80,7 +80,7 @@ namespace Cysharp.Threading.Tasks
                 }
                 RIGHT:
                 {
-                    UniTask.Awaiter awaiter;
+                    UnitaskVoid.Awaiter awaiter;
                     try
                     {
                         awaiter = rightTask.GetAwaiter();
@@ -99,7 +99,7 @@ namespace Cysharp.Threading.Tasks
                     {
                         awaiter.SourceOnCompleted(state =>
                         {
-                            using (var t = (StateTuple<WhenAnyLRPromise<T>, UniTask.Awaiter>)state)
+                            using (var t = (StateTuple<WhenAnyLRPromise<T>, UnitaskVoid.Awaiter>)state)
                             {
                                 TryRightInvokeContinuation(t.Item1, t.Item2);
                             }
@@ -127,7 +127,7 @@ namespace Cysharp.Threading.Tasks
                 }
             }
 
-            static void TryRightInvokeContinuation(WhenAnyLRPromise<T> self, in UniTask.Awaiter awaiter)
+            static void TryRightInvokeContinuation(WhenAnyLRPromise<T> self, in UnitaskVoid.Awaiter awaiter)
             {
                 try
                 {
@@ -270,7 +270,7 @@ namespace Cysharp.Threading.Tasks
             int completedCount;
             UniTaskCompletionSourceCore<int> core;
 
-            public WhenAnyPromise(UniTask[] tasks, int tasksLength)
+            public WhenAnyPromise(UnitaskVoid[] tasks, int tasksLength)
             {
                 if (tasksLength == 0)
                 {
@@ -281,7 +281,7 @@ namespace Cysharp.Threading.Tasks
 
                 for (int i = 0; i < tasksLength; i++)
                 {
-                    UniTask.Awaiter awaiter;
+                    UnitaskVoid.Awaiter awaiter;
                     try
                     {
                         awaiter = tasks[i].GetAwaiter();
@@ -300,7 +300,7 @@ namespace Cysharp.Threading.Tasks
                     {
                         awaiter.SourceOnCompleted(state =>
                         {
-                            using (var t = (StateTuple<WhenAnyPromise, UniTask.Awaiter, int>)state)
+                            using (var t = (StateTuple<WhenAnyPromise, UnitaskVoid.Awaiter, int>)state)
                             {
                                 TryInvokeContinuation(t.Item1, t.Item2, t.Item3);
                             }
@@ -309,7 +309,7 @@ namespace Cysharp.Threading.Tasks
                 }
             }
 
-            static void TryInvokeContinuation(WhenAnyPromise self, in UniTask.Awaiter awaiter, int i)
+            static void TryInvokeContinuation(WhenAnyPromise self, in UnitaskVoid.Awaiter awaiter, int i)
             {
                 try
                 {
