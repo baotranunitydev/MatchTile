@@ -12,4 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5454066ae39661e4e8cd59f1a875c40f, type: 3}
   m_Name: ModelSO
   m_EditorClassIdentifier: 
-  tilePrefab: {fileID: 3655477170801211649, guid: 8fd891183275d2e4d898083342b2a0f5, type: 3}
+  tileSO:
+    tilePrefab: {fileID: 3655477170801211649, guid: 8fd891183275d2e4d898083342b2a0f5, type: 3}
+    lstTileModelSO:
+    - id: 0
+      sprTileIcon: {fileID: -1921275591, guid: 4d875cd1348c36343b56b251381a3986, type: 3}
+    - id: 1
+      sprTileIcon: {fileID: 553942947, guid: 4d875cd1348c36343b56b251381a3986, type: 3}
+    - id: 2
+      sprTileIcon: {fileID: -71821600, guid: 4d875cd1348c36343b56b251381a3986, type: 3}
+    - id: 3
+      sprTileIcon: {fileID: -1241871763, guid: 4d875cd1348c36343b56b251381a3986, type: 3}
+    - id: 4
+      sprTileIcon: {fileID: 654504092, guid: 4d875cd1348c36343b56b251381a3986, type: 3}
+    - id: 5
+      sprTileIcon: {fileID: 1878640010, guid: 4d875cd1348c36343b56b251381a3986, type: 3}
+    - id: 6
+      sprTileIcon: {fileID: -1166181484, guid: 4d875cd1348c36343b56b251381a3986, type: 3}
