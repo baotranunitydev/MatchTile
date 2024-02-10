@@ -1,13 +1,38 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public class TileView : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer sprRendererTileIcon;
+    [SerializeField] private SpriteRenderer sprRendererTileIconTop;
+    [SerializeField] private SpriteRenderer sprRendererTileIconBot;
     [SerializeField] private Rigidbody rbTile;
-
     public Rigidbody RbTile { get => rbTile; }
+    public void InitTileIcon(Sprite sprIcon)
+    {
+        sprRendererTileIconTop.sprite = sprIcon;
+        sprRendererTileIconBot.sprite = sprIcon;
+    }
 
-    public void InitTileIcon(Sprite sprIcon) => sprRendererTileIcon.sprite = sprIcon;
+    private float timerMove = 0.25f;
+    public async UnitaskVoid MoveTileToMergeBoard(Vector3 pos)
+    {
+        rbTile.isKinematic = true;
+        DOTween.Kill(this);
+        var sequence = DOTween.Sequence();
+        await sequence.Append(transform.DOMove(pos, timerMove))
+                .Join(transform.DOScale(Vector3.one * 0.3f, timerMove))
+                .Join(transform.DORotate(Vector3.zero, timerMove, RotateMode.FastBeyond360)).SetId(this);
+    }
+
+    public void AnimationMerge()
+    {
+        DOTween.Kill(this);
+        transform.DOScale(Vector3.zero, timerMove * 2f).OnComplete(() =>
+        {
+            gameObject.SetActive(false);
+        });
+    }
 }

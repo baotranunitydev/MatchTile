@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class InputHandle : MonoBehaviour
 {
+    [SerializeField] private LayerMask tileLayer;
     public void UpdateInputHandle()
     {
         if (Input.GetMouseButtonDown(0))
         {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Physics.Raycast(ray.origin, ray.direction, out RaycastHit hitInfo, 100f);
+            Physics.Raycast(ray.origin, ray.direction, out RaycastHit hitInfo, 100f, tileLayer);
             if (hitInfo.collider == null) return;
             if (hitInfo.collider.TryGetComponent(out Tile tile))
             {

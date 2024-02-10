@@ -48,13 +48,14 @@ public class MergeBoard : MonoBehaviour
         await tile.MoveTileToMergeBoard(pos);
         if (isCanMerge.isCanMerge)
         {
+            RearrangePosTileWhenMerge();
             for (int i = 0; i < isCanMerge.lstTileMerge.Count; i++)
             {
                 var tileMerge = isCanMerge.lstTileMerge[i];
                 tileMerge.AnimationMerge();
             }
             await UnitaskVoid.WaitForSeconds(0.2f);
-            RearrangePosTileWhenMerge();
+            AnimationRearrangeTile();
         }
     }
 
@@ -93,11 +94,21 @@ public class MergeBoard : MonoBehaviour
         {
             var slotMerge = arrSlotMerge[i];
             slotMerge.CurrentTile = arrSlot[i].CurrentTile;
-            slotMerge.CurrentTile.MoveTileToMergeBoard(slotMerge.TfmPos.position).Forget();
+
         }
         for (int i = arrSlot.Length; i < arrSlotMerge.Length; i++)
         {
             arrSlotMerge[i].CurrentTile = null;
+        }
+    }
+
+    private void AnimationRearrangeTile()
+    {
+        for (int i = 0; i < arrSlotMerge.Length; i++)
+        {
+            var slotMerge = arrSlotMerge[i];
+            if (slotMerge.CurrentTile == null) break;
+            slotMerge.CurrentTile.MoveTileToMergeBoard(slotMerge.TfmPos.position).Forget();
         }
     }
 }
