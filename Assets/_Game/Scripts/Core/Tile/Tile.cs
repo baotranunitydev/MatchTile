@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
+using UnityEngine.Playables;
 
 [Serializable]
 public class TileModel
@@ -23,11 +24,33 @@ public class Tile : MonoBehaviour
     private float timerMove = 0.25f;
     public int TileID => tileModel.TileId;
 
-    public void InitTile(int tileID, Sprite sprTileIcon)
+    public class Builder
     {
-        tileModel.SetTileId(tileID);
-        tileView.InitTileIcon(sprTileIcon);
+        private Tile tile;
+
+        public Builder(Tile tile) => this.tile = tile;
+
+        public Builder SetTileID(int id)
+        {
+            tile.tileModel.SetTileId(id);
+            return this;
+        }
+
+        public Builder SetSpriteTile(Sprite sprTileIcon)
+        {
+            tile.tileView.InitTileIcon(sprTileIcon);
+            return this;
+        }
+
+        public Builder SetNameObject(string name)
+        {
+            tile.name = name;
+            return this;
+        }
+
+        public Tile Build() => tile;
     }
+    public static Builder CreateBuilder(Tile tile) => new Builder(tile);
 
     public async UnitaskVoid MoveTileToMergeBoard(Vector3 pos)
     {

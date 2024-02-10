@@ -42,10 +42,14 @@ public class BoardController : MonoBehaviour
         for (int i = 0; i < lstTileID.Count; i++)
         {
             var tileID = lstTileID[i];
+            tileID = 0;
             var tile = Instantiate(modelSO.tileSO.tilePrefab, tfmSpawnTile);
             var tileModelSO = modelSO.tileSO.GetTileModelSO(tileID);
-            tile.InitTile(tileModelSO.id, tileModelSO.sprTileIcon);
-            tile.name = $"Tile Id: {tileModelSO.id} - {i:D2}";
+            Tile.CreateBuilder(tile)
+                .SetTileID(tileModelSO.id)
+                .SetSpriteTile(tileModelSO.sprTileIcon)
+                .SetNameObject($"Tile Id: {tileModelSO.id} - {i:D2}")
+                .Build();
             var posInsideCicle = RandomPosInCircle(0.5f);
             tile.transform.position = new Vector3(posInsideCicle.x, 2f, posInsideCicle.y);
             lstTile.Add(tile);
