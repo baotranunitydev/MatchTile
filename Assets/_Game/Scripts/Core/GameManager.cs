@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     private void InitGame()
     {
+        var lstTileID = gameHelper.LevelController.GetLstTileID(0);
         gameHelper.BoardController.InitBoard();
+        gameHelper.BoardController.SpawnTile(lstTileID).Forget();
     }
 }

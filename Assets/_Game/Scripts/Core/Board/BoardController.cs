@@ -24,7 +24,6 @@ public class BoardController : MonoBehaviour
     {
         modelSO = GameHelper.Instance.ModelSO;
         onSelectTile += OnSelectTile;
-        SpawnTile().Forget();
     }
 
     private void OnSelectTile(Tile tile)
@@ -37,17 +36,16 @@ public class BoardController : MonoBehaviour
         onSelectTile -= OnSelectTile;
     }
 
-    private async UnitaskVoid SpawnTile()
+    public async UnitaskVoid SpawnTile(List<int> lstTileID)
     {
         if (modelSO == null) return;
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < lstTileID.Count; i++)
         {
+            var tileID = lstTileID[i];
             var tile = Instantiate(modelSO.tileSO.tilePrefab, tfmSpawnTile);
-            var randomTileID = Random.Range(0, modelSO.tileSO.lstTileModelSO.Count);
-            //var randomTileID = 0;
-            var tileModelSO = modelSO.tileSO.GetTileModelSO(randomTileID);
+            var tileModelSO = modelSO.tileSO.GetTileModelSO(tileID);
             tile.InitTile(tileModelSO.id, tileModelSO.sprTileIcon);
-            tile.name = $"Tile Id: {tileModelSO.id} - {i}";
+            tile.name = $"Tile Id: {tileModelSO.id} - {i:D2}";
             var posInsideCicle = RandomPosInCircle(0.5f);
             tile.transform.position = new Vector3(posInsideCicle.x, 2f, posInsideCicle.y);
             lstTile.Add(tile);
