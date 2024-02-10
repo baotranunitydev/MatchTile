@@ -29,7 +29,7 @@ public class BoardController : MonoBehaviour
 
     private void OnSelectTile(Tile tile)
     {
-        mergeBoard.MoveTileToMergeBoard(tile);
+        mergeBoard.MoveTileToMergeBoardAndCheck(tile);
     }
 
     private void OnDestroy()
@@ -44,9 +44,10 @@ public class BoardController : MonoBehaviour
         {
             var tile = Instantiate(modelSO.tileSO.tilePrefab, tfmSpawnTile);
             var randomTileID = Random.Range(0, modelSO.tileSO.lstTileModelSO.Count);
+            //var randomTileID = 0;
             var tileModelSO = modelSO.tileSO.GetTileModelSO(randomTileID);
             tile.InitTile(tileModelSO.id, tileModelSO.sprTileIcon);
-            tile.name = $"Tile Id: {tileModelSO.id}";
+            tile.name = $"Tile Id: {tileModelSO.id} - {i}";
             var posInsideCicle = RandomPosInCircle(0.5f);
             tile.transform.position = new Vector3(posInsideCicle.x, 2f, posInsideCicle.y);
             lstTile.Add(tile);

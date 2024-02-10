@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using DG.Tweening;
+using Cysharp.Threading.Tasks;
 
 [Serializable]
 public class TileModel
@@ -28,12 +29,12 @@ public class Tile : MonoBehaviour
         tileView.InitTileIcon(sprTileIcon);
     }
 
-    public void MoveTileToMergeBoard(Vector3 pos)
+    public async UnitaskVoid MoveTileToMergeBoard(Vector3 pos)
     {
         tileView.RbTile.isKinematic = true;
         DOTween.Kill(this);
         var sequence = DOTween.Sequence();
-        sequence.Append(transform.DOMove(pos, timerMove))
+        await sequence.Append(transform.DOMove(pos, timerMove))
                 .Join(transform.DOScale(Vector3.one * 0.3f, timerMove))
                 .Join(transform.DORotate(Vector3.zero, timerMove, RotateMode.FastBeyond360)).SetId(this);
         //.AppendCallback(() => transform.DORotate(Vector3.up * 360f, timerMove * 10f, RotateMode.FastBeyond360).SetLoops(-1));
