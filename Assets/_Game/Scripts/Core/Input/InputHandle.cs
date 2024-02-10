@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InputHandle : MonoBehaviour
 {
-    private void Update()
+    public void UpdateInputHandle()
     {
         if (Input.GetMouseButtonDown(0))
         {

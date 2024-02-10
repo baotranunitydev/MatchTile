@@ -367,7 +367,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2047266764}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &254497342
 MonoBehaviour:
@@ -1040,7 +1040,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2047266764}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1081072368
 MonoBehaviour:
@@ -1299,7 +1299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc79f831898fe894883abf379748d60d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateGame: 0
+  stateGame: 1
 --- !u!4 &1701844237 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 792279579356442555, guid: f944e0634ef2be648baea5b373a18b07, type: 3}
@@ -1479,8 +1479,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1081072367}
   - {fileID: 254497341}
+  - {fileID: 1081072367}
   - {fileID: 808885393}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1499,6 +1499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dontDestroyOverload: 0
   modelSO: {fileID: 11400000, guid: a439b66e04c5e664cbd84c6a41ac4bd2, type: 2}
+  inputHandle: {fileID: 254497342}
   boardController: {fileID: 1081072368}
   levelController: {fileID: 808885394}
 --- !u!4 &2048063297 stripped

@@ -18,13 +18,27 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         gameHelper = GameHelper.Instance;
-        InitGame();
+        stateGame = StateGame.PauseGame;
+        InitGame().Forget();
     }
 
-    private void InitGame()
+    private void Update()
+    {
+        switch (stateGame)
+        {
+            case StateGame.PlayGame:
+                gameHelper.InputHandle.UpdateInputHandle();
+                break;
+            case StateGame.PauseGame:
+                break;
+        }
+    }
+
+    private async UnitaskVoid InitGame()
     {
         var lstTileID = gameHelper.LevelController.GetLstTileID(0);
         gameHelper.BoardController.InitBoard();
-        gameHelper.BoardController.SpawnTile(lstTileID).Forget();
+        await gameHelper.BoardController.SpawnTile(lstTileID);
+        stateGame = StateGame.PlayGame;
     }
 }
