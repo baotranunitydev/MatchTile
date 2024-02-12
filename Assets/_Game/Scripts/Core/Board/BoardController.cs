@@ -12,6 +12,8 @@ public class BoardController : MonoBehaviour
     private List<Tile> lstTile = new List<Tile>();
     private ModelSO modelSO;
 
+    public List<Tile> LstTile { get => lstTile;}
+
     private void OnValidate()
     {
         if (tfmSpawnTile == null)
@@ -62,4 +64,6 @@ public class BoardController : MonoBehaviour
         var randomInCircle = Random.insideUnitCircle * radius;
         return randomInCircle;
     }
+
+
 }

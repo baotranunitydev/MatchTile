@@ -7,8 +7,10 @@ public class LevelController : MonoBehaviour
     [SerializeField] private LevelDataSO levelDataSO;
     public List<int> GetLstTileID(int level)
     {
+        var levelLoad = GetLevelLoad(level, levelDataSO.arrLevel.Length, 0);
+        Debug.Log($"Current Level: {level}, Max: {levelDataSO.arrLevel.Length}, Start: {0} - Level Load: {levelLoad}");
         var lstTileID = new List<int>();
-        var levelSO = levelDataSO.GetLevel(level);
+        var levelSO = levelDataSO.GetLevel(levelLoad);
         var lstRandomID = GetRandomLstID(levelSO.tileType);
         int currentIndexRandom = 0;
         int countTileID = 0;
@@ -28,6 +30,18 @@ public class LevelController : MonoBehaviour
         }
         ShuffleList(lstTileID);
         return lstTileID;
+    }
+
+    private int GetLevelLoad(int current, int max, int start)
+    {
+        if (current > max)
+        {
+            while (current > max)
+            {
+                current = (current - (current / max) * max) + start;
+            }
+        }
+        return current;
     }
 
     private List<int> GetRandomLstID(int amount)

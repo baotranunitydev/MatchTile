@@ -10,10 +10,12 @@ using UnityEngine.Playables;
 public class TileModel
 {
     [SerializeField] private int tileID;
-
+    private bool isClick;
     public int TileId { get => tileID; }
+    public bool IsClick { get => isClick;}
 
     public void SetTileId(int tileID) => this.tileID = tileID;
+    public void SetIsClick(bool isClick) => this.isClick = isClick;
 }
 
 
@@ -27,6 +29,7 @@ public class Tile : MonoBehaviour
 
     public async UnitaskVoid MoveTileToMergeBoard(Vector3 pos)
     {
+        tileModel.SetIsClick(true);
         await tileView.MoveTileToMergeBoard(pos);
     }
 

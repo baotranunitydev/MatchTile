@@ -8,8 +8,9 @@ public class TileView : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer sprRendererTileIconTop;
     [SerializeField] private SpriteRenderer sprRendererTileIconBot;
-    [SerializeField] private Rigidbody rbTile;
-    public Rigidbody RbTile { get => rbTile; }
+    [SerializeField] private Collider tileCollider;
+    [SerializeField] private Rigidbody rg;
+    private bool isClick = false;
     public void InitTileIcon(Sprite sprIcon)
     {
         sprRendererTileIconTop.sprite = sprIcon;
@@ -17,9 +18,14 @@ public class TileView : MonoBehaviour
     }
 
     private float timerMove = 0.25f;
+
+    public bool IsClick { get => isClick;}
+
     public async UnitaskVoid MoveTileToMergeBoard(Vector3 pos)
     {
-        rbTile.isKinematic = true;
+        tileCollider.isTrigger = true;
+        rg.isKinematic = true;
+        isClick = true;
         DOTween.Kill(this);
         var sequence = DOTween.Sequence();
         await sequence.Append(transform.DOMove(pos, timerMove))

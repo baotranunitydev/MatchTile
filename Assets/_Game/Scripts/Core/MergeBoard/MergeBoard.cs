@@ -8,6 +8,13 @@ using UnityEngine;
 public class MergeBoard : MonoBehaviour
 {
     [SerializeField] private SlotMerge[] arrSlotMerge;
+    private GameHelper gameHelper;
+    private GameManager gameManager;
+    private void Start()
+    {
+        gameHelper = GameHelper.Instance;
+        gameManager = GameManager.Instance;
+    }
     private int GetCurrentIndex()
     {
         int index = 0;
@@ -38,17 +45,29 @@ public class MergeBoard : MonoBehaviour
         return slotMerge;
     }
 
+    private bool IsWin()
+    {
+        return gameHelper.BoardController.LstTile.Count <= 0;
+    }
+
     public async void MoveTileToMergeBoardAndCheck(Tile tile)
     {
+        if (tile.TileModel.IsClick) return;
         var index = GetCurrentIndex();
-        if (index >= 7) return;
+        if (index >= 7)
+        {
+            gameManager.onLose?.Invoke();
+        }
         arrSlotMerge[index].CurrentTile = tile;
         var pos = arrSlotMerge[index].TfmPos.position;
         var isCanMerge = CheckMerge(tile);
+        if (IsWin())
+        {
+            gameManager.onWin?.Invoke();
+        }
         await tile.MoveTileToMergeBoard(pos);
         if (isCanMerge.isCanMerge)
         {
-            RearrangePosTileWhenMerge();
             for (int i = 0; i < isCanMerge.lstTileMerge.Count; i++)
             {
                 var tileMerge = isCanMerge.lstTileMerge[i];
@@ -80,9 +99,11 @@ public class MergeBoard : MonoBehaviour
             {
                 var tileMerge = lstTileMerge[i];
                 var slot = GetSlotMergeByTile(tileMerge);
+                gameHelper.BoardController.LstTile.Remove(slot.CurrentTile);
                 slot.CurrentTile = null;
                 //Debug.Log($"Slot: {slot.TfmPos.gameObject.name}, Tile {tileMerge.gameObject.name}");
             }
+            RearrangePosTileWhenMerge();
         }
         return (isCanMerge, lstTileMerge);
     }

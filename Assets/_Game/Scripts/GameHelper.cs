@@ -8,10 +8,12 @@ public class GameHelper : Singleton<GameHelper>
     [SerializeField] private InputHandle inputHandle;
     [SerializeField] private BoardController boardController;
     [SerializeField] private LevelController levelController;
+    [SerializeField] private GamePlayController gamePlayController;
     public ModelSO ModelSO { get => modelSO; }
     public BoardController BoardController { get => boardController; }
     public LevelController LevelController { get => levelController;}
     public InputHandle InputHandle { get => inputHandle;}
+    public GamePlayController GamePlayController { get => gamePlayController;}
 
     private void OnValidate()
     {
