@@ -6,30 +6,31 @@ public class DBController : Singleton<DBController>
 {
     #region VARIABLE
 
-    private int _coin;
-    public int COIN
+    private UserData userData;
+    public UserData USER_DATA
     {
-        get => _coin;
+        get => userData;
         set
         {
-            _coin = value;
-            Save(DBKey.COIN, value);
+            userData = value;
+            Save(DBKey.USER_DATA, userData);
         }
     }
-    
+    private UserSettings userSettings;
+    public UserSettings USER_SETTINGS
+    {
+        get => userSettings;
+        set
+        {
+            userSettings = value;
+            Save(DBKey.USER_SETTINGS, userSettings);
+        }
+    }
+
     #endregion
     protected override void CustomAwake()
     {
         Initializing();
-    }
-
-    void Initializing()
-    {
-        CheckDependency(DBKey.COIN, key =>
-        {
-            COIN = 0;
-        });
-        Load();
     }
 
 
@@ -43,7 +44,7 @@ public class DBController : Singleton<DBController>
 
     public void Save<T>(string key, T values)
     {
-        
+
         if (typeof(T) == typeof(int) ||
             typeof(T) == typeof(bool) ||
             typeof(T) == typeof(string) ||
@@ -104,13 +105,28 @@ public class DBController : Singleton<DBController>
         PlayerPrefs.DeleteAll();
     }
 
+    void Initializing()
+    {
+        CheckDependency(DBKey.USER_DATA, key =>
+        {
+            USER_DATA = new UserData();
+        });
+        CheckDependency(DBKey.USER_SETTINGS, key =>
+        {
+            USER_SETTINGS = new UserSettings();
+        });
+        Load();
+    }
+
     void Load()
     {
-        _coin = LoadDataByKey<int>(DBKey.COIN); 
+        userData = LoadDataByKey<UserData>(DBKey.USER_DATA);
+        userSettings = LoadDataByKey<UserSettings>(DBKey.USER_SETTINGS);
     }
 }
 
 public class DBKey
 {
-    public readonly static string COIN = "COIN";
+    public readonly static string USER_DATA = "USER_DATA";
+    public readonly static string USER_SETTINGS = "USER_SETTINGS";
 }
