@@ -316,4 +316,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprRendererTileIconTop: {fileID: 7137038486239910845}
   sprRendererTileIconBot: {fileID: 5376176768930455746}
-  rbTile: {fileID: 3655477170801211647}
+  tileCollider: {fileID: 3655477170801211646}
+  rg: {fileID: 3655477170801211647}
