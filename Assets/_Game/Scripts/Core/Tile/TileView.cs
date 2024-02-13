@@ -10,14 +10,12 @@ public class TileView : MonoBehaviour
     [SerializeField] private SpriteRenderer sprRendererTileIconBot;
     [SerializeField] private Collider tileCollider;
     [SerializeField] private Rigidbody rg;
+    private float timerMove = 0.25f;
     public void InitTileIcon(Sprite sprIcon)
     {
         sprRendererTileIconTop.sprite = sprIcon;
         sprRendererTileIconBot.sprite = sprIcon;
     }
-
-    private float timerMove = 0.25f;
-
 
     public async UnitaskVoid MoveTileToMergeBoard(Vector3 pos)
     {
@@ -26,7 +24,7 @@ public class TileView : MonoBehaviour
         DOTween.Kill(this);
         var sequence = DOTween.Sequence();
         await sequence.Append(transform.DOMove(pos, timerMove))
-                .Join(transform.DOScale(Vector3.one * 0.3f, timerMove))
+                .Join(transform.DOScale(Vector3.one * 0.38f, timerMove))
                 .Join(transform.DORotate(Vector3.zero, timerMove, RotateMode.FastBeyond360)).SetId(this);
     }
 
