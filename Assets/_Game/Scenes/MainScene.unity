@@ -380,10 +380,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainScreen
       objectReference: {fileID: 0}
-    - target: {fileID: 3785686544762755504, guid: e8d7bea6c4ce53c48b22d1f42634fd77, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1226820031}
     - target: {fileID: 3785686544762755505, guid: e8d7bea6c4ce53c48b22d1f42634fd77, type: 3}
       propertyPath: m_Pivot.x
       value: 0

@@ -471,6 +471,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 1807802928723550908, guid: 9e7b76db7ee91a34b88d5d41394d450a, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807802928723550908, guid: 9e7b76db7ee91a34b88d5d41394d450a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1807802928723550909, guid: 9e7b76db7ee91a34b88d5d41394d450a, type: 3}
       propertyPath: m_Pivot.x
       value: 0
