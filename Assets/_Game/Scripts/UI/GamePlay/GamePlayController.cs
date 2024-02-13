@@ -34,7 +34,7 @@ public class GamePlayController : MonoBehaviour
     public void ShowPopupLose()
     {
         gameManager.StateGame = StateGame.EndGame;
-        var popupLose = popupController.GetPopupByType(PopupType.PopupSettings);
+        var popupLose = popupController.GetPopupByType(PopupType.PopupLose);
         popupLose.ShowPopup();
     }
 }

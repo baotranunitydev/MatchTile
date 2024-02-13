@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Playables;
 
 public class AudioController : Singleton<AudioController> 
 {
@@ -14,6 +13,8 @@ public class AudioController : Singleton<AudioController>
     private void Start()
     {
         userSettings = DBController.Instance.USER_SETTINGS;
+        Application.targetFrameRate = 60;
+        Input.multiTouchEnabled = false;
         CreateAudioSource();
         CreateAudioSourceBackround();
         PlayBackroundMusic(SoundName.BackroundMusic);
