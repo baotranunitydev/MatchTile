@@ -33,8 +33,8 @@ public class Tile : MonoBehaviour
         await tileView.MoveTileToMergeBoard(pos);
     }
 
-    public void AnimationMerge()
+    public void AnimationMerge(Vector3 pos)
     {
-        tileView.AnimationMerge();
+        tileView.AnimationMerge(pos);
     }
 }

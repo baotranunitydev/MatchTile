@@ -3,6 +3,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class MergeBoard : MonoBehaviour
@@ -15,7 +16,7 @@ public class MergeBoard : MonoBehaviour
         gameHelper = GameHelper.Instance;
         gameManager = GameManager.Instance;
     }
-    private int GetCurrentIndex()
+    private int GetTotalTileInMergeBoard()
     {
         int index = 0;
         for (int i = 0; i < arrSlotMerge.Length; i++)
@@ -23,7 +24,7 @@ public class MergeBoard : MonoBehaviour
             var slot = arrSlotMerge[i];
             if (slot.CurrentTile == null)
             {
-                index = i;
+                index = i + 1;
                 return index;
             }
         }
@@ -44,41 +45,98 @@ public class MergeBoard : MonoBehaviour
         }
         return slotMerge;
     }
-
-    private bool IsWin()
+    private void CheckWinLose(bool isCanMerge, int totalTile)
     {
-        return gameHelper.BoardController.LstTile.Count <= 0;
+        if (isCanMerge)
+        {
+            if (gameHelper.BoardController.LstTile.Count <= 0)
+            {
+                gameManager.onWin?.Invoke();
+            }
+        }
+        else
+        {
+            if (totalTile >= 7)
+            {
+                gameManager.onLose?.Invoke();
+            }
+        }
     }
 
     public async void MoveTileToMergeBoardAndCheck(Tile tile)
     {
         if (tile.TileModel.IsClick) return;
-        var index = GetCurrentIndex();
-        if (index >= 7)
-        {
-            gameManager.onLose?.Invoke();
-        }
+        var totalTileInMergeBoard = GetTotalTileInMergeBoard();
+        var index = GetIndexSlotToMoveTile(tile, totalTileInMergeBoard - 1);
+        SortTileInMergeBoard(index);
+        AnimationRearrangeTile();
         arrSlotMerge[index].CurrentTile = tile;
         var pos = arrSlotMerge[index].TfmPos.position;
-        var isCanMerge = CheckMerge(tile);
-        if (IsWin())
-        {
-            gameManager.onWin?.Invoke();
-        }
+        var isMerge = GetCanMergeAndListTileMerge(tile);
+        CheckWinLose(isMerge.isCanMerge, totalTileInMergeBoard);
         await tile.MoveTileToMergeBoard(pos);
-        if (isCanMerge.isCanMerge)
+        if (isMerge.isCanMerge)
         {
-            for (int i = 0; i < isCanMerge.lstTileMerge.Count; i++)
-            {
-                var tileMerge = isCanMerge.lstTileMerge[i];
-                tileMerge.AnimationMerge();
-            }
-            await UnitaskVoid.WaitForSeconds(0.2f);
-            AnimationRearrangeTile();
+            AnimationMergeTile(isMerge.lstTileMerge);
         }
     }
 
-    private (bool isCanMerge, List<Tile> lstTileMerge) CheckMerge(Tile tile)
+    private async void AnimationMergeTile(List<Tile> lstTileMerge)
+    {
+        for (int i = 0; i < lstTileMerge.Count; i++)
+        {
+            var tileMerge = lstTileMerge[i];
+            tileMerge.AnimationMerge(lstTileMerge[1].transform.position);
+        }
+        await UnitaskVoid.WaitForSeconds(0.2f);
+        AnimationRearrangeTile();
+    }
+
+    private int GetIndexSlotToMoveTile(Tile tile, int currentIndexInMergeBoard)
+    {
+        var nextIndex = GetIndexEqualTileID(tile);
+        int index = 0;
+        if (nextIndex > 0)
+        {
+            index = nextIndex;
+        }
+        else
+        {
+            index = currentIndexInMergeBoard;
+        }
+        return index;
+    }
+
+
+    private int GetIndexEqualTileID(Tile tile)
+    {
+        int index = 0;
+        for (int i = 0; i < arrSlotMerge.Length; i++)
+        {
+            var slotMerge = arrSlotMerge[i];
+            if (slotMerge.CurrentTile == null) continue;
+            if (slotMerge.CurrentTile.TileID == tile.TileID)
+            {
+                index = i + 1;
+            }
+        }
+        return index;
+    }
+
+    private void SortTileInMergeBoard(int index)
+    {
+        //Debug.Log($"Indexxxx: {index}, Current: {arrSlotMerge[index].CurrentTile == null}");
+        for (int i = arrSlotMerge.Length - 2; i >= index; i--)
+        {
+            var currentSlotMerge = arrSlotMerge[i];
+            var nextSlotMerge = arrSlotMerge[i + 1];
+            var currenTile = currentSlotMerge.CurrentTile;
+            nextSlotMerge.CurrentTile = currenTile;
+            //Debug.Log($"current: {i} - Next: {i + 1}");
+        }
+    }
+
+    private (bool isCanMerge, List<Tile> lstTileMerge) GetCanMergeAndListTileMerge(Tile tile)
     {
         bool isCanMerge = false;
         List<Tile> lstTileMerge = new List<Tile>();
@@ -103,12 +161,12 @@ public class MergeBoard : MonoBehaviour
                 slot.CurrentTile = null;
                 //Debug.Log($"Slot: {slot.TfmPos.gameObject.name}, Tile {tileMerge.gameObject.name}");
             }
-            RearrangePosTileWhenMerge();
+            SortSlotMergeTile();
         }
         return (isCanMerge, lstTileMerge);
     }
 
-    private void RearrangePosTileWhenMerge()
+    private void SortSlotMergeTile()
     {
         var arrSlot = Array.FindAll(arrSlotMerge, slot => slot.CurrentTile != null);
         for (int i = 0; i < arrSlot.Length; i++)

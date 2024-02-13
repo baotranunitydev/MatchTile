@@ -1078,7 +1078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOverload: 0
-  stateGame: 1
+  stateGame: 0
 --- !u!4 &1701844237 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 792279579356442555, guid: f944e0634ef2be648baea5b373a18b07, type: 3}
