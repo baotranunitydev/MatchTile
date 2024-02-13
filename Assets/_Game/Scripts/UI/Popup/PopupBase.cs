@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public enum PopupType
 {
     PopupSettings = 0,
-    PopupWin = 1,
-    PopupLose = 2,
+    PopupPause = 1,
+    PopupWin = 2,
+    PopupLose = 3,
 }
 
 public abstract class PopupBase : MonoBehaviour

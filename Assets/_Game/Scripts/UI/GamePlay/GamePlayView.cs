@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class GamePlayView : MonoBehaviour
 {
-    [SerializeField] private Button btnSettings;
+    [SerializeField] private Button btnPause;
 
     public void InitButtonBack(UnityAction actionSettings)
     {
-        btnSettings.onClick.RemoveAllListeners();
-        btnSettings.onClick.AddListener(actionSettings);
+        btnPause.onClick.RemoveAllListeners();
+        btnPause.onClick.AddListener(actionSettings);
     }
 }

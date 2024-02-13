@@ -8,7 +8,7 @@ public class AudioController : Singleton<AudioController>
 {
     [SerializeField] private AudioSO soundSO;
     private Sound soundMusic;
-    private Sound[] arrEffect;
+    private Sound[] arrSound;
     private UserSettings userSettings;
     private void Start()
     {
@@ -19,17 +19,17 @@ public class AudioController : Singleton<AudioController>
         CreateAudioSourceBackround();
         PlayBackroundMusic(SoundName.BackroundMusic);
         SetVolumeMusic(userSettings.isMusic);
-        SetVolumeEffect(userSettings.isEffect);
+        SetVolumeSound(userSettings.isSound);
     }
 
-    public void SetVolumeEffect(bool isEffect)
+    public void SetVolumeSound(bool isSound)
     {
-        for (int i = 0; i < arrEffect.Length; i++)
+        for (int i = 0; i < arrSound.Length; i++)
         {
-            var sound = arrEffect[i];
-            sound.source.mute = isEffect;
+            var sound = arrSound[i];
+            sound.source.mute = isSound;
         }
-        userSettings.SetEffect(isEffect);
+        userSettings.SetSound(isSound);
     }
 
     public void SetVolumeMusic(bool isMusic)
@@ -38,11 +38,11 @@ public class AudioController : Singleton<AudioController>
         userSettings.SetMusic(isMusic);
     }
 
-    public void SetVolumeEffect(float volume)
+    public void SetVolumeSound(float volume)
     {
-        for (int i = 0; i < arrEffect.Length; i++)
+        for (int i = 0; i < arrSound.Length; i++)
         {
-            var sound = arrEffect[i];
+            var sound = arrSound[i];
             var cacheVolume = sound.volume;
             sound.source.volume = volume * cacheVolume;
         }
@@ -57,7 +57,7 @@ public class AudioController : Singleton<AudioController>
     private void CreateAudioSource()
     {
         var soundCount = soundSO.arrSound.Length;
-        arrEffect = new Sound[soundCount];
+        arrSound = new Sound[soundCount];
         for (int i = 0; i < soundCount; i++)
         {
             var sound = soundSO.arrSound[i];
@@ -65,7 +65,7 @@ public class AudioController : Singleton<AudioController>
             sound.source.clip = sound.clip;
             sound.source.volume = sound.volume;
             sound.source.loop = sound.loop;
-            arrEffect[i] = sound;
+            arrSound[i] = sound;
         }
     }
 
@@ -94,7 +94,7 @@ public class AudioController : Singleton<AudioController>
 
     public void PlayEffect(SoundName name)
     {
-        Sound effect = Array.Find(arrEffect, effect => effect.name == name);
+        Sound effect = Array.Find(arrSound, effect => effect.name == name);
         if (effect == null)
         {
             Debug.LogError("Unable to play effect " + name);

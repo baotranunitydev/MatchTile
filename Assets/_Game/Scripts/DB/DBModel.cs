@@ -11,12 +11,12 @@ public class DBModel
 public class UserSettings
 {
     public bool isMusic;
-    public bool isEffect;
+    public bool isSound;
 
     public UserSettings()
     {
         isMusic = true;
-        isEffect = true;
+        isSound = true;
     }
 
     public void SetMusic(bool isMusic)
@@ -25,9 +25,9 @@ public class UserSettings
         DBController.Instance.USER_SETTINGS = this;
     }
 
-    public void SetEffect(bool isEffect)
+    public void SetSound(bool isSound)
     {
-        this.isEffect = isEffect;
+        this.isSound = isSound;
         DBController.Instance.USER_SETTINGS = this;
     }
 }

@@ -19,7 +19,7 @@ public class GamePlayController : MonoBehaviour
         gamePlayView.InitButtonBack(() =>
         {
             gameManager.StateGame = StateGame.PauseGame;
-            var popupSettings = popupController.GetPopupByType(PopupType.PopupSettings);
+            var popupSettings = popupController.GetPopupByType(PopupType.PopupPause);
             popupSettings.ShowPopup();
         });
     }

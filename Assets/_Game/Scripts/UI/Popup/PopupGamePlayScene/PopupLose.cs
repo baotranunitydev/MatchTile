@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class PopupLose : PopupBase
 {
-    [SerializeField] private Button btnRetry;
     [SerializeField] private Button btnHome;
+    [SerializeField] private Button btnRetry;
 
     private void InitBtnRestart()
     {

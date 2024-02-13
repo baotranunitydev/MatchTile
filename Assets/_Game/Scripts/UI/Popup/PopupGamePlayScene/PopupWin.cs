@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class PopupWin : PopupBase
 {
-    [SerializeField] private Button btnNextLevel;
     [SerializeField] private Button btnHome;
+    [SerializeField] private Button btnNextLevel;
 
     private void InitBtnNextLevel()
     {

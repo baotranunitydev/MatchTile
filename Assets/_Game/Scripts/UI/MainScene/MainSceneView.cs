@@ -12,7 +12,7 @@ public class MainSceneView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtBtnPlay;
     public void InitButtonPlay(int level, UnityAction actionPlay)
     {
-        txtBtnPlay.text = $"Play level {level:D2}";
+        txtBtnPlay.text = $"PLAY\nLEVEL {level:D2}";
         btnPlay.onClick.RemoveAllListeners();
         btnPlay.onClick.AddListener(actionPlay);
     }

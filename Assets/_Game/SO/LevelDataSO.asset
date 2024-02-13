@@ -14,17 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrLevel:
   - level: 0
-    tileAmount: 15
-    tileType: 5
+    tileAmount: 12
+    tileType: 10
   - level: 1
-    tileAmount: 18
-    tileType: 5
+    tileAmount: 15
+    tileType: 10
   - level: 2
-    tileAmount: 24
-    tileType: 5
+    tileAmount: 18
+    tileType: 10
   - level: 3
-    tileAmount: 30
-    tileType: 5
+    tileAmount: 21
+    tileType: 10
   - level: 4
-    tileAmount: 36
-    tileType: 5
+    tileAmount: 24
+    tileType: 10
+  - level: 5
+    tileAmount: 30
+    tileType: 10
