@@ -20,7 +20,6 @@ public class LoadingSceneView : MonoBehaviour
     {
         imgFill.DOFillAmount(1f, 2f).OnComplete(() =>
         {
-            gobjLoading.SetActive(false);
             onCompleteFade?.Invoke();
         });
     }
@@ -32,5 +31,10 @@ public class LoadingSceneView : MonoBehaviour
         {
             onCompleteFade?.Invoke();
         });
+    }
+
+    public void DisableLoadingScreen()
+    {
+        gobjLoading.SetActive(false);
     }
 }

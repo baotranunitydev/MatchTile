@@ -18,12 +18,11 @@ public class LoadingSceneController : Singleton<LoadingSceneController>
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-
     private void Start()
     {
         loadingSceneView.AnimationFillBar(() =>
         {
-            ChangeScene(SceneType.MainScene);
+            ChangeScene(SceneType.MainScene, () => loadingSceneView.DisableLoadingScreen());
         });
     }
 
@@ -34,20 +33,15 @@ public class LoadingSceneController : Singleton<LoadingSceneController>
         callBackLoadScreen = loadingSceneView.FadeOutBlackScreen;
     }
 
-    public void ChangeScene(SceneType sceneType)
+    public void ChangeScene(SceneType sceneType, UnityAction onCompleteFadeIn = null)
     {
         currentScene = sceneType;
         loadingSceneView.ChangSceneAnimation(() =>
         {
-            //DOVirtual.DelayedCall(0.2f, () =>
-            //{
-            //    SceneManager.LoadScene($"{sceneType}");
-            //});
             SceneManager.LoadScene($"{sceneType}");
+            onCompleteFadeIn?.Invoke();
         });
     }
-
-
 }
 public enum SceneType
 {
