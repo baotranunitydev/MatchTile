@@ -53,7 +53,7 @@ public class BoardController : MonoBehaviour
                         .SetNameObject($"Tile Id: {tileModelSO.id} - {i:D2}")
                         .Build();
             var posInsideCicle = RandomPosInCircle(0.5f);
-            tile.transform.position = new Vector3(posInsideCicle.x, 3.5f, posInsideCicle.y);
+            tile.transform.position = new Vector3(posInsideCicle.x, 2.5f, posInsideCicle.y);
             lstTile.Add(tile);
             await UnitaskVoid.WaitForSeconds(0.2f);
         }

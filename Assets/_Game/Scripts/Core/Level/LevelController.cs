@@ -8,7 +8,7 @@ public class LevelController : MonoBehaviour
     public List<int> GetLstTileID(int level)
     {
         var levelLoad = GetLevelLoad(level, levelDataSO.arrLevel.Length - 1, 0);
-        Debug.Log($"Current Level: {level}, Max: {levelDataSO.arrLevel.Length - 1}, Start: {0} - Level Load: {levelLoad}");
+        //Debug.Log($"Current Level: {level}, Max: {levelDataSO.arrLevel.Length - 1}, Start: {0} - Level Load: {levelLoad}");
         var lstTileID = new List<int>();
         var levelSO = levelDataSO.GetLevel(levelLoad);
         var lstRandomID = GetRandomLstID(levelSO.tileType);

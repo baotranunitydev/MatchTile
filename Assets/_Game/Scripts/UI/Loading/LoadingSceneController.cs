@@ -20,6 +20,8 @@ public class LoadingSceneController : Singleton<LoadingSceneController>
 
     private void Start()
     {
+        Application.targetFrameRate = 60;
+        Input.multiTouchEnabled = false;
         loadingSceneView.AnimationFillBar(() =>
         {
             ChangeScene(SceneType.MainScene, () => loadingSceneView.DisableLoadingScreen());

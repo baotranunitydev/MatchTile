@@ -13,8 +13,6 @@ public class AudioController : Singleton<AudioController>
     private void Start()
     {
         userSettings = DBController.Instance.USER_SETTINGS;
-        Application.targetFrameRate = 60;
-        Input.multiTouchEnabled = false;
         CreateAudioSource();
         CreateAudioSourceBackround();
         PlayBackroundMusic(SoundName.BackroundMusic);

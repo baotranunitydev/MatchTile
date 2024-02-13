@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5589665776697754748}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.058, z: -0.015}
+  m_LocalPosition: {x: 0, y: -0.035, z: -0.015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -109,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7137038486239910847}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.058, z: -0.015}
+  m_LocalPosition: {x: 0, y: 0.035, z: -0.015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -197,7 +197,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8055448113256553011}
-  m_LocalRotation: {x: 0, y: -0, z: 0.9996458, w: -0.02661307}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -206,7 +206,7 @@ Transform:
   - {fileID: 688897569766204555}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 183.05}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5993930846426369836
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -214,7 +214,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8055448113256553011}
-  m_Mesh: {fileID: -4063336337794184206, guid: acaf682b9d2c990419ba679a996c655a, type: 3}
+  m_Mesh: {fileID: 5062246478642505140, guid: 7068a42fbd0aba74cb0f83f6c7a49e30, type: 3}
 --- !u!23 &8415625788523609062
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -270,7 +270,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: -4063336337794184206, guid: acaf682b9d2c990419ba679a996c655a, type: 3}
+  m_Mesh: {fileID: 5062246478642505140, guid: 7068a42fbd0aba74cb0f83f6c7a49e30, type: 3}
 --- !u!54 &3655477170801211647
 Rigidbody:
   m_ObjectHideFlags: 0
