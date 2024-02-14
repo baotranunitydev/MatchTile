@@ -8,21 +8,35 @@ public class GamePlayController : MonoBehaviour
 {
     [SerializeField] private GamePlayView gamePlayView;
     [SerializeField] private PopupController popupController;
+    private GameHelper gameHelper;
     private GameManager gameManager;
     private AudioController audioController;
     private VibrateController vibrateController;
     private UserData userData;
     private void Start()
     {
+        gameHelper = GameHelper.Instance;
         gameManager = GameManager.Instance;
         audioController = AudioController.Instance;
         vibrateController = VibrateController.Instance;
-        userData = DBController.Instance.USER_DATA;   
-        InitBtnSettings();
+        userData = DBController.Instance.USER_DATA;
+        FeaturesController.onCheckCanUseHint += SetInteracbleBtnHint;
+        InitBtnPause();
+        InitBtnHint();
         gamePlayView.SetLevelText(userData.level + 1);
     }
 
-    private void InitBtnSettings()
+    private void OnDestroy()
+    {
+        FeaturesController.onCheckCanUseHint -= SetInteracbleBtnHint;
+    }
+
+    private void SetInteracbleBtnHint(bool enabled)
+    {
+        gamePlayView.SetInteracbleBtnHint(enabled);
+    }
+
+    private void InitBtnPause()
     {
         gamePlayView.InitButtonBack(() =>
         {
@@ -31,6 +45,16 @@ public class GamePlayController : MonoBehaviour
             gameManager.StateGame = StateGame.PauseGame;
             var popupSettings = popupController.GetPopupByType(PopupType.PopupPause);
             popupSettings.ShowPopup();
+        });
+    }
+        
+    private void InitBtnHint()
+    {
+        gamePlayView.InitButtonHint(() =>
+        {
+            vibrateController.Vibrate();
+            audioController.PlaySound(SoundName.ClickBtn);
+            gameHelper.FeaturesController.UseHint();
         });
     }
 

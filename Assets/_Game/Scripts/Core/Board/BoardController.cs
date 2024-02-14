@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class BoardController : MonoBehaviour
 {
-    [SerializeField] private MergeBoard mergeBoard;
+    private MergeBoard mergeBoard;
     [SerializeField] private Transform tfmSpawnTile;
     public static UnityAction<Tile> onSelectTile;
     private List<Tile> lstTile = new List<Tile>();
@@ -25,12 +25,18 @@ public class BoardController : MonoBehaviour
     public void InitBoard()
     {
         modelSO = GameHelper.Instance.ModelSO;
+        mergeBoard = GameHelper.Instance.MergeBoard;
         onSelectTile += OnSelectTile;
     }
 
     private void OnSelectTile(Tile tile)
     {
         mergeBoard.MoveTileToMergeBoardAndCheck(tile);
+    }
+
+    public void UseHint(Tile tile)
+    {
+        mergeBoard.MoveTileToMergeBoardAndCheckHint(tile);
     }
 
     private void OnDestroy()

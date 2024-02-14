@@ -11,6 +11,9 @@ public class MergeBoard : MonoBehaviour
     [SerializeField] private SlotMerge[] arrSlotMerge;
     private GameHelper gameHelper;
     private GameManager gameManager;
+
+    public SlotMerge[] ArrSlotMerge { get => arrSlotMerge; }
+
     private void Start()
     {
         gameHelper = GameHelper.Instance;
@@ -66,6 +69,7 @@ public class MergeBoard : MonoBehaviour
     public async void MoveTileToMergeBoardAndCheck(Tile tile)
     {
         if (tile.TileModel.IsClick) return;
+        gameHelper.BoardController.LstTile.Remove(tile);
         AudioController.Instance.PlaySound(SoundName.ClickTile);
         var totalTileInMergeBoard = GetTotalTileInMergeBoard();
         var index = GetIndexSlotToMoveTile(tile, totalTileInMergeBoard - 1);
@@ -75,6 +79,32 @@ public class MergeBoard : MonoBehaviour
         var pos = arrSlotMerge[index].TfmPos.position;
         var isMerge = GetCanMergeAndListTileMerge(tile);
         CheckWinLose(isMerge.isCanMerge, totalTileInMergeBoard);
+        gameHelper.FeaturesController.CheckIsCanUseHint();
+        await tile.MoveTileToMergeBoard(pos);
+        if (isMerge.isCanMerge)
+        {
+            AnimationMergeTile(isMerge.lstTileMerge);
+        }
+    }
+
+    public async void MoveTileToMergeBoardAndCheckHint(Tile tile)
+    {
+        gameHelper.BoardController.LstTile.Remove(tile);
+        AudioController.Instance.PlaySound(SoundName.ClickTile);
+        var totalTileInMergeBoard = GetTotalTileInMergeBoard();
+        var index = GetIndexSlotToMoveTile(tile, totalTileInMergeBoard - 1);
+        SortTileInMergeBoard(index);
+        AnimationRearrangeTile();
+        arrSlotMerge[index].CurrentTile = tile;
+        var pos = arrSlotMerge[index].TfmPos.position;
+        var isMerge = GetCanMergeAndListTileMerge(tile);
+        if (isMerge.isCanMerge)
+        {
+            if (gameHelper.BoardController.LstTile.Count <= 0)
+            {
+                gameManager.onWin?.Invoke();
+            }
+        }
         await tile.MoveTileToMergeBoard(pos);
         if (isMerge.isCanMerge)
         {
