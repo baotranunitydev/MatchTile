@@ -8,12 +8,23 @@ public class PopupWin : PopupBase
 {
     [SerializeField] private Button btnHome;
     [SerializeField] private Button btnNextLevel;
-
+    private AudioController audioController;
+    private VibrateController vibrateController;
+    public override void InitPopup()
+    {
+        audioController = AudioController.Instance;
+        vibrateController = VibrateController.Instance;
+        InitBtnNextLevel();
+        InitBtnHome();
+        base.InitPopup();
+    }
     private void InitBtnNextLevel()
     {
         btnNextLevel.onClick.RemoveAllListeners();
         btnNextLevel.onClick.AddListener(() =>
         {
+            vibrateController.Vibrate();
+            audioController.PlaySound(SoundName.ClickBtn);
             LoadingSceneController.Instance.ChangeScene(SceneType.GamePlay);
         });
     }
@@ -23,14 +34,9 @@ public class PopupWin : PopupBase
         btnHome.onClick.RemoveAllListeners();
         btnHome.onClick.AddListener(() =>
         {
+            vibrateController.Vibrate();
+            audioController.PlaySound(SoundName.ClickBtn);
             LoadingSceneController.Instance.ChangeScene(SceneType.MainScene);
         });
-    }
-
-    public override void InitPopup()
-    {
-        InitBtnNextLevel();
-        InitBtnHome();
-        base.InitPopup();
     }
 }

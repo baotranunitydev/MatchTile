@@ -66,6 +66,7 @@ public class MergeBoard : MonoBehaviour
     public async void MoveTileToMergeBoardAndCheck(Tile tile)
     {
         if (tile.TileModel.IsClick) return;
+        AudioController.Instance.PlaySound(SoundName.ClickTile);
         var totalTileInMergeBoard = GetTotalTileInMergeBoard();
         var index = GetIndexSlotToMoveTile(tile, totalTileInMergeBoard - 1);
         SortTileInMergeBoard(index);
@@ -153,6 +154,8 @@ public class MergeBoard : MonoBehaviour
         if (lstTileMerge.Count >= 3)
         {
             isCanMerge = true;
+            VibrateController.Instance.Vibrate();
+            AudioController.Instance.PlaySound(SoundName.Merge);
             for (int i = 0; i < lstTileMerge.Count; i++)
             {
                 var tileMerge = lstTileMerge[i];

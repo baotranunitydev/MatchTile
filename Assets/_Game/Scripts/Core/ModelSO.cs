@@ -2,14 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 [CreateAssetMenu(fileName = "ModelSO", menuName = "SO/ModelSO")]
 public class ModelSO : ScriptableObject
 {
     public TileSO tileSO;
 
+
+#if UNITY_EDITOR
     [ContextMenu("Add Sprite to List")]
     private void AddSpritesFromFolderToList()
     {
@@ -45,7 +49,7 @@ public class ModelSO : ScriptableObject
             AssetDatabase.SaveAssets();
         }
     }
-
+#endif
 }
 
 [Serializable]

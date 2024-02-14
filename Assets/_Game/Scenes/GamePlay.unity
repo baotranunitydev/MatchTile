@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 107590123}
   - component: {fileID: 107590122}
   - component: {fileID: 107590121}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 392867793}
   - component: {fileID: 392867792}
   - component: {fileID: 392867795}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -825,7 +825,7 @@ GameObject:
   - component: {fileID: 810669365}
   - component: {fileID: 810669364}
   - component: {fileID: 810669363}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1128,7 +1128,7 @@ GameObject:
   - component: {fileID: 1100053421}
   - component: {fileID: 1100053420}
   - component: {fileID: 1100053419}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1225,7 +1225,7 @@ GameObject:
   - component: {fileID: 1283750751}
   - component: {fileID: 1283750750}
   - component: {fileID: 1283750749}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}

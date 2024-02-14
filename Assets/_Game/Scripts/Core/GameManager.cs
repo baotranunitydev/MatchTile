@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,17 +17,22 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private StateGame stateGame;
     private GameHelper gameHelper;
+    private AudioController audioController;
     private UserData userData;
     public StateGame StateGame { get => stateGame; set => stateGame = value; }
     public UnityAction onWin;
     public UnityAction onLose;
-    private void Start()
+    private async void Start()
     {
         gameHelper = GameHelper.Instance;
+        audioController = AudioController.Instance;
         userData = DBController.Instance.USER_DATA;
         onWin += Win;
         onLose += Lose;
-        InitGame().Forget();
+        SetStausImageCover(true);
+        await InitGame();
+        stateGame = StateGame.PlayGame;
+        SetStausImageCover(false);
     }
 
     private void OnDestroy()
@@ -48,6 +54,7 @@ public class GameManager : Singleton<GameManager>
                 break;
             case StateGame.EndGame:
                 break;
+
         }
     }
 
@@ -56,17 +63,24 @@ public class GameManager : Singleton<GameManager>
         var lstTileID = gameHelper.LevelController.GetLstTileID(userData.level);
         gameHelper.BoardController.InitBoard();
         await gameHelper.BoardController.SpawnTile(lstTileID);
-        stateGame = StateGame.PlayGame;
     }
 
     private void Win()
     {
         userData.LevelUp();
-        gameHelper.GamePlayController.ShowPopupWin();
+        SetStausImageCover(true);
+        stateGame = StateGame.EndGame;
+        audioController.PlaySound(SoundName.Win);
+        gameHelper.GamePlayController.ShowPopupWin(() => SetStausImageCover(false));
     }
 
     private void Lose()
     {
-        gameHelper.GamePlayController.ShowPopupLose();
+        stateGame = StateGame.EndGame;
+        SetStausImageCover(true);
+        audioController.PlaySound(SoundName.Lose);
+        gameHelper.GamePlayController.ShowPopupLose(() => SetStausImageCover(false));
     }
+
+    private void SetStausImageCover(bool isStatus) => gameHelper.GamePlayController.SetStatusImageCover(isStatus);
 }

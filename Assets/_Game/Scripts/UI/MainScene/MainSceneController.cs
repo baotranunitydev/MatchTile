@@ -7,9 +7,13 @@ public class MainSceneController : MonoBehaviour
     [SerializeField] private MainSceneView mainSceneView;
     [SerializeField] private PopupController popupController;
     private UserData userData;
+    private AudioController audioController;
+    private VibrateController vibrateController;
     private void Start()
     {
         userData = DBController.Instance.USER_DATA;
+        audioController = AudioController.Instance;
+        vibrateController = VibrateController.Instance;
         InitButtonPlay();
         InitButtonSettings();
     }
@@ -19,6 +23,8 @@ public class MainSceneController : MonoBehaviour
         var level = userData.level + 1;
         mainSceneView.InitButtonPlay(level, () =>
         {
+            vibrateController.Vibrate();
+            audioController.PlaySound(SoundName.ClickBtn);
             LoadingSceneController.Instance.ChangeScene(SceneType.GamePlay);
         });
     }
@@ -27,6 +33,8 @@ public class MainSceneController : MonoBehaviour
     {
         mainSceneView.InitButtonSettings(() =>
         {
+            vibrateController.Vibrate();
+            audioController.PlaySound(SoundName.ClickBtn);
             popupController.GetPopupByType(PopupType.PopupSettings).ShowPopup();
         });
     }

@@ -25,9 +25,11 @@ public class Sound
 
 public enum SoundName
 {
-    BackroundMusic = 0,
-    Sound_OnClickButton = 1,
-    Sound_Clear = 2,
-    Sound_WinGame = 3,
-    Sound_LoseGame = 4,
+    BG_00 = 0,
+    BG_01 = 1,
+    ClickBtn = 2,
+    ClickTile = 3,
+    Merge = 4,
+    Win = 5,
+    Lose = 6,
 }

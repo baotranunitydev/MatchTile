@@ -12,11 +12,13 @@ public class UserSettings
 {
     public bool isMusic;
     public bool isSound;
+    public bool isVibrate;
 
     public UserSettings()
     {
         isMusic = true;
         isSound = true;
+        isVibrate = true;
     }
 
     public void SetMusic(bool isMusic)
@@ -28,6 +30,12 @@ public class UserSettings
     public void SetSound(bool isSound)
     {
         this.isSound = isSound;
+        DBController.Instance.USER_SETTINGS = this;
+    }
+
+    public void SetVibrate(bool isVibrate)
+    {
+        this.isVibrate = isVibrate;
         DBController.Instance.USER_SETTINGS = this;
     }
 }

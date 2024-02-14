@@ -15,7 +15,7 @@ public class AudioController : Singleton<AudioController>
         userSettings = DBController.Instance.USER_SETTINGS;
         CreateAudioSource();
         CreateAudioSourceBackround();
-        PlayBackroundMusic(SoundName.BackroundMusic);
+        PlayBackroundMusic(SoundName.BG_00);
         SetVolumeMusic(userSettings.isMusic);
         SetVolumeSound(userSettings.isSound);
     }
@@ -25,14 +25,14 @@ public class AudioController : Singleton<AudioController>
         for (int i = 0; i < arrSound.Length; i++)
         {
             var sound = arrSound[i];
-            sound.source.mute = isSound;
+            sound.source.mute = !isSound;
         }
         userSettings.SetSound(isSound);
     }
 
     public void SetVolumeMusic(bool isMusic)
     {
-        soundMusic.source.mute = isMusic;
+        soundMusic.source.mute = !isMusic;
         userSettings.SetMusic(isMusic);
     }
 
@@ -87,10 +87,11 @@ public class AudioController : Singleton<AudioController>
         soundMusic.source.clip = soundMusic.clip;
         soundMusic.source.volume = soundMusic.volume;
         soundMusic.source.loop = soundMusic.loop;
+        soundMusic.source.Play();
         //Debug.Log($"Volume: {soundMusic.volume}, Source: {soundMusic.source.volume}");
     }
 
-    public void PlayEffect(SoundName name)
+    public void PlaySound(SoundName name)
     {
         Sound effect = Array.Find(arrSound, effect => effect.name == name);
         if (effect == null)

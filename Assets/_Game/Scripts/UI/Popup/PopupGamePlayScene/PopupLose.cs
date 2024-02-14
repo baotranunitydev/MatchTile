@@ -8,12 +8,23 @@ public class PopupLose : PopupBase
 {
     [SerializeField] private Button btnHome;
     [SerializeField] private Button btnRetry;
-
+    private AudioController audioController;
+    private VibrateController vibrateController;
+    public override void InitPopup()
+    {
+        audioController = AudioController.Instance;
+        vibrateController = VibrateController.Instance;
+        InitBtnRestart();
+        InitBtnHome();
+        base.InitPopup();
+    }
     private void InitBtnRestart()
     {
         btnRetry.onClick.RemoveAllListeners();
         btnRetry.onClick.AddListener(() =>
         {
+            vibrateController.Vibrate();
+            audioController.PlaySound(SoundName.ClickBtn);
             LoadingSceneController.Instance.ChangeScene(SceneType.GamePlay);
         });
     }
@@ -23,14 +34,10 @@ public class PopupLose : PopupBase
         btnHome.onClick.RemoveAllListeners();
         btnHome.onClick.AddListener(() =>
         {
+            vibrateController.Vibrate();
+            audioController.PlaySound(SoundName.ClickBtn);
             LoadingSceneController.Instance.ChangeScene(SceneType.MainScene);
         });
     }
 
-    public override void InitPopup()
-    {
-        InitBtnRestart();
-        InitBtnHome();
-        base.InitPopup();
-    }
 }
