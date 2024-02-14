@@ -6,12 +6,12 @@ using UnityEngine;
 public class PopupController : MonoBehaviour
 {
     [SerializeField] private PopupBase[] arrPopupBase;
-    public PopupBase GetPopupByType(PopupType popupType)
+    public PopupBase GetPopupByType(PopupType popupType, bool isActice = true)
     {
         var popup = Array.Find(arrPopupBase, popup => popup.PopupType == popupType);
         if (popup != null)
         {
-            popup.gameObject.SetActive(true);
+            popup.gameObject.SetActive(isActice);
         }
         return popup;
     }

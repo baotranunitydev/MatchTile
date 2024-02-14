@@ -9,15 +9,18 @@ public class GameHelper : Singleton<GameHelper>
     [SerializeField] private BoardController boardController;
     [SerializeField] private MergeBoard mergeBoard;
     [SerializeField] private LevelController levelController;
+    [SerializeField] private PopupController popupController;
     [SerializeField] private GamePlayController gamePlayController;
-    [SerializeField] private FeaturesController featuresController;
+    [SerializeField] private BoosterController featuresController;
+
     public ModelSO ModelSO { get => modelSO; }
     public BoardController BoardController { get => boardController; }
     public LevelController LevelController { get => levelController;}
     public InputHandle InputHandle { get => inputHandle;}
     public MergeBoard MergeBoard { get => mergeBoard;}
     public GamePlayController GamePlayController { get => gamePlayController;}
-    public FeaturesController FeaturesController { get => featuresController;}
+    public BoosterController BoosterController { get => featuresController;}
+    public PopupController PopupController { get => popupController; }
 
     private void OnValidate()
     {

@@ -1,35 +1,63 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
-public class HintController : MonoBehaviour
+public class BoosterHint : BoosterBase
 {
+    private GameHelper gameHelper;
+    private BoardController boardController;
+    private MergeBoard mergeBoard;
     private List<int> lstTileId = new List<int>();
-    public bool IsCanUseHint(MergeBoard mergeBoard)
+
+    public override void InitBooster(UnityAction onActionButton)
+    {
+        gameHelper = GameHelper.Instance;
+        boardController = gameHelper.BoardController;
+        mergeBoard = gameHelper.MergeBoard;
+        boosterButton.InitButton(onActionButton);
+    }
+
+    public override void SetAmountText(int amount)
+    {
+        boosterButton.SetAmountText(amount);
+    }
+
+    public override void UseBooster()
+    {
+        UseHint();
+    }
+
+    public void CheckIsCanUseHint()
+    {
+        boosterButton.SetInteracbleButton(IsCanUseHint());
+    }
+    public bool IsCanUseHint()
     {
         bool isCanUseHint = true;
-        lstTileId = GetListTileID(mergeBoard);
+        lstTileId = GetListTileIDMergeBoard();
         if (lstTileId.Count >= 6)
         {
             isCanUseHint = false;
         }
         return isCanUseHint;
     }
-    public void UseHint(MergeBoard mergeBoard, BoardController boardController)
+    public void UseHint()
     {
         var info = GetTileIDAndTileAmount(lstTileId, mergeBoard);
         var lstTile = new List<Tile>();
         var amount = 3 - info.tileAmount;
         if (info.tileId >= 0)
         {
-            lstTile = GetListTile(boardController, info.tileId, amount);
+            lstTile = GetListTile(info.tileId, amount);
         }
         else
         {
-            var lstTileIdBoard = GetListTileID(boardController);
+            var lstTileIdBoard = GetListTileIDBoardController();
             var randomIdex = Random.Range(0, lstTileIdBoard.Count);
-            lstTile = GetListTile(boardController, lstTileIdBoard[randomIdex], amount);
+            lstTile = GetListTile(lstTileIdBoard[randomIdex], amount);
         }
         for (int i = 0; i < lstTile.Count; i++)
         {
@@ -41,7 +69,7 @@ public class HintController : MonoBehaviour
         //Debug.Log($"Tile Amount: {amount}, - lst Count: {lstTile.Count}");
         //Debug.Log($"TileId: {info.tileId} - tile amount: {info.tileAmount}");
     }
-    private List<int> GetListTileID(MergeBoard mergeBoard)
+    private List<int> GetListTileIDMergeBoard()
     {
         List<int> lstIDMergeBoard = new List<int>();
         for (int i = 0; i < mergeBoard.ArrSlotMerge.Length; i++)
@@ -54,7 +82,7 @@ public class HintController : MonoBehaviour
         return lstIDMergeBoard;
     }
 
-    private List<int> GetListTileID(BoardController boardController)
+    private List<int> GetListTileIDBoardController()
     {
         List<int> lstIDMergeBoard = new List<int>();
         for (int i = 0; i < boardController.LstTile.Count; i++)
@@ -66,7 +94,7 @@ public class HintController : MonoBehaviour
         return lstIDMergeBoard;
     }
 
-    private List<Tile> GetListTile(BoardController boardController, int id, int amount)
+    private List<Tile> GetListTile(int id, int amount)
     {
         List<Tile> lstTile = new List<Tile>();
         for (int i = 0; i < boardController.LstTile.Count; i++)

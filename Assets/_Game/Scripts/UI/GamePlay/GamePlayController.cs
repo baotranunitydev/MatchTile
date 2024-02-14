@@ -7,7 +7,6 @@ using UnityEngine.Events;
 public class GamePlayController : MonoBehaviour
 {
     [SerializeField] private GamePlayView gamePlayView;
-    [SerializeField] private PopupController popupController;
     private GameHelper gameHelper;
     private GameManager gameManager;
     private AudioController audioController;
@@ -20,20 +19,14 @@ public class GamePlayController : MonoBehaviour
         audioController = AudioController.Instance;
         vibrateController = VibrateController.Instance;
         userData = DBController.Instance.USER_DATA;
-        FeaturesController.onCheckCanUseHint += SetInteracbleBtnHint;
         InitBtnPause();
-        InitBtnHint();
+        UpdateStarText();
         gamePlayView.SetLevelText(userData.level + 1);
     }
 
-    private void OnDestroy()
+    public void UpdateStarText()
     {
-        FeaturesController.onCheckCanUseHint -= SetInteracbleBtnHint;
-    }
-
-    private void SetInteracbleBtnHint(bool enabled)
-    {
-        gamePlayView.SetInteracbleBtnHint(enabled);
+        gamePlayView.SetStarText(userData.star);
     }
 
     private void InitBtnPause()
@@ -43,32 +36,21 @@ public class GamePlayController : MonoBehaviour
             vibrateController.Vibrate();
             audioController.PlaySound(SoundName.ClickBtn);
             gameManager.StateGame = StateGame.PauseGame;
-            var popupSettings = popupController.GetPopupByType(PopupType.PopupPause);
+            var popupSettings = gameHelper.PopupController.GetPopupByType(PopupType.PopupPause);
             popupSettings.ShowPopup();
-        });
-    }
-        
-    private void InitBtnHint()
-    {
-        gamePlayView.InitButtonHint(() =>
-        {
-            vibrateController.Vibrate();
-            audioController.PlaySound(SoundName.ClickBtn);
-            gameHelper.FeaturesController.UseHint();
         });
     }
 
     public void ShowPopupWin(UnityAction onCompleteShow = null)
     {
-        var popupWin = popupController.GetPopupByType(PopupType.PopupWin);
+        var popupWin = gameHelper.PopupController.GetPopupByType(PopupType.PopupWin);
         popupWin.ShowPopup(onCompleteShow);
     }
 
     public void ShowPopupLose(UnityAction onCompleteShow = null)
     {
-        var popupLose = popupController.GetPopupByType(PopupType.PopupLose);
+        var popupLose = gameHelper.PopupController.GetPopupByType(PopupType.PopupLose);
         popupLose.ShowPopup(onCompleteShow);
     }
-
     public void SetStatusImageCover(bool isStatus) => gamePlayView.SetStatusImageCover(isStatus);
-} 
+}

@@ -10,6 +10,7 @@ public enum PopupType
     PopupPause = 1,
     PopupWin = 2,
     PopupLose = 3,
+    PopupBooster = 4,
 }
 
 public abstract class PopupBase : MonoBehaviour

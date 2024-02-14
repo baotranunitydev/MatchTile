@@ -79,7 +79,7 @@ public class MergeBoard : MonoBehaviour
         var pos = arrSlotMerge[index].TfmPos.position;
         var isMerge = GetCanMergeAndListTileMerge(tile);
         CheckWinLose(isMerge.isCanMerge, totalTileInMergeBoard);
-        gameHelper.FeaturesController.CheckIsCanUseHint();
+        gameHelper.BoosterController.CheckIsCanUseHint();
         await tile.MoveTileToMergeBoard(pos);
         if (isMerge.isCanMerge)
         {
