@@ -11,6 +11,7 @@ public class TileView : MonoBehaviour
     [SerializeField] private Collider tileCollider;
     [SerializeField] private Rigidbody rg;
     private float timerMove = 0.25f;
+
     public void InitTileIcon(Sprite sprIcon)
     {
         sprRendererTileIconTop.sprite = sprIcon;
@@ -32,5 +33,13 @@ public class TileView : MonoBehaviour
     {
         DOTween.Kill(this);
         transform.DOMove(pos, timerMove).OnComplete(() => gameObject.SetActive(false));
+    }
+
+    public void AddForce()
+    {
+        var x = Random.Range(-0.5f, 0.5f);
+        var z = Random.Range(-0.5f, 0.5f);
+        var randomForce = new Vector3(x, 3f, z);
+        rg.AddForce(randomForce, ForceMode.Impulse);
     }
 }

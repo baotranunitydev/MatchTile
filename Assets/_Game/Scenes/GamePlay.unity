@@ -1725,6 +1725,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3124916956421207006, guid: a8d0269834dcc3e49b542d5b13d80421, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463748176430000102, guid: a8d0269834dcc3e49b542d5b13d80421, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7959101812415437120, guid: a8d0269834dcc3e49b542d5b13d80421, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1816,6 +1824,10 @@ PrefabInstance:
     - target: {fileID: 7959101812415437125, guid: a8d0269834dcc3e49b542d5b13d80421, type: 3}
       propertyPath: m_Name
       value: GamePlayScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210144970937450434, guid: a8d0269834dcc3e49b542d5b13d80421, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8d0269834dcc3e49b542d5b13d80421, type: 3}
