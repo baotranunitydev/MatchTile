@@ -20,15 +20,16 @@ public class HintController : MonoBehaviour
     {
         var info = GetTileIDAndTileAmount(lstTileId, mergeBoard);
         var lstTile = new List<Tile>();
+        var amount = 3 - info.tileAmount;
         if (info.tileId >= 0)
         {
-            lstTile = GetListTile(boardController, info.tileId, 3 - info.tileAmount);
+            lstTile = GetListTile(boardController, info.tileId, amount);
         }
         else
         {
             var lstTileIdBoard = GetListTileID(boardController);
             var randomIdex = Random.Range(0, lstTileIdBoard.Count);
-            lstTile = GetListTile(boardController, lstTileIdBoard[randomIdex], 3);
+            lstTile = GetListTile(boardController, lstTileIdBoard[randomIdex], amount);
         }
         for (int i = 0; i < lstTile.Count; i++)
         {
@@ -37,7 +38,8 @@ public class HintController : MonoBehaviour
         //string lst = "List:";
         //lstTileId.ForEach(x => lst += $" {x},");
         //Debug.Log(lst);
-        Debug.Log($"TileId: {info.tileId} - tile amount: {info.tileAmount}");
+        //Debug.Log($"Tile Amount: {amount}, - lst Count: {lstTile.Count}");
+        //Debug.Log($"TileId: {info.tileId} - tile amount: {info.tileAmount}");
     }
     private List<int> GetListTileID(MergeBoard mergeBoard)
     {
@@ -72,7 +74,7 @@ public class HintController : MonoBehaviour
             var tile = boardController.LstTile[i];
             if (tile.TileID == id)
             {
-                if (lstTile.Count <= amount)
+                if (lstTile.Count < amount)
                 {
                     lstTile.Add(tile);
                 }
