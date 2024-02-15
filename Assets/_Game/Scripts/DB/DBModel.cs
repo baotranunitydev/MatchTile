@@ -59,9 +59,9 @@ public class UserData
     public UserData()
     {
         level = 0;
-        star = 3000;
+        star = 300;
         amountHint = 3;
-        amountBomb = 3;
+        amountBomb = 2;
     }
 
     public void LevelUp()

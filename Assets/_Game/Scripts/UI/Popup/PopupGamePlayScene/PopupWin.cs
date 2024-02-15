@@ -1,5 +1,7 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -8,8 +10,12 @@ public class PopupWin : PopupBase
 {
     [SerializeField] private Button btnHome;
     [SerializeField] private Button btnNextLevel;
+    [SerializeField] private TextMeshProUGUI txtScore;
+    [SerializeField] private TextMeshProUGUI txtStar;
     private AudioController audioController;
     private VibrateController vibrateController;
+    private int star;
+    private int score;
     public override void InitPopup()
     {
         audioController = AudioController.Instance;
@@ -18,6 +24,28 @@ public class PopupWin : PopupBase
         InitBtnHome();
         base.InitPopup();
     }
+
+    public void InitInfoPopupWin(int score, int star)
+    {
+        this.score = score;
+        this.star = star;
+        txtScore.text = $"+{score}";
+        txtStar.text = $"{star}<sprite=0>";
+    }
+    public void AnimationText()
+    {
+        float timerText = 0.5f;
+        //DOVirtual.Int(score, 0, timerText, (value) =>
+        //{
+        //    txtScore.text = $"+{value}";
+        //});
+        DOVirtual.Int(star, star + score, timerText, (value) =>
+        {
+            txtScore.text = $"+{star + score - value}";
+            txtStar.text = $"{value}<sprite=0>"; 
+        });      
+    }
+
     private void InitBtnNextLevel()
     {
         btnNextLevel.onClick.RemoveAllListeners();

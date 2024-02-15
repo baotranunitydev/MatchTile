@@ -21,6 +21,7 @@ public class PopupPause : PopupBase
     private UserSettings userSettings;
     private AudioController audioController;
     private VibrateController vibrateController;
+    private GameHelper gameHelper;
     private Vector2 pivotLeft = new Vector2(0, 0.5f);
     private Vector2 pivotRight = new Vector2(1, 0.5f);
     public override void InitPopup()
@@ -28,6 +29,7 @@ public class PopupPause : PopupBase
         userSettings = DBController.Instance.USER_SETTINGS;
         audioController = AudioController.Instance;
         vibrateController = VibrateController.Instance;
+        gameHelper = GameHelper.Instance;
         InitBtnClose();
         InitBtnHome();
         InitBtnRestart();
@@ -66,7 +68,7 @@ public class PopupPause : PopupBase
         {
             vibrateController.Vibrate();
             audioController.PlaySound(SoundName.ClickBtn);
-            GameManager.Instance.StateGame = StateGame.PlayGame;
+            gameHelper.GamePlayController.StateGame = StateGame.PlayGame;
             HidePopup();
         });
     }

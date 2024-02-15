@@ -11,8 +11,6 @@ public class GamePlayView : MonoBehaviour
     [SerializeField] private Image imgCover;
     [SerializeField] private TextMeshProUGUI txtLevel;
     [SerializeField] private TextMeshProUGUI txtStar;
-    [SerializeField] private TextMeshProUGUI txtScore;
-
     public void InitButtonBack(UnityAction actionSettings)
     {
         btnPause.onClick.RemoveAllListeners();
@@ -21,5 +19,4 @@ public class GamePlayView : MonoBehaviour
     public void SetStatusImageCover(bool isStatus) => imgCover.gameObject.SetActive(isStatus);
     public void SetLevelText(int level) => txtLevel.text = $"{level}";
     public void SetStarText(int star) => txtStar.text = $"{star}<sprite=0>";
-    public void SetScoreText(int score) => txtScore.text = $"{score}";
 }

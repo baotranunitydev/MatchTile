@@ -16,6 +16,7 @@ public class PopupBooster : PopupBase
     private AudioController audioController;
     private VibrateController vibrateController;
     private UserData userData;
+    private GameHelper gameHelper;
     private BoosterType boosterType;
     private int price;
     private int amount;
@@ -24,6 +25,7 @@ public class PopupBooster : PopupBase
         userData = DBController.Instance.USER_DATA;
         audioController = AudioController.Instance;
         vibrateController = VibrateController.Instance;
+        gameHelper = GameHelper.Instance;
         InitBtnClose();
         InitBtnBuy();
         base.InitPopup();
@@ -35,7 +37,8 @@ public class PopupBooster : PopupBase
         btnClose.onClick.AddListener(() =>
         {
             vibrateController.Vibrate();
-            audioController.PlaySound(SoundName.ClickBtn); GameManager.Instance.StateGame = StateGame.PlayGame;
+            audioController.PlaySound(SoundName.ClickBtn);
+            gameHelper.GamePlayController.StateGame = StateGame.PlayGame;
             HidePopup();
         });
     }
@@ -72,7 +75,7 @@ public class PopupBooster : PopupBase
         {
             vibrateController.Vibrate();
             audioController.PlaySound(SoundName.ClickBtn);
-            HidePopup(() => GameManager.Instance.StateGame = StateGame.PlayGame);
+            HidePopup(() => gameHelper.GamePlayController.StateGame = StateGame.PlayGame);
             if (isCanBuy())
             {
                 var resourceType = GetResourceTypeByBoosterType(boosterType);
@@ -86,6 +89,7 @@ public class PopupBooster : PopupBase
 
     public void InitPopupbooster(BoosterType boosterType, Sprite sprIconBooster, int amount, int price)
     {
+        btnBuy.interactable = isCanBuy();
         SetIconBooster(sprIconBooster);
         SetNameBooster(boosterType.ToString());
         SetAmountBoosterBuy(amount);

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ec8a7ef4461f741b31b3643d016f1e, type: 3}
   m_Name: LevelDataSO
   m_EditorClassIdentifier: 
+  GenAmountTile: {x: 15, y: 60}
   arrLevel:
   - level: 0
     tileAmount: 15
@@ -32,17 +33,32 @@ MonoBehaviour:
     tileAmount: 30
     tileType: 7
   - level: 6
-    tileAmount: 36
+    tileAmount: 33
     tileType: 7
   - level: 7
-    tileAmount: 42
+    tileAmount: 36
     tileType: 7
   - level: 8
-    tileAmount: 48
+    tileAmount: 39
     tileType: 7
   - level: 9
-    tileAmount: 54
+    tileAmount: 42
     tileType: 7
   - level: 10
+    tileAmount: 45
+    tileType: 7
+  - level: 11
+    tileAmount: 48
+    tileType: 7
+  - level: 12
+    tileAmount: 51
+    tileType: 7
+  - level: 13
+    tileAmount: 54
+    tileType: 7
+  - level: 14
+    tileAmount: 57
+    tileType: 7
+  - level: 15
     tileAmount: 60
     tileType: 7

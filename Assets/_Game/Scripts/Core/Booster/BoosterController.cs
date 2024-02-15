@@ -11,10 +11,12 @@ public class BoosterController : MonoBehaviour
     private UserData userData;
     private BoosterHint boosterHint;
     private PopupBooster popupBooster;
+    private GameHelper gameHelper;
     private BoosterBase GetBoosterByBoosterType(BoosterType boosterType) => lstBooster.Find(booster => booster.BoosterType == boosterType);
     private void Start()
     {
         userData = DBController.Instance.USER_DATA;
+        gameHelper = GameHelper.Instance;
         SetBoosterHint();
         SetPopupBooster();
         InitBooster();
@@ -58,7 +60,7 @@ public class BoosterController : MonoBehaviour
                     var boosterModel = boosterSO.GetBoosterByType(booster.BoosterType);
                     if (popupBooster == null || booster == null) return;
                     popupBooster.InitPopupbooster(boosterModel.boosterType, boosterModel.sprBooster, boosterModel.amount, boosterModel.price);
-                    GameManager.Instance.StateGame = StateGame.PauseGame;
+                    gameHelper.GamePlayController.StateGame = StateGame.PauseGame;
                     popupBooster.gameObject.SetActive(true);
                     popupBooster.ShowPopup();
                 }

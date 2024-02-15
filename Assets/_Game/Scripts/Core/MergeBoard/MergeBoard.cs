@@ -10,14 +10,12 @@ public class MergeBoard : MonoBehaviour
 {
     [SerializeField] private SlotMerge[] arrSlotMerge;
     private GameHelper gameHelper;
-    private GameManager gameManager;
 
     public SlotMerge[] ArrSlotMerge { get => arrSlotMerge; }
 
     private void Start()
     {
         gameHelper = GameHelper.Instance;
-        gameManager = GameManager.Instance;
     }
     private int GetTotalTileInMergeBoard()
     {
@@ -54,14 +52,14 @@ public class MergeBoard : MonoBehaviour
         {
             if (gameHelper.BoardController.LstTile.Count <= 0)
             {
-                gameManager.onWin?.Invoke();
+                gameHelper.GamePlayController.Win();
             }
         }
         else
         {
             if (totalTile >= 7)
             {
-                gameManager.onLose?.Invoke();
+                gameHelper.GamePlayController.Lose();
             }
         }
     }
@@ -102,7 +100,7 @@ public class MergeBoard : MonoBehaviour
         {
             if (gameHelper.BoardController.LstTile.Count <= 0)
             {
-                gameManager.onWin?.Invoke();
+                gameHelper.GamePlayController.Win();
             }
         }
         await tile.MoveTileToMergeBoard(pos);
@@ -186,6 +184,8 @@ public class MergeBoard : MonoBehaviour
             isCanMerge = true;
             VibrateController.Instance.Vibrate();
             AudioController.Instance.PlaySound(SoundName.Merge);
+            GameHelper.Instance.GamePlayController.StartCombo();
+            GameHelper.Instance.GamePlayController.AddScore();
             for (int i = 0; i < lstTileMerge.Count; i++)
             {
                 var tileMerge = lstTileMerge[i];
