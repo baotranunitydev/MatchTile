@@ -39,7 +39,7 @@ public class TileView : MonoBehaviour
     {
         var x = Random.Range(-0.5f, 0.5f);
         var z = Random.Range(-0.5f, 0.5f);
-        var randomForce = new Vector3(x, 3f, z);
+        var randomForce = new Vector3(x, 2.5f, z);
         rg.AddForce(randomForce, ForceMode.Impulse);
     }
 }

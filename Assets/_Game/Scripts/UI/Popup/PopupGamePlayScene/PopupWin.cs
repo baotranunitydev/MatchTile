@@ -35,10 +35,7 @@ public class PopupWin : PopupBase
     public void AnimationText()
     {
         float timerText = 0.5f;
-        //DOVirtual.Int(score, 0, timerText, (value) =>
-        //{
-        //    txtScore.text = $"+{value}";
-        //});
+        audioController.PlaySound(SoundName.Coin);
         DOVirtual.Int(star, star + score, timerText, (value) =>
         {
             txtScore.text = $"+{star + score - value}";

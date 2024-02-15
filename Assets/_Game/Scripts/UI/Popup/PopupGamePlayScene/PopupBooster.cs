@@ -74,7 +74,7 @@ public class PopupBooster : PopupBase
         btnBuy.onClick.AddListener(() =>
         {
             vibrateController.Vibrate();
-            audioController.PlaySound(SoundName.ClickBtn);
+            audioController.PlaySound(SoundName.Coin);
             HidePopup(() => gameHelper.GamePlayController.StateGame = StateGame.PlayGame);
             if (isCanBuy())
             {

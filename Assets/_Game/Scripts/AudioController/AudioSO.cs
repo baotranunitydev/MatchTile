@@ -32,4 +32,5 @@ public enum SoundName
     Merge = 4,
     Win = 5,
     Lose = 6,
+    Coin = 7,
 }

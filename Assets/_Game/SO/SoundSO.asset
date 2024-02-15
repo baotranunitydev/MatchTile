@@ -15,12 +15,12 @@ MonoBehaviour:
   arrMusic:
   - name: 0
     clip: {fileID: 8300000, guid: ee849e3c63178b444aa08ab0cdf0c008, type: 3}
-    volume: 0.7
+    volume: 0.5
     source: {fileID: 0}
     loop: 1
   - name: 1
     clip: {fileID: 8300000, guid: 451241f0fbf616e44901b812a4484470, type: 3}
-    volume: 0.7
+    volume: 0.5
     source: {fileID: 0}
     loop: 1
   arrSound:
@@ -36,7 +36,7 @@ MonoBehaviour:
     loop: 0
   - name: 4
     clip: {fileID: 8300000, guid: 796cbe6491930204990c1f37b3abe18b, type: 3}
-    volume: 0.75
+    volume: 0.4
     source: {fileID: 0}
     loop: 0
   - name: 5
@@ -47,5 +47,10 @@ MonoBehaviour:
   - name: 6
     clip: {fileID: 8300000, guid: 6aa1dfae13e7438489a136b238d9b939, type: 3}
     volume: 0.5
+    source: {fileID: 0}
+    loop: 0
+  - name: 7
+    clip: {fileID: 8300000, guid: 229aa57f6e02c35448d892b0439545e6, type: 3}
+    volume: 0.75
     source: {fileID: 0}
     loop: 0
