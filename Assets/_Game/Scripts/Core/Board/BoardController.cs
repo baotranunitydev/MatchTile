@@ -58,8 +58,9 @@ public class BoardController : MonoBehaviour
                         .SetSpriteTile(tileModelSO.sprTileIcon)
                         .SetNameObject($"Tile Id: {tileModelSO.id} - {i:D2}")
                         .Build();
-            var posInsideCicle = RandomPosInCircle(0.5f);
-            tile.transform.position = new Vector3(posInsideCicle.x, 2.5f, posInsideCicle.y);
+            var posInsideCicle = RandomPosInCircle(0.15f);
+            var pos = tfmSpawnTile.transform.position;
+            tile.transform.position = pos + new Vector3(posInsideCicle.x, 2f, posInsideCicle.y);
             lstTile.Add(tile);
             await UnitaskVoid.WaitForSeconds(0.2f);
         }

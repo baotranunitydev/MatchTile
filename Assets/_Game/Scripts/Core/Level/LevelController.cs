@@ -7,7 +7,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] private LevelDataSO levelDataSO;
     public List<int> GetLstTileID(int level)
     {
-        var levelLoad = GetLevelLoad(level, levelDataSO.arrLevel.Length - 1, 5);
+        var levelLoad = GetLevelLoad(level, levelDataSO.arrLevel.Length - 1, 9);
         //Debug.Log($"Current Level: {level}, Max: {levelDataSO.arrLevel.Length - 1}, Start: {0} - Level Load: {levelLoad}");
         var lstTileID = new List<int>();
         var levelSO = levelDataSO.GetLevel(levelLoad);
