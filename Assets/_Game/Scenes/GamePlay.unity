@@ -1939,22 +1939,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1017314679, guid: a8d0269834dcc3e49b542d5b13d80421, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3271012344631481738, guid: a8d0269834dcc3e49b542d5b13d80421, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -29.999939
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938939724474035452, guid: a8d0269834dcc3e49b542d5b13d80421, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7959101812391777110, guid: a8d0269834dcc3e49b542d5b13d80421, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7959101812415437120, guid: a8d0269834dcc3e49b542d5b13d80421, type: 3}
       propertyPath: m_Camera
       value: 
@@ -2046,10 +2030,6 @@ PrefabInstance:
     - target: {fileID: 7959101812415437125, guid: a8d0269834dcc3e49b542d5b13d80421, type: 3}
       propertyPath: m_Name
       value: GamePlayScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 7959101812459647802, guid: a8d0269834dcc3e49b542d5b13d80421, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8d0269834dcc3e49b542d5b13d80421, type: 3}
