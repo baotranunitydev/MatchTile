@@ -8,7 +8,7 @@ using Cysharp.Threading.Tasks.Internal;
 
 namespace Cysharp.Threading.Tasks
 {
-    public partial struct UnitaskVoid
+    public partial struct UniTask
     {
 #if UNITY_2018_3_OR_NEWER
 

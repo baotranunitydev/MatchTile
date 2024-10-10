@@ -26,7 +26,7 @@ public class Tile : MonoBehaviour
     public int TileID => tileModel.TileId;
     public TileModel TileModel { get => tileModel; }
     public TileView TileView { get => tileView; }
-    public async UnitaskVoid MoveTileToMergeBoard(Vector3 pos)
+    public async UniTask MoveTileToMergeBoard(Vector3 pos)
     {
         tileModel.SetIsClick(true);
         await tileView.MoveTileToMergeBoard(pos);

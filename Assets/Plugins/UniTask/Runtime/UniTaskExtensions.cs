@@ -44,7 +44,7 @@ namespace Cysharp.Threading.Tasks
         /// <summary>
         /// Convert Task -> UniTask.
         /// </summary>
-        public static UnitaskVoid AsUniTask(this Task task, bool useCurrentSynchronizationContext = true)
+        public static UniTask AsUniTask(this Task task, bool useCurrentSynchronizationContext = true)
         {
             var promise = new UniTaskCompletionSource();
 
@@ -125,11 +125,11 @@ namespace Cysharp.Threading.Tasks
             }
         }
 
-        public static Task AsTask(this UnitaskVoid task)
+        public static Task AsTask(this UniTask task)
         {
             try
             {
-                UnitaskVoid.Awaiter awaiter;
+                UniTask.Awaiter awaiter;
                 try
                 {
                     awaiter = task.GetAwaiter();
@@ -156,7 +156,7 @@ namespace Cysharp.Threading.Tasks
 
                 awaiter.SourceOnCompleted(state =>
                 {
-                    using (var tuple = (StateTuple<TaskCompletionSource<object>, UnitaskVoid.Awaiter>)state)
+                    using (var tuple = (StateTuple<TaskCompletionSource<object>, UniTask.Awaiter>)state)
                     {
                         var (inTcs, inAwaiter) = tuple;
                         try
@@ -179,7 +179,7 @@ namespace Cysharp.Threading.Tasks
             }
         }
 
-        public static AsyncLazy ToAsyncLazy(this UnitaskVoid task)
+        public static AsyncLazy ToAsyncLazy(this UniTask task)
         {
             return new AsyncLazy(task);
         }
@@ -192,7 +192,7 @@ namespace Cysharp.Threading.Tasks
         /// <summary>
         /// Ignore task result when cancel raised first.
         /// </summary>
-        public static UnitaskVoid AttachExternalCancellation(this UnitaskVoid task, CancellationToken cancellationToken)
+        public static UniTask AttachExternalCancellation(this UniTask task, CancellationToken cancellationToken)
         {
             if (!cancellationToken.CanBeCanceled)
             {
@@ -201,7 +201,8 @@ namespace Cysharp.Threading.Tasks
 
             if (cancellationToken.IsCancellationRequested)
             {
-                return UnitaskVoid.FromCanceled(cancellationToken);
+                task.Forget();
+                return UniTask.FromCanceled(cancellationToken);
             }
 
             if (task.Status.IsCompleted())
@@ -209,7 +210,7 @@ namespace Cysharp.Threading.Tasks
                 return task;
             }
 
-            return new UnitaskVoid(new AttachExternalCancellationSource(task, cancellationToken), 0);
+            return new UniTask(new AttachExternalCancellationSource(task, cancellationToken), 0);
         }
 
         /// <summary>
@@ -224,7 +225,8 @@ namespace Cysharp.Threading.Tasks
 
             if (cancellationToken.IsCancellationRequested)
             {
-                return UnitaskVoid.FromCanceled<T>(cancellationToken);
+                task.Forget();
+                return UniTask.FromCanceled<T>(cancellationToken);
             }
 
             if (task.Status.IsCompleted())
@@ -243,14 +245,14 @@ namespace Cysharp.Threading.Tasks
             CancellationTokenRegistration tokenRegistration;
             UniTaskCompletionSourceCore<AsyncUnit> core;
 
-            public AttachExternalCancellationSource(UnitaskVoid task, CancellationToken cancellationToken)
+            public AttachExternalCancellationSource(UniTask task, CancellationToken cancellationToken)
             {
                 this.cancellationToken = cancellationToken;
                 this.tokenRegistration = cancellationToken.RegisterWithoutCaptureExecutionContext(cancellationCallbackDelegate, this);
                 RunTask(task).Forget();
             }
 
-            async UniTaskVoid RunTask(UnitaskVoid task)
+            async UniTaskVoid RunTask(UniTask task)
             {
                 try
                 {
@@ -364,21 +366,21 @@ namespace Cysharp.Threading.Tasks
             return new ToCoroutineEnumerator<T>(task, resultHandler, exceptionHandler);
         }
 
-        public static IEnumerator ToCoroutine(this UnitaskVoid task, Action<Exception> exceptionHandler = null)
+        public static IEnumerator ToCoroutine(this UniTask task, Action<Exception> exceptionHandler = null)
         {
             return new ToCoroutineEnumerator(task, exceptionHandler);
         }
 
-        public static async UnitaskVoid Timeout(this UnitaskVoid task, TimeSpan timeout, DelayType delayType = DelayType.DeltaTime, PlayerLoopTiming timeoutCheckTiming = PlayerLoopTiming.Update, CancellationTokenSource taskCancellationTokenSource = null)
+        public static async UniTask Timeout(this UniTask task, TimeSpan timeout, DelayType delayType = DelayType.DeltaTime, PlayerLoopTiming timeoutCheckTiming = PlayerLoopTiming.Update, CancellationTokenSource taskCancellationTokenSource = null)
         {
             var delayCancellationTokenSource = new CancellationTokenSource();
-            var timeoutTask = UnitaskVoid.Delay(timeout, delayType, timeoutCheckTiming, delayCancellationTokenSource.Token).SuppressCancellationThrow();
+            var timeoutTask = UniTask.Delay(timeout, delayType, timeoutCheckTiming, delayCancellationTokenSource.Token).SuppressCancellationThrow();
 
             int winArgIndex;
             bool taskResultIsCanceled;
             try
             {
-                (winArgIndex, taskResultIsCanceled, _) = await UnitaskVoid.WhenAny(task.SuppressCancellationThrow(), timeoutTask);
+                (winArgIndex, taskResultIsCanceled, _) = await UniTask.WhenAny(task.SuppressCancellationThrow(), timeoutTask);
             }
             catch
             {
@@ -413,13 +415,13 @@ namespace Cysharp.Threading.Tasks
         public static async UniTask<T> Timeout<T>(this UniTask<T> task, TimeSpan timeout, DelayType delayType = DelayType.DeltaTime, PlayerLoopTiming timeoutCheckTiming = PlayerLoopTiming.Update, CancellationTokenSource taskCancellationTokenSource = null)
         {
             var delayCancellationTokenSource = new CancellationTokenSource();
-            var timeoutTask = UnitaskVoid.Delay(timeout, delayType, timeoutCheckTiming, delayCancellationTokenSource.Token).SuppressCancellationThrow();
+            var timeoutTask = UniTask.Delay(timeout, delayType, timeoutCheckTiming, delayCancellationTokenSource.Token).SuppressCancellationThrow();
 
             int winArgIndex;
             (bool IsCanceled, T Result) taskResult;
             try
             {
-                (winArgIndex, taskResult, _) = await UnitaskVoid.WhenAny(task.SuppressCancellationThrow(), timeoutTask);
+                (winArgIndex, taskResult, _) = await UniTask.WhenAny(task.SuppressCancellationThrow(), timeoutTask);
             }
             catch
             {
@@ -456,16 +458,16 @@ namespace Cysharp.Threading.Tasks
         /// <summary>
         /// Timeout with suppress OperationCanceledException. Returns (bool, IsCanceled).
         /// </summary>
-        public static async UniTask<bool> TimeoutWithoutException(this UnitaskVoid task, TimeSpan timeout, DelayType delayType = DelayType.DeltaTime, PlayerLoopTiming timeoutCheckTiming = PlayerLoopTiming.Update, CancellationTokenSource taskCancellationTokenSource = null)
+        public static async UniTask<bool> TimeoutWithoutException(this UniTask task, TimeSpan timeout, DelayType delayType = DelayType.DeltaTime, PlayerLoopTiming timeoutCheckTiming = PlayerLoopTiming.Update, CancellationTokenSource taskCancellationTokenSource = null)
         {
             var delayCancellationTokenSource = new CancellationTokenSource();
-            var timeoutTask = UnitaskVoid.Delay(timeout, delayType, timeoutCheckTiming, delayCancellationTokenSource.Token).SuppressCancellationThrow();
+            var timeoutTask = UniTask.Delay(timeout, delayType, timeoutCheckTiming, delayCancellationTokenSource.Token).SuppressCancellationThrow();
 
             int winArgIndex;
             bool taskResultIsCanceled;
             try
             {
-                (winArgIndex, taskResultIsCanceled, _) = await UnitaskVoid.WhenAny(task.SuppressCancellationThrow(), timeoutTask);
+                (winArgIndex, taskResultIsCanceled, _) = await UniTask.WhenAny(task.SuppressCancellationThrow(), timeoutTask);
             }
             catch
             {
@@ -505,13 +507,13 @@ namespace Cysharp.Threading.Tasks
         public static async UniTask<(bool IsTimeout, T Result)> TimeoutWithoutException<T>(this UniTask<T> task, TimeSpan timeout, DelayType delayType = DelayType.DeltaTime, PlayerLoopTiming timeoutCheckTiming = PlayerLoopTiming.Update, CancellationTokenSource taskCancellationTokenSource = null)
         {
             var delayCancellationTokenSource = new CancellationTokenSource();
-            var timeoutTask = UnitaskVoid.Delay(timeout, delayType, timeoutCheckTiming, delayCancellationTokenSource.Token).SuppressCancellationThrow();
+            var timeoutTask = UniTask.Delay(timeout, delayType, timeoutCheckTiming, delayCancellationTokenSource.Token).SuppressCancellationThrow();
 
             int winArgIndex;
             (bool IsCanceled, T Result) taskResult;
             try
             {
-                (winArgIndex, taskResult, _) = await UnitaskVoid.WhenAny(task.SuppressCancellationThrow(), timeoutTask);
+                (winArgIndex, taskResult, _) = await UniTask.WhenAny(task.SuppressCancellationThrow(), timeoutTask);
             }
             catch
             {
@@ -547,7 +549,7 @@ namespace Cysharp.Threading.Tasks
 
 #endif
 
-        public static void Forget(this UnitaskVoid task)
+        public static void Forget(this UniTask task)
         {
             var awaiter = task.GetAwaiter();
             if (awaiter.IsCompleted)
@@ -565,7 +567,7 @@ namespace Cysharp.Threading.Tasks
             {
                 awaiter.SourceOnCompleted(state =>
                 {
-                    using (var t = (StateTuple<UnitaskVoid.Awaiter>)state)
+                    using (var t = (StateTuple<UniTask.Awaiter>)state)
                     {
                         try
                         {
@@ -580,7 +582,7 @@ namespace Cysharp.Threading.Tasks
             }
         }
 
-        public static void Forget(this UnitaskVoid task, Action<Exception> exceptionHandler, bool handleExceptionOnMainThread = true)
+        public static void Forget(this UniTask task, Action<Exception> exceptionHandler, bool handleExceptionOnMainThread = true)
         {
             if (exceptionHandler == null)
             {
@@ -592,7 +594,7 @@ namespace Cysharp.Threading.Tasks
             }
         }
 
-        static async UniTaskVoid ForgetCoreWithCatch(UnitaskVoid task, Action<Exception> exceptionHandler, bool handleExceptionOnMainThread)
+        static async UniTaskVoid ForgetCoreWithCatch(UniTask task, Action<Exception> exceptionHandler, bool handleExceptionOnMainThread)
         {
             try
             {
@@ -605,7 +607,7 @@ namespace Cysharp.Threading.Tasks
                     if (handleExceptionOnMainThread)
                     {
 #if UNITY_2018_3_OR_NEWER
-                        await UnitaskVoid.SwitchToMainThread();
+                        await UniTask.SwitchToMainThread();
 #endif
                     }
                     exceptionHandler(ex);
@@ -675,7 +677,7 @@ namespace Cysharp.Threading.Tasks
                     if (handleExceptionOnMainThread)
                     {
 #if UNITY_2018_3_OR_NEWER
-                        await UnitaskVoid.SwitchToMainThread();
+                        await UniTask.SwitchToMainThread();
 #endif
                     }
                     exceptionHandler(ex);
@@ -687,12 +689,12 @@ namespace Cysharp.Threading.Tasks
             }
         }
 
-        public static async UnitaskVoid ContinueWith<T>(this UniTask<T> task, Action<T> continuationFunction)
+        public static async UniTask ContinueWith<T>(this UniTask<T> task, Action<T> continuationFunction)
         {
             continuationFunction(await task);
         }
 
-        public static async UnitaskVoid ContinueWith<T>(this UniTask<T> task, Func<T, UnitaskVoid> continuationFunction)
+        public static async UniTask ContinueWith<T>(this UniTask<T> task, Func<T, UniTask> continuationFunction)
         {
             await continuationFunction(await task);
         }
@@ -707,25 +709,25 @@ namespace Cysharp.Threading.Tasks
             return await continuationFunction(await task);
         }
 
-        public static async UnitaskVoid ContinueWith(this UnitaskVoid task, Action continuationFunction)
+        public static async UniTask ContinueWith(this UniTask task, Action continuationFunction)
         {
             await task;
             continuationFunction();
         }
 
-        public static async UnitaskVoid ContinueWith(this UnitaskVoid task, Func<UnitaskVoid> continuationFunction)
+        public static async UniTask ContinueWith(this UniTask task, Func<UniTask> continuationFunction)
         {
             await task;
             await continuationFunction();
         }
 
-        public static async UniTask<T> ContinueWith<T>(this UnitaskVoid task, Func<T> continuationFunction)
+        public static async UniTask<T> ContinueWith<T>(this UniTask task, Func<T> continuationFunction)
         {
             await task;
             return continuationFunction();
         }
 
-        public static async UniTask<T> ContinueWith<T>(this UnitaskVoid task, Func<UniTask<T>> continuationFunction)
+        public static async UniTask<T> ContinueWith<T>(this UniTask task, Func<UniTask<T>> continuationFunction)
         {
             await task;
             return await continuationFunction();
@@ -736,7 +738,7 @@ namespace Cysharp.Threading.Tasks
             return await await task;
         }
 
-        public static async UnitaskVoid Unwrap(this UniTask<UnitaskVoid> task)
+        public static async UniTask Unwrap(this UniTask<UniTask> task)
         {
             await await task;
         }
@@ -751,12 +753,12 @@ namespace Cysharp.Threading.Tasks
             return await await task.ConfigureAwait(continueOnCapturedContext);
         }
 
-        public static async UnitaskVoid Unwrap(this Task<UnitaskVoid> task)
+        public static async UniTask Unwrap(this Task<UniTask> task)
         {
             await await task;
         }
 
-        public static async UnitaskVoid Unwrap(this Task<UnitaskVoid> task, bool continueOnCapturedContext)
+        public static async UniTask Unwrap(this Task<UniTask> task, bool continueOnCapturedContext)
         {
             await await task.ConfigureAwait(continueOnCapturedContext);
         }
@@ -771,12 +773,12 @@ namespace Cysharp.Threading.Tasks
             return await (await task).ConfigureAwait(continueOnCapturedContext);
         }
 
-        public static async UnitaskVoid Unwrap(this UniTask<Task> task)
+        public static async UniTask Unwrap(this UniTask<Task> task)
         {
             await await task;
         }
 
-        public static async UnitaskVoid Unwrap(this UniTask<Task> task, bool continueOnCapturedContext)
+        public static async UniTask Unwrap(this UniTask<Task> task, bool continueOnCapturedContext)
         {
             await (await task).ConfigureAwait(continueOnCapturedContext);
         }
@@ -786,19 +788,19 @@ namespace Cysharp.Threading.Tasks
         sealed class ToCoroutineEnumerator : IEnumerator
         {
             bool completed;
-            UnitaskVoid task;
+            UniTask task;
             Action<Exception> exceptionHandler = null;
             bool isStarted = false;
             ExceptionDispatchInfo exception;
 
-            public ToCoroutineEnumerator(UnitaskVoid task, Action<Exception> exceptionHandler)
+            public ToCoroutineEnumerator(UniTask task, Action<Exception> exceptionHandler)
             {
                 completed = false;
                 this.exceptionHandler = exceptionHandler;
                 this.task = task;
             }
 
-            async UniTaskVoid RunTask(UnitaskVoid task)
+            async UniTaskVoid RunTask(UniTask task)
             {
                 try
                 {

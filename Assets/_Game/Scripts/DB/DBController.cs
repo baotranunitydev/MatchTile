@@ -36,7 +36,7 @@ public class DBController : Singleton<DBController>
 
     void CheckDependency(string key, UnityAction<string> onComplete)
     {
-        if (!PlayerPrefs.HasKey(key))
+        if (!PlayerPrefsExtend.HasKey(key))
         {
             onComplete?.Invoke(key);
         }
@@ -56,14 +56,14 @@ public class DBController : Singleton<DBController>
             typeof(T) == typeof(Vector2Int) ||
             typeof(T) == typeof(Vector3Int))
         {
-            PlayerPrefs.SetString(key, values.ToString());
+            PlayerPrefsExtend.SetString(key, values.ToString());
         }
         else
         {
             try
             {
                 string json = JsonUtility.ToJson(values);
-                PlayerPrefs.SetString(key, json);
+                PlayerPrefsExtend.SetString(key, json);
             }
             catch (UnityException e)
             {
@@ -85,24 +85,24 @@ public class DBController : Singleton<DBController>
             typeof(T) == typeof(Vector2Int) ||
             typeof(T) == typeof(Vector3Int))
         {
-            string stringValue = PlayerPrefs.GetString(key);
+            string stringValue = PlayerPrefsExtend.GetString(key);
             return (T)Convert.ChangeType(stringValue, typeof(T));
         }
         else
         {
-            string json = PlayerPrefs.GetString(key);
+            string json = PlayerPrefsExtend.GetString(key);
             return JsonUtility.FromJson<T>(json);
         }
     }
 
     public void Delete(string key)
     {
-        PlayerPrefs.DeleteKey(key);
+        PlayerPrefsExtend.DeleteKey(key);
     }
 
     public void DeleteAll()
     {
-        PlayerPrefs.DeleteAll();
+        PlayerPrefsExtend.DeleteAll();
     }
 
     void Initializing()

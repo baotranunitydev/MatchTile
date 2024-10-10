@@ -9,14 +9,14 @@ namespace Cysharp.Threading.Tasks
     {
         static Action<object> continuation = SetCompletionSource;
 
-        Func<UnitaskVoid> taskFactory;
+        Func<UniTask> taskFactory;
         UniTaskCompletionSource completionSource;
-        UnitaskVoid.Awaiter awaiter;
+        UniTask.Awaiter awaiter;
 
         object syncLock;
         bool initialized;
 
-        public AsyncLazy(Func<UnitaskVoid> taskFactory)
+        public AsyncLazy(Func<UniTask> taskFactory)
         {
             this.taskFactory = taskFactory;
             this.completionSource = new UniTaskCompletionSource();
@@ -24,7 +24,7 @@ namespace Cysharp.Threading.Tasks
             this.initialized = false;
         }
 
-        internal AsyncLazy(UnitaskVoid task)
+        internal AsyncLazy(UniTask task)
         {
             this.taskFactory = null;
             this.completionSource = new UniTaskCompletionSource();
@@ -43,7 +43,7 @@ namespace Cysharp.Threading.Tasks
             }
         }
 
-        public UnitaskVoid Task
+        public UniTask Task
         {
             get
             {
@@ -53,7 +53,7 @@ namespace Cysharp.Threading.Tasks
         }
 
 
-        public UnitaskVoid.Awaiter GetAwaiter() => Task.GetAwaiter();
+        public UniTask.Awaiter GetAwaiter() => Task.GetAwaiter();
 
         void EnsureInitialized()
         {
@@ -92,7 +92,7 @@ namespace Cysharp.Threading.Tasks
             }
         }
 
-        void SetCompletionSource(in UnitaskVoid.Awaiter awaiter)
+        void SetCompletionSource(in UniTask.Awaiter awaiter)
         {
             try
             {

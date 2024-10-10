@@ -149,7 +149,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 StartIterate();
             }
 
-            public UnitaskVoid DisposeAsync()
+            public UniTask DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (enumerator != null)

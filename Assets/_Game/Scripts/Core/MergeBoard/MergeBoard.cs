@@ -117,7 +117,7 @@ public class MergeBoard : MonoBehaviour
             var tileMerge = lstTileMerge[i];
             tileMerge.AnimationMerge(lstTileMerge[1].transform.position);
         }
-        await UnitaskVoid.WaitForSeconds(0.2f);
+        await UniTask.WaitForSeconds(0.2f);
         AnimationRearrangeTile();
     }
 

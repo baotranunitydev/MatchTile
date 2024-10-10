@@ -30,13 +30,13 @@ namespace Cysharp.Threading.Tasks
         public abstract bool TryRead(out T item);
         public abstract UniTask<bool> WaitToReadAsync(CancellationToken cancellationToken = default(CancellationToken));
 
-        public abstract UnitaskVoid Completion { get; }
+        public abstract UniTask Completion { get; }
 
         public virtual UniTask<T> ReadAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             if (this.TryRead(out var item))
             {
-                return UnitaskVoid.FromResult(item);
+                return UniTask.FromResult(item);
             }
 
             return ReadAsyncCore(cancellationToken);
@@ -92,7 +92,7 @@ namespace Cysharp.Threading.Tasks
         readonly Queue<T> items;
         readonly SingleConsumerUnboundedChannelReader readerSource;
         UniTaskCompletionSource completedTaskSource;
-        UnitaskVoid completedTask;
+        UniTask completedTask;
 
         Exception completionError;
         bool closed;
@@ -152,7 +152,7 @@ namespace Cysharp.Threading.Tasks
                             }
                             else
                             {
-                                parent.completedTask = UnitaskVoid.CompletedTask;
+                                parent.completedTask = UniTask.CompletedTask;
                             }
                         }
                         else
@@ -163,7 +163,7 @@ namespace Cysharp.Threading.Tasks
                             }
                             else
                             {
-                                parent.completedTask = UnitaskVoid.FromException(error);
+                                parent.completedTask = UniTask.FromException(error);
                             }
                         }
 
@@ -197,7 +197,7 @@ namespace Cysharp.Threading.Tasks
                 TaskTracker.TrackActiveTask(this, 4);
             }
 
-            public override UnitaskVoid Completion
+            public override UniTask Completion
             {
                 get
                 {
@@ -232,7 +232,7 @@ namespace Cysharp.Threading.Tasks
                                 }
                                 else
                                 {
-                                    parent.completedTask = UnitaskVoid.FromException(parent.completionError);
+                                    parent.completedTask = UniTask.FromException(parent.completionError);
                                 }
                             }
                             else
@@ -243,7 +243,7 @@ namespace Cysharp.Threading.Tasks
                                 }
                                 else
                                 {
-                                    parent.completedTask = UnitaskVoid.CompletedTask;
+                                    parent.completedTask = UniTask.CompletedTask;
                                 }
                             }
                         }
@@ -262,7 +262,7 @@ namespace Cysharp.Threading.Tasks
             {
                 if (cancellationToken.IsCancellationRequested)
                 {
-                    return UnitaskVoid.FromCanceled<bool>(cancellationToken);
+                    return UniTask.FromCanceled<bool>(cancellationToken);
                 }
 
                 lock (parent.items)
@@ -280,7 +280,7 @@ namespace Cysharp.Threading.Tasks
                         }
                         else
                         {
-                            return UnitaskVoid.FromException<bool>(parent.completionError);
+                            return UniTask.FromException<bool>(parent.completionError);
                         }
                     }
 
@@ -426,7 +426,7 @@ namespace Cysharp.Threading.Tasks
                     return parent.WaitToReadAsync(CancellationToken.None); // ok to use None, registered in ctor.
                 }
 
-                public UnitaskVoid DisposeAsync()
+                public UniTask DisposeAsync()
                 {
                     cancellationTokenRegistration1.Dispose();
                     cancellationTokenRegistration2.Dispose();

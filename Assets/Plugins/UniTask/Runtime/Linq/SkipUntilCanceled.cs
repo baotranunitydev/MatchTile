@@ -157,7 +157,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public UnitaskVoid DisposeAsync()
+            public UniTask DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 cancellationTokenRegistration1.Dispose();

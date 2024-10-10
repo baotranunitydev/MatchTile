@@ -10,14 +10,14 @@ namespace Cysharp.Threading.Tasks
 {
     public static partial class UnityAsyncExtensions
     {
-        public static async UnitaskVoid WaitAsync(this JobHandle jobHandle, PlayerLoopTiming waitTiming, CancellationToken cancellationToken = default)
+        public static async UniTask WaitAsync(this JobHandle jobHandle, PlayerLoopTiming waitTiming, CancellationToken cancellationToken = default)
         {
-            await UnitaskVoid.Yield(waitTiming);
+            await UniTask.Yield(waitTiming);
             jobHandle.Complete();
             cancellationToken.ThrowIfCancellationRequested(); // call cancel after Complete.
         }
 
-        public static UnitaskVoid.Awaiter GetAwaiter(this JobHandle jobHandle)
+        public static UniTask.Awaiter GetAwaiter(this JobHandle jobHandle)
         {
             var handler = JobHandlePromise.Create(jobHandle, out var token);
             {
@@ -28,19 +28,19 @@ namespace Cysharp.Threading.Tasks
                 PlayerLoopHelper.AddAction(PlayerLoopTiming.PostLateUpdate, handler);
             }
 
-            return new UnitaskVoid(handler, token).GetAwaiter();
+            return new UniTask(handler, token).GetAwaiter();
         }
 
         // can not pass CancellationToken because can't handle JobHandle's Complete and NativeArray.Dispose.
 
-        public static UnitaskVoid ToUniTask(this JobHandle jobHandle, PlayerLoopTiming waitTiming)
+        public static UniTask ToUniTask(this JobHandle jobHandle, PlayerLoopTiming waitTiming)
         {
             var handler = JobHandlePromise.Create(jobHandle, out var token);
             {
                 PlayerLoopHelper.AddAction(waitTiming, handler);
             }
 
-            return new UnitaskVoid(handler, token);
+            return new UniTask(handler, token);
         }
 
         sealed class JobHandlePromise : IUniTaskSource, IPlayerLoopItem

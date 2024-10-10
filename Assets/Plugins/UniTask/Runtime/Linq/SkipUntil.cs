@@ -6,14 +6,14 @@ namespace Cysharp.Threading.Tasks.Linq
 {
     public static partial class UniTaskAsyncEnumerable
     {
-        public static IUniTaskAsyncEnumerable<TSource> SkipUntil<TSource>(this IUniTaskAsyncEnumerable<TSource> source, UnitaskVoid other)
+        public static IUniTaskAsyncEnumerable<TSource> SkipUntil<TSource>(this IUniTaskAsyncEnumerable<TSource> source, UniTask other)
         {
             Error.ThrowArgumentNullException(source, nameof(source));
 
             return new SkipUntil<TSource>(source, other, null);
         }
 
-        public static IUniTaskAsyncEnumerable<TSource> SkipUntil<TSource>(this IUniTaskAsyncEnumerable<TSource> source, Func<CancellationToken, UnitaskVoid> other)
+        public static IUniTaskAsyncEnumerable<TSource> SkipUntil<TSource>(this IUniTaskAsyncEnumerable<TSource> source, Func<CancellationToken, UniTask> other)
         {
             Error.ThrowArgumentNullException(source, nameof(source));
             Error.ThrowArgumentNullException(source, nameof(other));
@@ -25,10 +25,10 @@ namespace Cysharp.Threading.Tasks.Linq
     internal sealed class SkipUntil<TSource> : IUniTaskAsyncEnumerable<TSource>
     {
         readonly IUniTaskAsyncEnumerable<TSource> source;
-        readonly UnitaskVoid other;
-        readonly Func<CancellationToken, UnitaskVoid> other2;
+        readonly UniTask other;
+        readonly Func<CancellationToken, UniTask> other2;
 
-        public SkipUntil(IUniTaskAsyncEnumerable<TSource> source, UnitaskVoid other, Func<CancellationToken, UnitaskVoid> other2)
+        public SkipUntil(IUniTaskAsyncEnumerable<TSource> source, UniTask other, Func<CancellationToken, UniTask> other2)
         {
             this.source = source;
             this.other = other;
@@ -62,7 +62,7 @@ namespace Cysharp.Threading.Tasks.Linq
             bool continueNext;
             Exception exception;
 
-            public _SkipUntil(IUniTaskAsyncEnumerable<TSource> source, UnitaskVoid other, CancellationToken cancellationToken1)
+            public _SkipUntil(IUniTaskAsyncEnumerable<TSource> source, UniTask other, CancellationToken cancellationToken1)
             {
                 this.source = source;
                 this.cancellationToken1 = cancellationToken1;
@@ -81,12 +81,12 @@ namespace Cysharp.Threading.Tasks.Linq
             {
                 if (exception != null)
                 {
-                    return UnitaskVoid.FromException<bool>(exception);
+                    return UniTask.FromException<bool>(exception);
                 }
 
                 if (cancellationToken1.IsCancellationRequested)
                 {
-                    return UnitaskVoid.FromCanceled<bool>(cancellationToken1);
+                    return UniTask.FromCanceled<bool>(cancellationToken1);
                 }
 
                 if (enumerator == null)
@@ -151,7 +151,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            async UniTaskVoid RunOther(UnitaskVoid other)
+            async UniTaskVoid RunOther(UniTask other)
             {
                 try
                 {
@@ -172,7 +172,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 self.completionSource.TrySetCanceled(self.cancellationToken1);
             }
 
-            public UnitaskVoid DisposeAsync()
+            public UniTask DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 cancellationTokenRegistration1.Dispose();

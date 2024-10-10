@@ -67,33 +67,33 @@ namespace Cysharp.Threading.Tasks.Triggers
         // Special for single operation.
 
         /// <summary>This function is called when the MonoBehaviour will be destroyed.</summary>
-        public static UnitaskVoid OnDestroyAsync(this GameObject gameObject)
+        public static UniTask OnDestroyAsync(this GameObject gameObject)
         {
             return gameObject.GetAsyncDestroyTrigger().OnDestroyAsync();
         }
 
         /// <summary>This function is called when the MonoBehaviour will be destroyed.</summary>
-        public static UnitaskVoid OnDestroyAsync(this Component component)
+        public static UniTask OnDestroyAsync(this Component component)
         {
             return component.GetAsyncDestroyTrigger().OnDestroyAsync();
         }
 
-        public static UnitaskVoid StartAsync(this GameObject gameObject)
+        public static UniTask StartAsync(this GameObject gameObject)
         {
             return gameObject.GetAsyncStartTrigger().StartAsync();
         }
 
-        public static UnitaskVoid StartAsync(this Component component)
+        public static UniTask StartAsync(this Component component)
         {
             return component.GetAsyncStartTrigger().StartAsync();
         }
 
-        public static UnitaskVoid AwakeAsync(this GameObject gameObject)
+        public static UniTask AwakeAsync(this GameObject gameObject)
         {
             return gameObject.GetAsyncAwakeTrigger().AwakeAsync();
         }
 
-        public static UnitaskVoid AwakeAsync(this Component component)
+        public static UniTask AwakeAsync(this Component component)
         {
             return component.GetAsyncAwakeTrigger().AwakeAsync();
         }

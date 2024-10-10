@@ -12,10 +12,10 @@ public class VibrateController : Singleton<VibrateController>
 
     public void Vibrate()
     {
-        if (SystemInfo.supportsVibration && userSettings.isVibrate)
-        {
-            Handheld.Vibrate();
-        }
+        //if (SystemInfo.supportsVibration && userSettings.isVibrate)
+        //{
+        //    Handheld.Vibrate();
+        //}
     }
 
     public void SetVibrate(bool isVibrate)

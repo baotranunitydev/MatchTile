@@ -125,7 +125,7 @@ namespace Cysharp.Threading.Tasks.Triggers
                 return new UniTask<bool>(this, completionSource.Version);
             }
 
-            public UnitaskVoid DisposeAsync()
+            public UniTask DisposeAsync()
             {
                 if (!isDisposed)
                 {
@@ -163,15 +163,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOneShotTrigger
     {
-        UnitaskVoid OneShotAsync();
+        UniTask OneShotAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOneShotTrigger
     {
-        UnitaskVoid IAsyncOneShotTrigger.OneShotAsync()
+        UniTask IAsyncOneShotTrigger.OneShotAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)this, core.Version);
+            return new UniTask((IUniTaskSource)this, core.Version);
         }
     }
 

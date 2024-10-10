@@ -41,7 +41,7 @@ namespace Cysharp.Threading.Tasks.Internal
             { typeof(ulong), "ulong" },
             { typeof(ushort), "ushort" },
             { typeof(Task), "Task" },
-            { typeof(UnitaskVoid), "UniTask" },
+            { typeof(UniTask), "UniTask" },
             { typeof(UniTaskVoid), "UniTaskVoid" }
         };
 

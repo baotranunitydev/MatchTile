@@ -83,7 +83,7 @@ namespace Cysharp.Threading.Tasks.Linq
         {
             Error.ThrowArgumentNullException(source, nameof(source));
             Error.ThrowArgumentNullException(keySelector, nameof(keySelector));
-            return new GroupByAwait<TSource, TKey, TSource>(source, keySelector, x => UnitaskVoid.FromResult(x), EqualityComparer<TKey>.Default);
+            return new GroupByAwait<TSource, TKey, TSource>(source, keySelector, x => UniTask.FromResult(x), EqualityComparer<TKey>.Default);
         }
 
         public static IUniTaskAsyncEnumerable<IGrouping<TKey, TSource>> GroupByAwait<TSource, TKey>(this IUniTaskAsyncEnumerable<TSource> source, Func<TSource, UniTask<TKey>> keySelector, IEqualityComparer<TKey> comparer)
@@ -91,7 +91,7 @@ namespace Cysharp.Threading.Tasks.Linq
             Error.ThrowArgumentNullException(source, nameof(source));
             Error.ThrowArgumentNullException(keySelector, nameof(keySelector));
             Error.ThrowArgumentNullException(comparer, nameof(comparer));
-            return new GroupByAwait<TSource, TKey, TSource>(source, keySelector, x => UnitaskVoid.FromResult(x), comparer);
+            return new GroupByAwait<TSource, TKey, TSource>(source, keySelector, x => UniTask.FromResult(x), comparer);
         }
 
         public static IUniTaskAsyncEnumerable<IGrouping<TKey, TElement>> GroupByAwait<TSource, TKey, TElement>(this IUniTaskAsyncEnumerable<TSource> source, Func<TSource, UniTask<TKey>> keySelector, Func<TSource, UniTask<TElement>> elementSelector)
@@ -116,7 +116,7 @@ namespace Cysharp.Threading.Tasks.Linq
             Error.ThrowArgumentNullException(source, nameof(source));
             Error.ThrowArgumentNullException(keySelector, nameof(keySelector));
             Error.ThrowArgumentNullException(resultSelector, nameof(resultSelector));
-            return new GroupByAwait<TSource, TKey, TSource, TResult>(source, keySelector, x => UnitaskVoid.FromResult(x), resultSelector, EqualityComparer<TKey>.Default);
+            return new GroupByAwait<TSource, TKey, TSource, TResult>(source, keySelector, x => UniTask.FromResult(x), resultSelector, EqualityComparer<TKey>.Default);
         }
 
         public static IUniTaskAsyncEnumerable<TResult> GroupByAwait<TSource, TKey, TElement, TResult>(this IUniTaskAsyncEnumerable<TSource> source, Func<TSource, UniTask<TKey>> keySelector, Func<TSource, UniTask<TElement>> elementSelector, Func<TKey, IEnumerable<TElement>, UniTask<TResult>> resultSelector)
@@ -134,7 +134,7 @@ namespace Cysharp.Threading.Tasks.Linq
             Error.ThrowArgumentNullException(keySelector, nameof(keySelector));
             Error.ThrowArgumentNullException(resultSelector, nameof(resultSelector));
             Error.ThrowArgumentNullException(comparer, nameof(comparer));
-            return new GroupByAwait<TSource, TKey, TSource, TResult>(source, keySelector, x => UnitaskVoid.FromResult(x), resultSelector, comparer);
+            return new GroupByAwait<TSource, TKey, TSource, TResult>(source, keySelector, x => UniTask.FromResult(x), resultSelector, comparer);
         }
 
         public static IUniTaskAsyncEnumerable<TResult> GroupByAwait<TSource, TKey, TElement, TResult>(this IUniTaskAsyncEnumerable<TSource> source, Func<TSource, UniTask<TKey>> keySelector, Func<TSource, UniTask<TElement>> elementSelector, Func<TKey, IEnumerable<TElement>, UniTask<TResult>> resultSelector, IEqualityComparer<TKey> comparer)
@@ -153,7 +153,7 @@ namespace Cysharp.Threading.Tasks.Linq
         {
             Error.ThrowArgumentNullException(source, nameof(source));
             Error.ThrowArgumentNullException(keySelector, nameof(keySelector));
-            return new GroupByAwaitWithCancellation<TSource, TKey, TSource>(source, keySelector, (x, _) => UnitaskVoid.FromResult(x), EqualityComparer<TKey>.Default);
+            return new GroupByAwaitWithCancellation<TSource, TKey, TSource>(source, keySelector, (x, _) => UniTask.FromResult(x), EqualityComparer<TKey>.Default);
         }
 
         public static IUniTaskAsyncEnumerable<IGrouping<TKey, TSource>> GroupByAwaitWithCancellation<TSource, TKey>(this IUniTaskAsyncEnumerable<TSource> source, Func<TSource, CancellationToken, UniTask<TKey>> keySelector, IEqualityComparer<TKey> comparer)
@@ -161,7 +161,7 @@ namespace Cysharp.Threading.Tasks.Linq
             Error.ThrowArgumentNullException(source, nameof(source));
             Error.ThrowArgumentNullException(keySelector, nameof(keySelector));
             Error.ThrowArgumentNullException(comparer, nameof(comparer));
-            return new GroupByAwaitWithCancellation<TSource, TKey, TSource>(source, keySelector, (x, _) => UnitaskVoid.FromResult(x), comparer);
+            return new GroupByAwaitWithCancellation<TSource, TKey, TSource>(source, keySelector, (x, _) => UniTask.FromResult(x), comparer);
         }
 
         public static IUniTaskAsyncEnumerable<IGrouping<TKey, TElement>> GroupByAwaitWithCancellation<TSource, TKey, TElement>(this IUniTaskAsyncEnumerable<TSource> source, Func<TSource, CancellationToken, UniTask<TKey>> keySelector, Func<TSource, CancellationToken, UniTask<TElement>> elementSelector)
@@ -186,7 +186,7 @@ namespace Cysharp.Threading.Tasks.Linq
             Error.ThrowArgumentNullException(source, nameof(source));
             Error.ThrowArgumentNullException(keySelector, nameof(keySelector));
             Error.ThrowArgumentNullException(resultSelector, nameof(resultSelector));
-            return new GroupByAwaitWithCancellation<TSource, TKey, TSource, TResult>(source, keySelector, (x, _) => UnitaskVoid.FromResult(x), resultSelector, EqualityComparer<TKey>.Default);
+            return new GroupByAwaitWithCancellation<TSource, TKey, TSource, TResult>(source, keySelector, (x, _) => UniTask.FromResult(x), resultSelector, EqualityComparer<TKey>.Default);
         }
 
         public static IUniTaskAsyncEnumerable<TResult> GroupByAwaitWithCancellation<TSource, TKey, TElement, TResult>(this IUniTaskAsyncEnumerable<TSource> source, Func<TSource, CancellationToken, UniTask<TKey>> keySelector, Func<TSource, CancellationToken, UniTask<TElement>> elementSelector, Func<TKey, IEnumerable<TElement>, CancellationToken, UniTask<TResult>> resultSelector)
@@ -204,7 +204,7 @@ namespace Cysharp.Threading.Tasks.Linq
             Error.ThrowArgumentNullException(keySelector, nameof(keySelector));
             Error.ThrowArgumentNullException(resultSelector, nameof(resultSelector));
             Error.ThrowArgumentNullException(comparer, nameof(comparer));
-            return new GroupByAwaitWithCancellation<TSource, TKey, TSource, TResult>(source, keySelector, (x, _) => UnitaskVoid.FromResult(x), resultSelector, comparer);
+            return new GroupByAwaitWithCancellation<TSource, TKey, TSource, TResult>(source, keySelector, (x, _) => UniTask.FromResult(x), resultSelector, comparer);
         }
 
         public static IUniTaskAsyncEnumerable<TResult> GroupByAwaitWithCancellation<TSource, TKey, TElement, TResult>(this IUniTaskAsyncEnumerable<TSource> source, Func<TSource, CancellationToken, UniTask<TKey>> keySelector, Func<TSource, CancellationToken, UniTask<TElement>> elementSelector, Func<TKey, IEnumerable<TElement>, CancellationToken, UniTask<TResult>> resultSelector, IEqualityComparer<TKey> comparer)
@@ -312,7 +312,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public UnitaskVoid DisposeAsync()
+            public UniTask DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (groupEnumerator != null)
@@ -424,7 +424,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public UnitaskVoid DisposeAsync()
+            public UniTask DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (groupEnumerator != null)
@@ -531,7 +531,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public UnitaskVoid DisposeAsync()
+            public UniTask DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (groupEnumerator != null)
@@ -666,7 +666,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public UnitaskVoid DisposeAsync()
+            public UniTask DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (groupEnumerator != null)
@@ -773,7 +773,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public UnitaskVoid DisposeAsync()
+            public UniTask DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (groupEnumerator != null)
@@ -908,7 +908,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public UnitaskVoid DisposeAsync()
+            public UniTask DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (groupEnumerator != null)

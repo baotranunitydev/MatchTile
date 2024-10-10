@@ -12,15 +12,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncFixedUpdateHandler
     {
-        UnitaskVoid FixedUpdateAsync();
+        UniTask FixedUpdateAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncFixedUpdateHandler
     {
-        UnitaskVoid IAsyncFixedUpdateHandler.FixedUpdateAsync()
+        UniTask IAsyncFixedUpdateHandler.FixedUpdateAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -55,12 +55,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid FixedUpdateAsync()
+        public UniTask FixedUpdateAsync()
         {
             return ((IAsyncFixedUpdateHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).FixedUpdateAsync();
         }
 
-        public UnitaskVoid FixedUpdateAsync(CancellationToken cancellationToken)
+        public UniTask FixedUpdateAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncFixedUpdateHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).FixedUpdateAsync();
         }
@@ -71,15 +71,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncLateUpdateHandler
     {
-        UnitaskVoid LateUpdateAsync();
+        UniTask LateUpdateAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncLateUpdateHandler
     {
-        UnitaskVoid IAsyncLateUpdateHandler.LateUpdateAsync()
+        UniTask IAsyncLateUpdateHandler.LateUpdateAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -114,12 +114,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid LateUpdateAsync()
+        public UniTask LateUpdateAsync()
         {
             return ((IAsyncLateUpdateHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).LateUpdateAsync();
         }
 
-        public UnitaskVoid LateUpdateAsync(CancellationToken cancellationToken)
+        public UniTask LateUpdateAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncLateUpdateHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).LateUpdateAsync();
         }
@@ -189,15 +189,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnAnimatorMoveHandler
     {
-        UnitaskVoid OnAnimatorMoveAsync();
+        UniTask OnAnimatorMoveAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnAnimatorMoveHandler
     {
-        UnitaskVoid IAsyncOnAnimatorMoveHandler.OnAnimatorMoveAsync()
+        UniTask IAsyncOnAnimatorMoveHandler.OnAnimatorMoveAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -232,12 +232,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnAnimatorMoveAsync()
+        public UniTask OnAnimatorMoveAsync()
         {
             return ((IAsyncOnAnimatorMoveHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnAnimatorMoveAsync();
         }
 
-        public UnitaskVoid OnAnimatorMoveAsync(CancellationToken cancellationToken)
+        public UniTask OnAnimatorMoveAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnAnimatorMoveHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnAnimatorMoveAsync();
         }
@@ -366,15 +366,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnApplicationQuitHandler
     {
-        UnitaskVoid OnApplicationQuitAsync();
+        UniTask OnApplicationQuitAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnApplicationQuitHandler
     {
-        UnitaskVoid IAsyncOnApplicationQuitHandler.OnApplicationQuitAsync()
+        UniTask IAsyncOnApplicationQuitHandler.OnApplicationQuitAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -409,12 +409,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnApplicationQuitAsync()
+        public UniTask OnApplicationQuitAsync()
         {
             return ((IAsyncOnApplicationQuitHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnApplicationQuitAsync();
         }
 
-        public UnitaskVoid OnApplicationQuitAsync(CancellationToken cancellationToken)
+        public UniTask OnApplicationQuitAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnApplicationQuitHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnApplicationQuitAsync();
         }
@@ -484,15 +484,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnBecameInvisibleHandler
     {
-        UnitaskVoid OnBecameInvisibleAsync();
+        UniTask OnBecameInvisibleAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnBecameInvisibleHandler
     {
-        UnitaskVoid IAsyncOnBecameInvisibleHandler.OnBecameInvisibleAsync()
+        UniTask IAsyncOnBecameInvisibleHandler.OnBecameInvisibleAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -527,12 +527,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnBecameInvisibleAsync()
+        public UniTask OnBecameInvisibleAsync()
         {
             return ((IAsyncOnBecameInvisibleHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnBecameInvisibleAsync();
         }
 
-        public UnitaskVoid OnBecameInvisibleAsync(CancellationToken cancellationToken)
+        public UniTask OnBecameInvisibleAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnBecameInvisibleHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnBecameInvisibleAsync();
         }
@@ -543,15 +543,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnBecameVisibleHandler
     {
-        UnitaskVoid OnBecameVisibleAsync();
+        UniTask OnBecameVisibleAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnBecameVisibleHandler
     {
-        UnitaskVoid IAsyncOnBecameVisibleHandler.OnBecameVisibleAsync()
+        UniTask IAsyncOnBecameVisibleHandler.OnBecameVisibleAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -586,12 +586,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnBecameVisibleAsync()
+        public UniTask OnBecameVisibleAsync()
         {
             return ((IAsyncOnBecameVisibleHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnBecameVisibleAsync();
         }
 
-        public UnitaskVoid OnBecameVisibleAsync(CancellationToken cancellationToken)
+        public UniTask OnBecameVisibleAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnBecameVisibleHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnBecameVisibleAsync();
         }
@@ -602,15 +602,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnBeforeTransformParentChangedHandler
     {
-        UnitaskVoid OnBeforeTransformParentChangedAsync();
+        UniTask OnBeforeTransformParentChangedAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnBeforeTransformParentChangedHandler
     {
-        UnitaskVoid IAsyncOnBeforeTransformParentChangedHandler.OnBeforeTransformParentChangedAsync()
+        UniTask IAsyncOnBeforeTransformParentChangedHandler.OnBeforeTransformParentChangedAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -645,12 +645,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnBeforeTransformParentChangedAsync()
+        public UniTask OnBeforeTransformParentChangedAsync()
         {
             return ((IAsyncOnBeforeTransformParentChangedHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnBeforeTransformParentChangedAsync();
         }
 
-        public UnitaskVoid OnBeforeTransformParentChangedAsync(CancellationToken cancellationToken)
+        public UniTask OnBeforeTransformParentChangedAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnBeforeTransformParentChangedHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnBeforeTransformParentChangedAsync();
         }
@@ -661,15 +661,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnCanvasGroupChangedHandler
     {
-        UnitaskVoid OnCanvasGroupChangedAsync();
+        UniTask OnCanvasGroupChangedAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnCanvasGroupChangedHandler
     {
-        UnitaskVoid IAsyncOnCanvasGroupChangedHandler.OnCanvasGroupChangedAsync()
+        UniTask IAsyncOnCanvasGroupChangedHandler.OnCanvasGroupChangedAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -704,12 +704,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnCanvasGroupChangedAsync()
+        public UniTask OnCanvasGroupChangedAsync()
         {
             return ((IAsyncOnCanvasGroupChangedHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnCanvasGroupChangedAsync();
         }
 
-        public UnitaskVoid OnCanvasGroupChangedAsync(CancellationToken cancellationToken)
+        public UniTask OnCanvasGroupChangedAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnCanvasGroupChangedHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnCanvasGroupChangedAsync();
         }
@@ -1147,15 +1147,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnDisableHandler
     {
-        UnitaskVoid OnDisableAsync();
+        UniTask OnDisableAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnDisableHandler
     {
-        UnitaskVoid IAsyncOnDisableHandler.OnDisableAsync()
+        UniTask IAsyncOnDisableHandler.OnDisableAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -1190,12 +1190,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnDisableAsync()
+        public UniTask OnDisableAsync()
         {
             return ((IAsyncOnDisableHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnDisableAsync();
         }
 
-        public UnitaskVoid OnDisableAsync(CancellationToken cancellationToken)
+        public UniTask OnDisableAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnDisableHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnDisableAsync();
         }
@@ -1206,15 +1206,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnDrawGizmosHandler
     {
-        UnitaskVoid OnDrawGizmosAsync();
+        UniTask OnDrawGizmosAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnDrawGizmosHandler
     {
-        UnitaskVoid IAsyncOnDrawGizmosHandler.OnDrawGizmosAsync()
+        UniTask IAsyncOnDrawGizmosHandler.OnDrawGizmosAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -1249,12 +1249,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnDrawGizmosAsync()
+        public UniTask OnDrawGizmosAsync()
         {
             return ((IAsyncOnDrawGizmosHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnDrawGizmosAsync();
         }
 
-        public UnitaskVoid OnDrawGizmosAsync(CancellationToken cancellationToken)
+        public UniTask OnDrawGizmosAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnDrawGizmosHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnDrawGizmosAsync();
         }
@@ -1265,15 +1265,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnDrawGizmosSelectedHandler
     {
-        UnitaskVoid OnDrawGizmosSelectedAsync();
+        UniTask OnDrawGizmosSelectedAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnDrawGizmosSelectedHandler
     {
-        UnitaskVoid IAsyncOnDrawGizmosSelectedHandler.OnDrawGizmosSelectedAsync()
+        UniTask IAsyncOnDrawGizmosSelectedHandler.OnDrawGizmosSelectedAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -1308,12 +1308,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnDrawGizmosSelectedAsync()
+        public UniTask OnDrawGizmosSelectedAsync()
         {
             return ((IAsyncOnDrawGizmosSelectedHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnDrawGizmosSelectedAsync();
         }
 
-        public UnitaskVoid OnDrawGizmosSelectedAsync(CancellationToken cancellationToken)
+        public UniTask OnDrawGizmosSelectedAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnDrawGizmosSelectedHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnDrawGizmosSelectedAsync();
         }
@@ -1324,15 +1324,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnEnableHandler
     {
-        UnitaskVoid OnEnableAsync();
+        UniTask OnEnableAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnEnableHandler
     {
-        UnitaskVoid IAsyncOnEnableHandler.OnEnableAsync()
+        UniTask IAsyncOnEnableHandler.OnEnableAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -1367,12 +1367,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnEnableAsync()
+        public UniTask OnEnableAsync()
         {
             return ((IAsyncOnEnableHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnEnableAsync();
         }
 
-        public UnitaskVoid OnEnableAsync(CancellationToken cancellationToken)
+        public UniTask OnEnableAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnEnableHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnEnableAsync();
         }
@@ -1383,15 +1383,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnGUIHandler
     {
-        UnitaskVoid OnGUIAsync();
+        UniTask OnGUIAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnGUIHandler
     {
-        UnitaskVoid IAsyncOnGUIHandler.OnGUIAsync()
+        UniTask IAsyncOnGUIHandler.OnGUIAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -1426,12 +1426,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnGUIAsync()
+        public UniTask OnGUIAsync()
         {
             return ((IAsyncOnGUIHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnGUIAsync();
         }
 
-        public UnitaskVoid OnGUIAsync(CancellationToken cancellationToken)
+        public UniTask OnGUIAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnGUIHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnGUIAsync();
         }
@@ -1565,15 +1565,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnMouseDownHandler
     {
-        UnitaskVoid OnMouseDownAsync();
+        UniTask OnMouseDownAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnMouseDownHandler
     {
-        UnitaskVoid IAsyncOnMouseDownHandler.OnMouseDownAsync()
+        UniTask IAsyncOnMouseDownHandler.OnMouseDownAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -1608,12 +1608,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnMouseDownAsync()
+        public UniTask OnMouseDownAsync()
         {
             return ((IAsyncOnMouseDownHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnMouseDownAsync();
         }
 
-        public UnitaskVoid OnMouseDownAsync(CancellationToken cancellationToken)
+        public UniTask OnMouseDownAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnMouseDownHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnMouseDownAsync();
         }
@@ -1626,15 +1626,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnMouseDragHandler
     {
-        UnitaskVoid OnMouseDragAsync();
+        UniTask OnMouseDragAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnMouseDragHandler
     {
-        UnitaskVoid IAsyncOnMouseDragHandler.OnMouseDragAsync()
+        UniTask IAsyncOnMouseDragHandler.OnMouseDragAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -1669,12 +1669,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnMouseDragAsync()
+        public UniTask OnMouseDragAsync()
         {
             return ((IAsyncOnMouseDragHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnMouseDragAsync();
         }
 
-        public UnitaskVoid OnMouseDragAsync(CancellationToken cancellationToken)
+        public UniTask OnMouseDragAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnMouseDragHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnMouseDragAsync();
         }
@@ -1687,15 +1687,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnMouseEnterHandler
     {
-        UnitaskVoid OnMouseEnterAsync();
+        UniTask OnMouseEnterAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnMouseEnterHandler
     {
-        UnitaskVoid IAsyncOnMouseEnterHandler.OnMouseEnterAsync()
+        UniTask IAsyncOnMouseEnterHandler.OnMouseEnterAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -1730,12 +1730,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnMouseEnterAsync()
+        public UniTask OnMouseEnterAsync()
         {
             return ((IAsyncOnMouseEnterHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnMouseEnterAsync();
         }
 
-        public UnitaskVoid OnMouseEnterAsync(CancellationToken cancellationToken)
+        public UniTask OnMouseEnterAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnMouseEnterHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnMouseEnterAsync();
         }
@@ -1748,15 +1748,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnMouseExitHandler
     {
-        UnitaskVoid OnMouseExitAsync();
+        UniTask OnMouseExitAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnMouseExitHandler
     {
-        UnitaskVoid IAsyncOnMouseExitHandler.OnMouseExitAsync()
+        UniTask IAsyncOnMouseExitHandler.OnMouseExitAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -1791,12 +1791,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnMouseExitAsync()
+        public UniTask OnMouseExitAsync()
         {
             return ((IAsyncOnMouseExitHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnMouseExitAsync();
         }
 
-        public UnitaskVoid OnMouseExitAsync(CancellationToken cancellationToken)
+        public UniTask OnMouseExitAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnMouseExitHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnMouseExitAsync();
         }
@@ -1809,15 +1809,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnMouseOverHandler
     {
-        UnitaskVoid OnMouseOverAsync();
+        UniTask OnMouseOverAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnMouseOverHandler
     {
-        UnitaskVoid IAsyncOnMouseOverHandler.OnMouseOverAsync()
+        UniTask IAsyncOnMouseOverHandler.OnMouseOverAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -1852,12 +1852,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnMouseOverAsync()
+        public UniTask OnMouseOverAsync()
         {
             return ((IAsyncOnMouseOverHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnMouseOverAsync();
         }
 
-        public UnitaskVoid OnMouseOverAsync(CancellationToken cancellationToken)
+        public UniTask OnMouseOverAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnMouseOverHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnMouseOverAsync();
         }
@@ -1870,15 +1870,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnMouseUpHandler
     {
-        UnitaskVoid OnMouseUpAsync();
+        UniTask OnMouseUpAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnMouseUpHandler
     {
-        UnitaskVoid IAsyncOnMouseUpHandler.OnMouseUpAsync()
+        UniTask IAsyncOnMouseUpHandler.OnMouseUpAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -1913,12 +1913,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnMouseUpAsync()
+        public UniTask OnMouseUpAsync()
         {
             return ((IAsyncOnMouseUpHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnMouseUpAsync();
         }
 
-        public UnitaskVoid OnMouseUpAsync(CancellationToken cancellationToken)
+        public UniTask OnMouseUpAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnMouseUpHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnMouseUpAsync();
         }
@@ -1931,15 +1931,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnMouseUpAsButtonHandler
     {
-        UnitaskVoid OnMouseUpAsButtonAsync();
+        UniTask OnMouseUpAsButtonAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnMouseUpAsButtonHandler
     {
-        UnitaskVoid IAsyncOnMouseUpAsButtonHandler.OnMouseUpAsButtonAsync()
+        UniTask IAsyncOnMouseUpAsButtonHandler.OnMouseUpAsButtonAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -1974,12 +1974,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnMouseUpAsButtonAsync()
+        public UniTask OnMouseUpAsButtonAsync()
         {
             return ((IAsyncOnMouseUpAsButtonHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnMouseUpAsButtonAsync();
         }
 
-        public UnitaskVoid OnMouseUpAsButtonAsync(CancellationToken cancellationToken)
+        public UniTask OnMouseUpAsButtonAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnMouseUpAsButtonHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnMouseUpAsButtonAsync();
         }
@@ -2050,15 +2050,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnParticleSystemStoppedHandler
     {
-        UnitaskVoid OnParticleSystemStoppedAsync();
+        UniTask OnParticleSystemStoppedAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnParticleSystemStoppedHandler
     {
-        UnitaskVoid IAsyncOnParticleSystemStoppedHandler.OnParticleSystemStoppedAsync()
+        UniTask IAsyncOnParticleSystemStoppedHandler.OnParticleSystemStoppedAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -2093,12 +2093,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnParticleSystemStoppedAsync()
+        public UniTask OnParticleSystemStoppedAsync()
         {
             return ((IAsyncOnParticleSystemStoppedHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnParticleSystemStoppedAsync();
         }
 
-        public UnitaskVoid OnParticleSystemStoppedAsync(CancellationToken cancellationToken)
+        public UniTask OnParticleSystemStoppedAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnParticleSystemStoppedHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnParticleSystemStoppedAsync();
         }
@@ -2109,15 +2109,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnParticleTriggerHandler
     {
-        UnitaskVoid OnParticleTriggerAsync();
+        UniTask OnParticleTriggerAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnParticleTriggerHandler
     {
-        UnitaskVoid IAsyncOnParticleTriggerHandler.OnParticleTriggerAsync()
+        UniTask IAsyncOnParticleTriggerHandler.OnParticleTriggerAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -2152,12 +2152,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnParticleTriggerAsync()
+        public UniTask OnParticleTriggerAsync()
         {
             return ((IAsyncOnParticleTriggerHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnParticleTriggerAsync();
         }
 
-        public UnitaskVoid OnParticleTriggerAsync(CancellationToken cancellationToken)
+        public UniTask OnParticleTriggerAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnParticleTriggerHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnParticleTriggerAsync();
         }
@@ -2229,15 +2229,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnPostRenderHandler
     {
-        UnitaskVoid OnPostRenderAsync();
+        UniTask OnPostRenderAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnPostRenderHandler
     {
-        UnitaskVoid IAsyncOnPostRenderHandler.OnPostRenderAsync()
+        UniTask IAsyncOnPostRenderHandler.OnPostRenderAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -2272,12 +2272,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnPostRenderAsync()
+        public UniTask OnPostRenderAsync()
         {
             return ((IAsyncOnPostRenderHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnPostRenderAsync();
         }
 
-        public UnitaskVoid OnPostRenderAsync(CancellationToken cancellationToken)
+        public UniTask OnPostRenderAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnPostRenderHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnPostRenderAsync();
         }
@@ -2288,15 +2288,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnPreCullHandler
     {
-        UnitaskVoid OnPreCullAsync();
+        UniTask OnPreCullAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnPreCullHandler
     {
-        UnitaskVoid IAsyncOnPreCullHandler.OnPreCullAsync()
+        UniTask IAsyncOnPreCullHandler.OnPreCullAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -2331,12 +2331,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnPreCullAsync()
+        public UniTask OnPreCullAsync()
         {
             return ((IAsyncOnPreCullHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnPreCullAsync();
         }
 
-        public UnitaskVoid OnPreCullAsync(CancellationToken cancellationToken)
+        public UniTask OnPreCullAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnPreCullHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnPreCullAsync();
         }
@@ -2347,15 +2347,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnPreRenderHandler
     {
-        UnitaskVoid OnPreRenderAsync();
+        UniTask OnPreRenderAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnPreRenderHandler
     {
-        UnitaskVoid IAsyncOnPreRenderHandler.OnPreRenderAsync()
+        UniTask IAsyncOnPreRenderHandler.OnPreRenderAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -2390,12 +2390,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnPreRenderAsync()
+        public UniTask OnPreRenderAsync()
         {
             return ((IAsyncOnPreRenderHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnPreRenderAsync();
         }
 
-        public UnitaskVoid OnPreRenderAsync(CancellationToken cancellationToken)
+        public UniTask OnPreRenderAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnPreRenderHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnPreRenderAsync();
         }
@@ -2406,15 +2406,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnRectTransformDimensionsChangeHandler
     {
-        UnitaskVoid OnRectTransformDimensionsChangeAsync();
+        UniTask OnRectTransformDimensionsChangeAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnRectTransformDimensionsChangeHandler
     {
-        UnitaskVoid IAsyncOnRectTransformDimensionsChangeHandler.OnRectTransformDimensionsChangeAsync()
+        UniTask IAsyncOnRectTransformDimensionsChangeHandler.OnRectTransformDimensionsChangeAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -2449,12 +2449,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnRectTransformDimensionsChangeAsync()
+        public UniTask OnRectTransformDimensionsChangeAsync()
         {
             return ((IAsyncOnRectTransformDimensionsChangeHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnRectTransformDimensionsChangeAsync();
         }
 
-        public UnitaskVoid OnRectTransformDimensionsChangeAsync(CancellationToken cancellationToken)
+        public UniTask OnRectTransformDimensionsChangeAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnRectTransformDimensionsChangeHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnRectTransformDimensionsChangeAsync();
         }
@@ -2465,15 +2465,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnRectTransformRemovedHandler
     {
-        UnitaskVoid OnRectTransformRemovedAsync();
+        UniTask OnRectTransformRemovedAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnRectTransformRemovedHandler
     {
-        UnitaskVoid IAsyncOnRectTransformRemovedHandler.OnRectTransformRemovedAsync()
+        UniTask IAsyncOnRectTransformRemovedHandler.OnRectTransformRemovedAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -2508,12 +2508,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnRectTransformRemovedAsync()
+        public UniTask OnRectTransformRemovedAsync()
         {
             return ((IAsyncOnRectTransformRemovedHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnRectTransformRemovedAsync();
         }
 
-        public UnitaskVoid OnRectTransformRemovedAsync(CancellationToken cancellationToken)
+        public UniTask OnRectTransformRemovedAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnRectTransformRemovedHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnRectTransformRemovedAsync();
         }
@@ -2583,15 +2583,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnRenderObjectHandler
     {
-        UnitaskVoid OnRenderObjectAsync();
+        UniTask OnRenderObjectAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnRenderObjectHandler
     {
-        UnitaskVoid IAsyncOnRenderObjectHandler.OnRenderObjectAsync()
+        UniTask IAsyncOnRenderObjectHandler.OnRenderObjectAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -2626,12 +2626,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnRenderObjectAsync()
+        public UniTask OnRenderObjectAsync()
         {
             return ((IAsyncOnRenderObjectHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnRenderObjectAsync();
         }
 
-        public UnitaskVoid OnRenderObjectAsync(CancellationToken cancellationToken)
+        public UniTask OnRenderObjectAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnRenderObjectHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnRenderObjectAsync();
         }
@@ -2642,15 +2642,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnServerInitializedHandler
     {
-        UnitaskVoid OnServerInitializedAsync();
+        UniTask OnServerInitializedAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnServerInitializedHandler
     {
-        UnitaskVoid IAsyncOnServerInitializedHandler.OnServerInitializedAsync()
+        UniTask IAsyncOnServerInitializedHandler.OnServerInitializedAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -2685,12 +2685,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnServerInitializedAsync()
+        public UniTask OnServerInitializedAsync()
         {
             return ((IAsyncOnServerInitializedHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnServerInitializedAsync();
         }
 
-        public UnitaskVoid OnServerInitializedAsync(CancellationToken cancellationToken)
+        public UniTask OnServerInitializedAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnServerInitializedHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnServerInitializedAsync();
         }
@@ -2701,15 +2701,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnTransformChildrenChangedHandler
     {
-        UnitaskVoid OnTransformChildrenChangedAsync();
+        UniTask OnTransformChildrenChangedAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnTransformChildrenChangedHandler
     {
-        UnitaskVoid IAsyncOnTransformChildrenChangedHandler.OnTransformChildrenChangedAsync()
+        UniTask IAsyncOnTransformChildrenChangedHandler.OnTransformChildrenChangedAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -2744,12 +2744,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnTransformChildrenChangedAsync()
+        public UniTask OnTransformChildrenChangedAsync()
         {
             return ((IAsyncOnTransformChildrenChangedHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnTransformChildrenChangedAsync();
         }
 
-        public UnitaskVoid OnTransformChildrenChangedAsync(CancellationToken cancellationToken)
+        public UniTask OnTransformChildrenChangedAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnTransformChildrenChangedHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnTransformChildrenChangedAsync();
         }
@@ -2760,15 +2760,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnTransformParentChangedHandler
     {
-        UnitaskVoid OnTransformParentChangedAsync();
+        UniTask OnTransformParentChangedAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnTransformParentChangedHandler
     {
-        UnitaskVoid IAsyncOnTransformParentChangedHandler.OnTransformParentChangedAsync()
+        UniTask IAsyncOnTransformParentChangedHandler.OnTransformParentChangedAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -2803,12 +2803,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnTransformParentChangedAsync()
+        public UniTask OnTransformParentChangedAsync()
         {
             return ((IAsyncOnTransformParentChangedHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnTransformParentChangedAsync();
         }
 
-        public UnitaskVoid OnTransformParentChangedAsync(CancellationToken cancellationToken)
+        public UniTask OnTransformParentChangedAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnTransformParentChangedHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnTransformParentChangedAsync();
         }
@@ -3185,15 +3185,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnValidateHandler
     {
-        UnitaskVoid OnValidateAsync();
+        UniTask OnValidateAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnValidateHandler
     {
-        UnitaskVoid IAsyncOnValidateHandler.OnValidateAsync()
+        UniTask IAsyncOnValidateHandler.OnValidateAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -3228,12 +3228,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnValidateAsync()
+        public UniTask OnValidateAsync()
         {
             return ((IAsyncOnValidateHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnValidateAsync();
         }
 
-        public UnitaskVoid OnValidateAsync(CancellationToken cancellationToken)
+        public UniTask OnValidateAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnValidateHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnValidateAsync();
         }
@@ -3244,15 +3244,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncOnWillRenderObjectHandler
     {
-        UnitaskVoid OnWillRenderObjectAsync();
+        UniTask OnWillRenderObjectAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncOnWillRenderObjectHandler
     {
-        UnitaskVoid IAsyncOnWillRenderObjectHandler.OnWillRenderObjectAsync()
+        UniTask IAsyncOnWillRenderObjectHandler.OnWillRenderObjectAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -3287,12 +3287,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid OnWillRenderObjectAsync()
+        public UniTask OnWillRenderObjectAsync()
         {
             return ((IAsyncOnWillRenderObjectHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).OnWillRenderObjectAsync();
         }
 
-        public UnitaskVoid OnWillRenderObjectAsync(CancellationToken cancellationToken)
+        public UniTask OnWillRenderObjectAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncOnWillRenderObjectHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).OnWillRenderObjectAsync();
         }
@@ -3303,15 +3303,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncResetHandler
     {
-        UnitaskVoid ResetAsync();
+        UniTask ResetAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncResetHandler
     {
-        UnitaskVoid IAsyncResetHandler.ResetAsync()
+        UniTask IAsyncResetHandler.ResetAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -3346,12 +3346,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid ResetAsync()
+        public UniTask ResetAsync()
         {
             return ((IAsyncResetHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).ResetAsync();
         }
 
-        public UnitaskVoid ResetAsync(CancellationToken cancellationToken)
+        public UniTask ResetAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncResetHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).ResetAsync();
         }
@@ -3362,15 +3362,15 @@ namespace Cysharp.Threading.Tasks.Triggers
 
     public interface IAsyncUpdateHandler
     {
-        UnitaskVoid UpdateAsync();
+        UniTask UpdateAsync();
     }
 
     public partial class AsyncTriggerHandler<T> : IAsyncUpdateHandler
     {
-        UnitaskVoid IAsyncUpdateHandler.UpdateAsync()
+        UniTask IAsyncUpdateHandler.UpdateAsync()
         {
             core.Reset();
-            return new UnitaskVoid((IUniTaskSource)(object)this, core.Version);
+            return new UniTask((IUniTaskSource)(object)this, core.Version);
         }
     }
 
@@ -3405,12 +3405,12 @@ namespace Cysharp.Threading.Tasks.Triggers
             return new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, false);
         }
 
-        public UnitaskVoid UpdateAsync()
+        public UniTask UpdateAsync()
         {
             return ((IAsyncUpdateHandler)new AsyncTriggerHandler<AsyncUnit>(this, true)).UpdateAsync();
         }
 
-        public UnitaskVoid UpdateAsync(CancellationToken cancellationToken)
+        public UniTask UpdateAsync(CancellationToken cancellationToken)
         {
             return ((IAsyncUpdateHandler)new AsyncTriggerHandler<AsyncUnit>(this, cancellationToken, true)).UpdateAsync();
         }

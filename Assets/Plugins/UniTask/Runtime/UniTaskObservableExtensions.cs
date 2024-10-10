@@ -52,7 +52,7 @@ namespace Cysharp.Threading.Tasks
         /// <summary>
         /// Ideally returns IObservabl[Unit] is best but Cysharp.Threading.Tasks does not have Unit so return AsyncUnit instead.
         /// </summary>
-        public static IObservable<AsyncUnit> ToObservable(this UnitaskVoid task)
+        public static IObservable<AsyncUnit> ToObservable(this UniTask task)
         {
             if (task.Status.IsCompleted())
             {
@@ -89,7 +89,7 @@ namespace Cysharp.Threading.Tasks
             subject.OnCompleted();
         }
 
-        static async UniTaskVoid Fire(AsyncSubject<AsyncUnit> subject, UnitaskVoid task)
+        static async UniTaskVoid Fire(AsyncSubject<AsyncUnit> subject, UniTask task)
         {
             try
             {

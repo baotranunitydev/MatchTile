@@ -27,7 +27,7 @@ namespace Cysharp.Threading.Tasks
 
         public static UniTask<AsyncGPUReadbackRequest> ToUniTask(this AsyncGPUReadbackRequest asyncOperation, PlayerLoopTiming timing = PlayerLoopTiming.Update, CancellationToken cancellationToken = default(CancellationToken), bool cancelImmediately = false)
         {
-            if (asyncOperation.done) return UnitaskVoid.FromResult(asyncOperation);
+            if (asyncOperation.done) return UniTask.FromResult(asyncOperation);
             return new UniTask<AsyncGPUReadbackRequest>(AsyncGPUReadbackRequestAwaiterConfiguredSource.Create(asyncOperation, timing, cancellationToken, cancelImmediately, out var token), token);
         }
         
@@ -45,7 +45,7 @@ namespace Cysharp.Threading.Tasks
             AsyncGPUReadbackRequest asyncOperation;
             CancellationToken cancellationToken;
             CancellationTokenRegistration cancellationTokenRegistration;
-
+            bool cancelImmediately;
             UniTaskCompletionSourceCore<AsyncGPUReadbackRequest> core;
 
             AsyncGPUReadbackRequestAwaiterConfiguredSource()
@@ -66,6 +66,7 @@ namespace Cysharp.Threading.Tasks
 
                 result.asyncOperation = asyncOperation;
                 result.cancellationToken = cancellationToken;
+                result.cancelImmediately = cancelImmediately;
                 
                 if (cancelImmediately && cancellationToken.CanBeCanceled)
                 {
@@ -92,7 +93,14 @@ namespace Cysharp.Threading.Tasks
                 }
                 finally
                 {
-                    TryReturn();
+                    if (!(cancelImmediately && cancellationToken.IsCancellationRequested))
+                    {
+                        TryReturn();
+                    }
+                    else
+                    {
+                        TaskTracker.RemoveTracking(this);
+                    }
                 }
             }
 
@@ -146,6 +154,7 @@ namespace Cysharp.Threading.Tasks
                 asyncOperation = default;
                 cancellationToken = default;
                 cancellationTokenRegistration.Dispose();
+                cancelImmediately = default;
                 return pool.TryPush(this);
             }
         }

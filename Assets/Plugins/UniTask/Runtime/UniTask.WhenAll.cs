@@ -7,13 +7,13 @@ using Cysharp.Threading.Tasks.Internal;
 
 namespace Cysharp.Threading.Tasks
 {
-    public partial struct UnitaskVoid
+    public partial struct UniTask
     {
         public static UniTask<T[]> WhenAll<T>(params UniTask<T>[] tasks)
         {
             if (tasks.Length == 0)
             {
-                return UnitaskVoid.FromResult(Array.Empty<T>());
+                return UniTask.FromResult(Array.Empty<T>());
             }
 
             return new UniTask<T[]>(new WhenAllPromise<T>(tasks, tasks.Length), 0);
@@ -28,22 +28,22 @@ namespace Cysharp.Threading.Tasks
             }
         }
 
-        public static UnitaskVoid WhenAll(params UnitaskVoid[] tasks)
+        public static UniTask WhenAll(params UniTask[] tasks)
         {
             if (tasks.Length == 0)
             {
-                return UnitaskVoid.CompletedTask;
+                return UniTask.CompletedTask;
             }
 
-            return new UnitaskVoid(new WhenAllPromise(tasks, tasks.Length), 0);
+            return new UniTask(new WhenAllPromise(tasks, tasks.Length), 0);
         }
 
-        public static UnitaskVoid WhenAll(IEnumerable<UnitaskVoid> tasks)
+        public static UniTask WhenAll(IEnumerable<UniTask> tasks)
         {
             using (var span = ArrayPoolUtil.Materialize(tasks))
             {
                 var promise = new WhenAllPromise(span.Array, span.Length); // consumed array in constructor.
-                return new UnitaskVoid(promise, 0);
+                return new UniTask(promise, 0);
             }
         }
 
@@ -150,7 +150,7 @@ namespace Cysharp.Threading.Tasks
             int tasksLength;
             UniTaskCompletionSourceCore<AsyncUnit> core; // don't reset(called after GetResult, will invoke TrySetException.)
 
-            public WhenAllPromise(UnitaskVoid[] tasks, int tasksLength)
+            public WhenAllPromise(UniTask[] tasks, int tasksLength)
             {
                 TaskTracker.TrackActiveTask(this, 3);
 
@@ -165,7 +165,7 @@ namespace Cysharp.Threading.Tasks
 
                 for (int i = 0; i < tasksLength; i++)
                 {
-                    UnitaskVoid.Awaiter awaiter;
+                    UniTask.Awaiter awaiter;
                     try
                     {
                         awaiter = tasks[i].GetAwaiter();
@@ -184,7 +184,7 @@ namespace Cysharp.Threading.Tasks
                     {
                         awaiter.SourceOnCompleted(state =>
                         {
-                            using (var t = (StateTuple<WhenAllPromise, UnitaskVoid.Awaiter>)state)
+                            using (var t = (StateTuple<WhenAllPromise, UniTask.Awaiter>)state)
                             {
                                 TryInvokeContinuation(t.Item1, t.Item2);
                             }
@@ -193,7 +193,7 @@ namespace Cysharp.Threading.Tasks
                 }
             }
 
-            static void TryInvokeContinuation(WhenAllPromise self, in UnitaskVoid.Awaiter awaiter)
+            static void TryInvokeContinuation(WhenAllPromise self, in UniTask.Awaiter awaiter)
             {
                 try
                 {

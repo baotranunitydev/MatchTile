@@ -7,9 +7,9 @@ namespace Cysharp.Threading.Tasks
 {
     // UnityEngine Bridges.
 
-    public partial struct UnitaskVoid
+    public partial struct UniTask
     {
-        public static IEnumerator ToCoroutine(Func<UnitaskVoid> taskFactory)
+        public static IEnumerator ToCoroutine(Func<UniTask> taskFactory)
         {
             return taskFactory().ToCoroutine();
         }

@@ -120,7 +120,7 @@ namespace Cysharp.Threading.Tasks.Linq
         }
 
         // if require additional resource to dispose, override and call base.DisposeAsync.
-        public virtual UnitaskVoid DisposeAsync()
+        public virtual UniTask DisposeAsync()
         {
             TaskTracker.RemoveTracking(this);
             if (enumerator != null)
@@ -343,7 +343,7 @@ namespace Cysharp.Threading.Tasks.Linq
         }
 
         // if require additional resource to dispose, override and call base.DisposeAsync.
-        public virtual UnitaskVoid DisposeAsync()
+        public virtual UniTask DisposeAsync()
         {
             TaskTracker.RemoveTracking(this);
             if (enumerator != null)

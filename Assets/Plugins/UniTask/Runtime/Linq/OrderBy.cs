@@ -223,7 +223,7 @@ namespace Cysharp.Threading.Tasks.Linq
 
     internal abstract class AsyncEnumerableSorter<TElement>
     {
-        internal abstract UnitaskVoid ComputeKeysAsync(TElement[] elements, int count);
+        internal abstract UniTask ComputeKeysAsync(TElement[] elements, int count);
 
         internal abstract int CompareKeys(int index1, int index2);
 
@@ -288,7 +288,7 @@ namespace Cysharp.Threading.Tasks.Linq
             this.next = next;
         }
 
-        internal override async UnitaskVoid ComputeKeysAsync(TElement[] elements, int count)
+        internal override async UniTask ComputeKeysAsync(TElement[] elements, int count)
         {
             keys = new TKey[count];
             for (int i = 0; i < count; i++) keys[i] = keySelector(elements[i]);
@@ -323,7 +323,7 @@ namespace Cysharp.Threading.Tasks.Linq
             this.next = next;
         }
 
-        internal override async UnitaskVoid ComputeKeysAsync(TElement[] elements, int count)
+        internal override async UniTask ComputeKeysAsync(TElement[] elements, int count)
         {
             keys = new TKey[count];
             for (int i = 0; i < count; i++) keys[i] = await keySelector(elements[i]);
@@ -360,7 +360,7 @@ namespace Cysharp.Threading.Tasks.Linq
             this.cancellationToken = cancellationToken;
         }
 
-        internal override async UnitaskVoid ComputeKeysAsync(TElement[] elements, int count)
+        internal override async UniTask ComputeKeysAsync(TElement[] elements, int count)
         {
             keys = new TKey[count];
             for (int i = 0; i < count; i++) keys[i] = await keySelector(elements[i], cancellationToken);
@@ -476,7 +476,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 completionSource.TrySetResult(true);
             }
 
-            public UnitaskVoid DisposeAsync()
+            public UniTask DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 return default;

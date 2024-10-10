@@ -110,7 +110,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public UnitaskVoid DisposeAsync()
+            public UniTask DisposeAsync()
             {
                 TaskTracker.RemoveTracking(this);
                 if (enumerator != null)

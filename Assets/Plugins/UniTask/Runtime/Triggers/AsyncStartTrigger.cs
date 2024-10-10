@@ -28,9 +28,9 @@ namespace Cysharp.Threading.Tasks.Triggers
             RaiseEvent(AsyncUnit.Default);
         }
 
-        public UnitaskVoid StartAsync()
+        public UniTask StartAsync()
         {
-            if (called) return UnitaskVoid.CompletedTask;
+            if (called) return UniTask.CompletedTask;
 
             return ((IAsyncOneShotTrigger)new AsyncTriggerHandler<AsyncUnit>(this, true)).OneShotAsync();
         }

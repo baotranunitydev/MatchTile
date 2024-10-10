@@ -81,7 +81,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
             }
 
-            public async UnitaskVoid DisposeAsync()
+            public async UniTask DisposeAsync()
             {
                 if (sourceEnumerator != null)
                 {

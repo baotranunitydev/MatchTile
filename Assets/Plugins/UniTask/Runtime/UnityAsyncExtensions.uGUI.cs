@@ -15,7 +15,7 @@ namespace Cysharp.Threading.Tasks
             return new AsyncUnityEventHandler(unityEvent, cancellationToken, false);
         }
 
-        public static UnitaskVoid OnInvokeAsync(this UnityEvent unityEvent, CancellationToken cancellationToken)
+        public static UniTask OnInvokeAsync(this UnityEvent unityEvent, CancellationToken cancellationToken)
         {
             return new AsyncUnityEventHandler(unityEvent, cancellationToken, true).OnInvokeAsync();
         }
@@ -50,12 +50,12 @@ namespace Cysharp.Threading.Tasks
             return new AsyncUnityEventHandler(button.onClick, cancellationToken, false);
         }
 
-        public static UnitaskVoid OnClickAsync(this Button button)
+        public static UniTask OnClickAsync(this Button button)
         {
             return new AsyncUnityEventHandler(button.onClick, button.GetCancellationTokenOnDestroy(), true).OnInvokeAsync();
         }
 
-        public static UnitaskVoid OnClickAsync(this Button button, CancellationToken cancellationToken)
+        public static UniTask OnClickAsync(this Button button, CancellationToken cancellationToken)
         {
             return new AsyncUnityEventHandler(button.onClick, cancellationToken, true).OnInvokeAsync();
         }
@@ -283,7 +283,7 @@ namespace Cysharp.Threading.Tasks
 
     public interface IAsyncClickEventHandler : IDisposable
     {
-        UnitaskVoid OnClickAsync();
+        UniTask OnClickAsync();
     }
 
     public interface IAsyncValueChangedEventHandler<T> : IDisposable
@@ -339,7 +339,7 @@ namespace Cysharp.Threading.Tasks
 
         void InvokeCore(string item1, int item2, int item3)
         {
-            innerEvent.Invoke(item1, item2, item3);
+            Invoke((item1, item2, item3));
         }
 
         public void Dispose()
@@ -385,14 +385,14 @@ namespace Cysharp.Threading.Tasks
             TaskTracker.TrackActiveTask(this, 3);
         }
 
-        public UnitaskVoid OnInvokeAsync()
+        public UniTask OnInvokeAsync()
         {
             core.Reset();
             if (isDisposed)
             {
                 core.TrySetCanceled(this.cancellationToken);
             }
-            return new UnitaskVoid(this, core.Version);
+            return new UniTask(this, core.Version);
         }
 
         void Invoke()
@@ -421,7 +421,7 @@ namespace Cysharp.Threading.Tasks
             }
         }
 
-        UnitaskVoid IAsyncClickEventHandler.OnClickAsync()
+        UniTask IAsyncClickEventHandler.OnClickAsync()
         {
             return OnInvokeAsync();
         }
@@ -711,7 +711,7 @@ namespace Cysharp.Threading.Tasks
                 }
             }
 
-            public UnitaskVoid DisposeAsync()
+            public UniTask DisposeAsync()
             {
                 if (!isDisposed)
                 {
@@ -832,7 +832,7 @@ namespace Cysharp.Threading.Tasks
                 }
             }
 
-            public UnitaskVoid DisposeAsync()
+            public UniTask DisposeAsync()
             {
                 if (!isDisposed)
                 {

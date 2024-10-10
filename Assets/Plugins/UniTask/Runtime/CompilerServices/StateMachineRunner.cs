@@ -25,7 +25,7 @@ namespace Cysharp.Threading.Tasks.CompilerServices
     internal interface IStateMachineRunnerPromise : IUniTaskSource
     {
         Action MoveNext { get; }
-        UnitaskVoid Task { get; }
+        UniTask Task { get; }
         void SetResult();
         void SetException(Exception exception);
     }
@@ -189,12 +189,12 @@ namespace Cysharp.Threading.Tasks.CompilerServices
             stateMachine.MoveNext();
         }
 
-        public UnitaskVoid Task
+        public UniTask Task
         {
             [DebuggerHidden]
             get
             {
-                return new UnitaskVoid(this, core.Version);
+                return new UniTask(this, core.Version);
             }
         }
 

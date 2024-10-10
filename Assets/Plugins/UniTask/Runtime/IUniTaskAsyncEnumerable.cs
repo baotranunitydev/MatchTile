@@ -18,7 +18,7 @@ namespace Cysharp.Threading.Tasks
 
     public interface IUniTaskAsyncDisposable
     {
-        UnitaskVoid DisposeAsync();
+        UniTask DisposeAsync();
     }
 
     public interface IUniTaskOrderedAsyncEnumerable<TElement> : IUniTaskAsyncEnumerable<TElement>
@@ -82,7 +82,7 @@ namespace Cysharp.Threading.Tasks
             }
 
 
-            public UnitaskVoid DisposeAsync()
+            public UniTask DisposeAsync()
             {
                 return enumerator.DisposeAsync();
             }

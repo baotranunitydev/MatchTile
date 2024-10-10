@@ -12,27 +12,27 @@ namespace Cysharp.Threading.Tasks
 {
     public static class EnumeratorAsyncExtensions
     {
-        public static UnitaskVoid.Awaiter GetAwaiter<T>(this T enumerator)
+        public static UniTask.Awaiter GetAwaiter<T>(this T enumerator)
             where T : IEnumerator
         {
             var e = (IEnumerator)enumerator;
             Error.ThrowArgumentNullException(e, nameof(enumerator));
-            return new UnitaskVoid(EnumeratorPromise.Create(e, PlayerLoopTiming.Update, CancellationToken.None, out var token), token).GetAwaiter();
+            return new UniTask(EnumeratorPromise.Create(e, PlayerLoopTiming.Update, CancellationToken.None, out var token), token).GetAwaiter();
         }
 
-        public static UnitaskVoid WithCancellation(this IEnumerator enumerator, CancellationToken cancellationToken)
+        public static UniTask WithCancellation(this IEnumerator enumerator, CancellationToken cancellationToken)
         {
             Error.ThrowArgumentNullException(enumerator, nameof(enumerator));
-            return new UnitaskVoid(EnumeratorPromise.Create(enumerator, PlayerLoopTiming.Update, cancellationToken, out var token), token);
+            return new UniTask(EnumeratorPromise.Create(enumerator, PlayerLoopTiming.Update, cancellationToken, out var token), token);
         }
 
-        public static UnitaskVoid ToUniTask(this IEnumerator enumerator, PlayerLoopTiming timing = PlayerLoopTiming.Update, CancellationToken cancellationToken = default(CancellationToken))
+        public static UniTask ToUniTask(this IEnumerator enumerator, PlayerLoopTiming timing = PlayerLoopTiming.Update, CancellationToken cancellationToken = default(CancellationToken))
         {
             Error.ThrowArgumentNullException(enumerator, nameof(enumerator));
-            return new UnitaskVoid(EnumeratorPromise.Create(enumerator, timing, cancellationToken, out var token), token);
+            return new UniTask(EnumeratorPromise.Create(enumerator, timing, cancellationToken, out var token), token);
         }
 
-        public static UnitaskVoid ToUniTask(this IEnumerator enumerator, MonoBehaviour coroutineRunner)
+        public static UniTask ToUniTask(this IEnumerator enumerator, MonoBehaviour coroutineRunner)
         {
             var source = AutoResetUniTaskCompletionSource.Create();
             coroutineRunner.StartCoroutine(Core(enumerator, coroutineRunner, source));

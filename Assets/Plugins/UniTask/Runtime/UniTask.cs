@@ -31,14 +31,14 @@ namespace Cysharp.Threading.Tasks
     /// </summary>
     [AsyncMethodBuilder(typeof(AsyncUniTaskMethodBuilder))]
     [StructLayout(LayoutKind.Auto)]
-    public readonly partial struct UnitaskVoid
+    public readonly partial struct UniTask
     {
         readonly IUniTaskSource source;
         readonly short token;
 
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public UnitaskVoid(IUniTaskSource source, short token)
+        public UniTask(IUniTaskSource source, short token)
         {
             this.source = source;
             this.token = token;
@@ -100,7 +100,7 @@ namespace Cysharp.Threading.Tasks
         /// <summary>
         /// Memoizing inner IValueTaskSource. The result UniTask can await multiple.
         /// </summary>
-        public UnitaskVoid Preserve()
+        public UniTask Preserve()
         {
             if (source == null)
             {
@@ -108,7 +108,7 @@ namespace Cysharp.Threading.Tasks
             }
             else
             {
-                return new UnitaskVoid(new MemoizeSource(source), token);
+                return new UniTask(new MemoizeSource(source), token);
             }
         }
 
@@ -289,11 +289,11 @@ namespace Cysharp.Threading.Tasks
 
         public readonly struct Awaiter : ICriticalNotifyCompletion
         {
-            readonly UnitaskVoid task;
+            readonly UniTask task;
 
             [DebuggerHidden]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public Awaiter(in UnitaskVoid task)
+            public Awaiter(in UniTask task)
             {
                 this.task = task;
             }
@@ -424,22 +424,22 @@ namespace Cysharp.Threading.Tasks
             }
         }
 
-        public UnitaskVoid AsUniTask()
+        public UniTask AsUniTask()
         {
-            if (this.source == null) return UnitaskVoid.CompletedTask;
+            if (this.source == null) return UniTask.CompletedTask;
 
             var status = this.source.GetStatus(this.token);
             if (status.IsCompletedSuccessfully())
             {
                 this.source.GetResult(this.token);
-                return UnitaskVoid.CompletedTask;
+                return UniTask.CompletedTask;
             }
 
             // Converting UniTask<T> -> UniTask is zero overhead.
-            return new UnitaskVoid(this.source, this.token);
+            return new UniTask(this.source, this.token);
         }
 
-        public static implicit operator UnitaskVoid(UniTask<T> self)
+        public static implicit operator UniTask(UniTask<T> self)
         {
             return self.AsUniTask();
         }
