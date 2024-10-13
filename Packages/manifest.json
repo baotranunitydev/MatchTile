@@ -1,14 +1,17 @@
 {
   "dependencies": {
+    "com.sirenix.odininspector": "https://github.com/baotranunitydev/Packages.git#odininspector-1.0.0",
+    "com.tivadar.best": "https://github.com/baotranunitydev/Packages.git#bestbundle-1.0.0",
+    "com.dev.ultils": "https://github.com/baotranunitydev/Packages.git#devultills-1.0.7",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.ai.navigation": "2.0.4",
     "com.unity.collab-proxy": "2.5.2",
     "com.unity.feature.development": "1.0.2",
     "com.unity.ide.rider": "3.0.31",
     "com.unity.ide.visualstudio": "2.0.22",
-    "com.unity.ide.vscode": "1.2.5",
     "com.unity.mobile.android-logcat": "1.4.3",
     "com.unity.multiplayer.center": "1.0.0",
+    "com.unity.nuget.newtonsoft-json": "3.2.1",
     "com.unity.test-framework": "1.4.5",
     "com.unity.timeline": "1.8.7",
     "com.unity.toolchain.win-x86_64-linux-x86_64": "2.0.9",
