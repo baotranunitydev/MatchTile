@@ -9,35 +9,25 @@ public class DBModel
 
 }
 [Serializable]
-public class UserSettings
+public struct UserSettings
 {
     public bool isMusic;
     public bool isSound;
     public bool isVibrate;
 
-    public UserSettings()
-    {
-        isMusic = true;
-        isSound = true;
-        isVibrate = true;
-    }
-
     public void SetMusic(bool isMusic)
     {
         this.isMusic = isMusic;
-        DBController.Instance.USER_SETTINGS = this;
     }
 
     public void SetSound(bool isSound)
     {
         this.isSound = isSound;
-        DBController.Instance.USER_SETTINGS = this;
     }
 
     public void SetVibrate(bool isVibrate)
     {
         this.isVibrate = isVibrate;
-        DBController.Instance.USER_SETTINGS = this;
     }
 }
 
@@ -49,25 +39,20 @@ public enum ResourceType
 }
 
 [Serializable]
-public class UserData
+public struct UserData
 {
+    public string firstName;
+    public string lastName;
+    public string telegramId;
     public int level;
     public int star;
     public int amountHint;
     public int amountBomb;
 
-    public UserData()
-    {
-        level = 0;
-        star = 300;
-        amountHint = 3;
-        amountBomb = 2;
-    }
-
     public void LevelUp()
     {
         level++;
-        DBController.Instance.USER_DATA = this;
+        //DBController.Instance.USER_DATA = this;
     }
 
     public void InscreaseResource(ResourceType resourceType, int amount)
@@ -84,7 +69,7 @@ public class UserData
                 amountBomb += amount;
                 break;
         }
-        DBController.Instance.USER_DATA = this;
+        //DBController.Instance.USER_DATA = this;
     }
 
     public void DescreaseResource(ResourceType resourceType, int amount)
@@ -101,6 +86,6 @@ public class UserData
                 amountBomb -= amount;
                 break;
         }
-        DBController.Instance.USER_DATA = this;
+        //DBController.Instance.USER_DATA = this;
     }
 }

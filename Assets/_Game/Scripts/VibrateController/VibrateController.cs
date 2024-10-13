@@ -7,7 +7,7 @@ public class VibrateController : Singleton<VibrateController>
     private UserSettings userSettings;
     private void Start()
     {
-        userSettings = DBController.Instance.USER_SETTINGS;
+        //userSettings = DBController.Instance.USER_SETTINGS;
     }
 
     public void Vibrate()
@@ -20,6 +20,6 @@ public class VibrateController : Singleton<VibrateController>
 
     public void SetVibrate(bool isVibrate)
     {
-        userSettings.SetVibrate(isVibrate);
+        //userSettings.SetVibrate(isVibrate);
     }
 }

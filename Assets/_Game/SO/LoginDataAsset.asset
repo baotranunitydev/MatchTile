@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc66202aaaf77c447bd9d55a60fbe052, type: 3}
+  m_Name: LoginDataAsset
+  m_EditorClassIdentifier: 
+  data:
+    userData:
+      firstName: Paul
+      lastName: 
+      telegramId: 765466944
+      level: 0
+      star: 0
+      amountHint: 0
+      amountBomb: 0
+    accessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE3Mjg5MTEzMjEsInVzZXJuYW1lIjoiNzY1NDY2OTQ0In0.3MROBulO8u0qHsRamMLX3f1R4YlpF2g2Wh6c7TyfPhk
+    refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mjk0Mjk3MjEsInVzZXJuYW1lIjoiNzY1NDY2OTQ0In0.x-CRuVXtCjp_AMHWdwgQGZVAzDdDQVbKuKL46e8BDr0
+  isCheckFail: 1
+  userInfo:
+    id: 765466944
+    firstName: Paul
+    lastName: 
+    userName: PaulUnityDev
+    languageCode: en
+    isPremeium: 1
+    isAllowWriteToPm: 1
+    refferalFrom: 

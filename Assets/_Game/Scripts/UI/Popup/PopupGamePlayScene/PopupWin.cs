@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-
+using Loading;
 public class PopupWin : PopupBase
 {
     [SerializeField] private Button btnHome;

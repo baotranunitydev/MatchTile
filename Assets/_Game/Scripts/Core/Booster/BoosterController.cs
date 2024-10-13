@@ -8,18 +8,29 @@ public class BoosterController : MonoBehaviour
 {
     [SerializeField] private BoosterSO boosterSO;
     [SerializeField] private List<BoosterBase> lstBooster;
-    private UserData userData;
     private BoosterHint boosterHint;
     private PopupBooster popupBooster;
     private GameHelper gameHelper;
+    private UserData userData;
     private BoosterBase GetBoosterByBoosterType(BoosterType boosterType) => lstBooster.Find(booster => booster.BoosterType == boosterType);
     private void Start()
     {
-        userData = DBController.Instance.USER_DATA;
+        userData = APIController.Instance.UserDataAsset.Data;
         gameHelper = GameHelper.Instance;
         SetBoosterHint();
         SetPopupBooster();
         InitBooster();
+        GameEvent.onUpdateUserData += OnUpdateUserData;
+    }
+
+    private void OnDestroy()
+    {
+        GameEvent.onUpdateUserData -= OnUpdateUserData;
+    }
+
+    private void OnUpdateUserData(UserData userData)
+    {
+        this.userData = userData;
     }
 
     private void SetBoosterHint()
@@ -48,11 +59,11 @@ public class BoosterController : MonoBehaviour
             {
                 VibrateController.Instance.Vibrate();
                 AudioController.Instance.PlaySound(SoundName.ClickBtn);
-                var amount = GetAmountBooster(booster.BoosterType);
+                var amount = GetAmountBooster(booster.BoosterType, userData);
                 if (amount > 0)
                 {
                     booster.UseBooster();
-                    DescreaseBooster(booster.BoosterType, 1);
+                    //DescreaseBooster(booster.BoosterType, 1);
                     SetAmountTextByBoosterType(booster.BoosterType);
                 }
                 else
@@ -73,10 +84,10 @@ public class BoosterController : MonoBehaviour
     {
         var booster = GetBoosterByBoosterType(boosterType);
         if (booster == null) return;
-        booster.SetAmountText(GetAmountBooster(booster.BoosterType));
+        booster.SetAmountText(GetAmountBooster(booster.BoosterType, userData));
     }
 
-    private int GetAmountBooster(BoosterType boosterType)
+    private int GetAmountBooster(BoosterType boosterType, UserData userData)
     {
         var amount = 0;
         switch (boosterType)
@@ -89,31 +100,5 @@ public class BoosterController : MonoBehaviour
                 break;
         }
         return amount;
-    }
-
-    private void InscreaseBooster(BoosterType boosterType, int amount)
-    {
-        switch (boosterType)
-        {
-            case BoosterType.Hint:
-                userData.InscreaseResource(ResourceType.Hint, amount);
-                break;
-            case BoosterType.Bomb:
-                userData.DescreaseResource(ResourceType.Bomb, amount);
-                break;
-        }
-    }
-
-    private void DescreaseBooster(BoosterType boosterType, int amount)
-    {
-        switch (boosterType)
-        {
-            case BoosterType.Hint:
-                userData.DescreaseResource(ResourceType.Hint, amount);
-                break;
-            case BoosterType.Bomb:
-                userData.DescreaseResource(ResourceType.Bomb, amount);
-                break;
-        }
     }
 }

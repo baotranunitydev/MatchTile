@@ -4,20 +4,20 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class AudioController : Singleton<AudioController> 
+public class AudioController : Singleton<AudioController>
 {
+    [SerializeField] private UserSettingsAsset _userSettingsAsset;
     [SerializeField] private AudioSO soundSO;
     private Sound soundMusic;
     private Sound[] arrSound;
-    private UserSettings userSettings;
-    private void Start()
+    private async void Start()
     {
-        userSettings = DBController.Instance.USER_SETTINGS;
+        await _userSettingsAsset.LoadingData();
         CreateAudioSource();
         CreateAudioSourceBackround();
         PlayBackroundMusic(SoundName.BG_00);
-        SetVolumeMusic(userSettings.isMusic);
-        SetVolumeSound(userSettings.isSound);
+        SetVolumeMusic(_userSettingsAsset.Data.isMusic);
+        SetVolumeSound(_userSettingsAsset.Data.isSound);
     }
 
     public void SetVolumeSound(bool isSound)
@@ -27,13 +27,13 @@ public class AudioController : Singleton<AudioController>
             var sound = arrSound[i];
             sound.source.mute = !isSound;
         }
-        userSettings.SetSound(isSound);
+        _userSettingsAsset.SetSound(isSound);
     }
 
     public void SetVolumeMusic(bool isMusic)
     {
         soundMusic.source.mute = !isMusic;
-        userSettings.SetMusic(isMusic);
+        _userSettingsAsset.SetMusic(isMusic);
     }
 
     public void SetVolumeSound(float volume)

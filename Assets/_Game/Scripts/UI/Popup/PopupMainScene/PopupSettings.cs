@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PopupSettings : PopupBase
 {
-
+    [SerializeField] private UserSettingsAsset _userSettingsAsset;
     [Header("Image")]
     [SerializeField] private Image imgToggleMusic;
     [SerializeField] private Image imgToggleSound;
@@ -17,14 +17,12 @@ public class PopupSettings : PopupBase
     [SerializeField] private Button btnSound;
     [SerializeField] private Button btnVibrate;
     [SerializeField] private Button btnQuit;
-    private UserSettings userSettings;
     private AudioController audioController;
     private VibrateController vibrateController;
     private Vector2 pivotLeft = new Vector2(0, 0.5f);
     private Vector2 pivotRight = new Vector2(1, 0.5f);
     public override void InitPopup()
     {
-        userSettings = DBController.Instance.USER_SETTINGS;
         audioController = AudioController.Instance;
         vibrateController = VibrateController.Instance;
         InitBtnClose();
@@ -65,8 +63,8 @@ public class PopupSettings : PopupBase
         {
             vibrateController.Vibrate();
             audioController.PlaySound(SoundName.ClickBtn);
-            audioController.SetVolumeMusic(!userSettings.isMusic);
-            SetStatusToggle(userSettings.isMusic, imgToggleMusic);
+            audioController.SetVolumeMusic(!_userSettingsAsset.Data.isMusic);
+            SetStatusToggle(_userSettingsAsset.Data.isMusic, imgToggleMusic);
         });
     }
 
@@ -77,8 +75,8 @@ public class PopupSettings : PopupBase
         {
             vibrateController.Vibrate();
             audioController.PlaySound(SoundName.ClickBtn);
-            audioController.SetVolumeSound(!userSettings.isSound);
-            SetStatusToggle(userSettings.isSound, imgToggleSound);
+            audioController.SetVolumeSound(!_userSettingsAsset.Data.isSound);
+            SetStatusToggle(_userSettingsAsset.Data.isSound, imgToggleSound);
         });
     }    
     
@@ -88,16 +86,16 @@ public class PopupSettings : PopupBase
         btnVibrate.onClick.AddListener(() =>
         {
             audioController.PlaySound(SoundName.ClickBtn);
-            vibrateController.SetVibrate(!userSettings.isVibrate);
-            SetStatusToggle(userSettings.isVibrate, imgToggleVibrate);
+            vibrateController.SetVibrate(!_userSettingsAsset.Data.isVibrate);
+            SetStatusToggle(_userSettingsAsset.Data.isVibrate, imgToggleVibrate);
             vibrateController.Vibrate();
         });
     }
     private void CheckStatusToggle()
     {
-        SetStatusToggle(userSettings.isMusic, imgToggleMusic);
-        SetStatusToggle(userSettings.isSound, imgToggleSound);
-        SetStatusToggle(userSettings.isVibrate, imgToggleVibrate);
+        SetStatusToggle(_userSettingsAsset.Data.isMusic, imgToggleMusic);
+        SetStatusToggle(_userSettingsAsset.Data.isSound, imgToggleSound);
+        SetStatusToggle(_userSettingsAsset.Data.isVibrate, imgToggleVibrate);
     }
 
     private void SetStatusToggle(bool toggle, Image imgToggle)

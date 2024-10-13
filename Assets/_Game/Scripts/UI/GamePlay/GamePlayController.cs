@@ -30,7 +30,7 @@ public class GamePlayController : MonoBehaviour
         gameHelper = GameHelper.Instance;
         audioController = AudioController.Instance;
         vibrateController = VibrateController.Instance;
-        userData = DBController.Instance.USER_DATA;
+        userData = APIController.Instance.UserDataAsset.Data;
         InitGamePlayScene();
     }
     private void Update()
@@ -101,9 +101,9 @@ public class GamePlayController : MonoBehaviour
 
     public void Win()
     {
-        userData.LevelUp();
+        //userData.LevelUp();
         var score = scoreController.Score;
-        userData.InscreaseResource(ResourceType.Star, score);
+        //userData.InscreaseResource(ResourceType.Star, score);
         UpdateStarText();
         SetStatusImageCover(true);
         stateGame = StateGame.EndGame;

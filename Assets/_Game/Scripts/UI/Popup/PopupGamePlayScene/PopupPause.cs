@@ -4,9 +4,10 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-
+using Loading;
 public class PopupPause : PopupBase
 {
+    [SerializeField] private UserSettingsAsset _userSettingsAsset;
     [Header("Image")]
     [SerializeField] private Image imgToggleMusic;
     [SerializeField] private Image imgToggleSound;
@@ -18,7 +19,6 @@ public class PopupPause : PopupBase
     [SerializeField] private Button btnVibrate;
     [SerializeField] private Button btnHome;
     [SerializeField] private Button btnRestart;
-    private UserSettings userSettings;
     private AudioController audioController;
     private VibrateController vibrateController;
     private GameHelper gameHelper;
@@ -26,7 +26,6 @@ public class PopupPause : PopupBase
     private Vector2 pivotRight = new Vector2(1, 0.5f);
     public override void InitPopup()
     {
-        userSettings = DBController.Instance.USER_SETTINGS;
         audioController = AudioController.Instance;
         vibrateController = VibrateController.Instance;
         gameHelper = GameHelper.Instance;
@@ -80,8 +79,8 @@ public class PopupPause : PopupBase
         {
             vibrateController.Vibrate();
             audioController.PlaySound(SoundName.ClickBtn);
-            audioController.SetVolumeMusic(!userSettings.isMusic);
-            SetStatusToggle(userSettings.isMusic, imgToggleMusic);
+            audioController.SetVolumeMusic(!_userSettingsAsset.Data.isMusic);
+            SetStatusToggle(_userSettingsAsset.Data.isMusic, imgToggleMusic);
         });
     }
 
@@ -92,8 +91,8 @@ public class PopupPause : PopupBase
         {
             vibrateController.Vibrate();
             audioController.PlaySound(SoundName.ClickBtn);
-            audioController.SetVolumeSound(!userSettings.isSound);
-            SetStatusToggle(userSettings.isSound, imgToggleSound);
+            audioController.SetVolumeSound(!_userSettingsAsset.Data.isSound);
+            SetStatusToggle(_userSettingsAsset.Data.isSound, imgToggleSound);
         });
     }
     private void InitButtonVibrate()
@@ -102,16 +101,16 @@ public class PopupPause : PopupBase
         btnVibrate.onClick.AddListener(() =>
         {
             audioController.PlaySound(SoundName.ClickBtn);
-            vibrateController.SetVibrate(!userSettings.isVibrate);
-            SetStatusToggle(userSettings.isVibrate, imgToggleVibrate);
+            vibrateController.SetVibrate(!_userSettingsAsset.Data.isVibrate);
+            SetStatusToggle(_userSettingsAsset.Data.isVibrate, imgToggleVibrate);
             vibrateController.Vibrate();
         });
     }
     private void CheckStatusToggle()
     {
-        SetStatusToggle(userSettings.isMusic, imgToggleMusic);
-        SetStatusToggle(userSettings.isSound, imgToggleSound);
-        SetStatusToggle(userSettings.isVibrate, imgToggleVibrate);
+        SetStatusToggle(_userSettingsAsset.Data.isMusic, imgToggleMusic);
+        SetStatusToggle(_userSettingsAsset.Data.isSound, imgToggleSound);
+        SetStatusToggle(_userSettingsAsset.Data.isVibrate, imgToggleVibrate);
     }
 
 

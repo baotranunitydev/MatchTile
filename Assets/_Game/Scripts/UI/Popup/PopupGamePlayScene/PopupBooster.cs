@@ -22,7 +22,7 @@ public class PopupBooster : PopupBase
     private int amount;
     public override void InitPopup()
     {
-        userData = DBController.Instance.USER_DATA;
+        userData = APIController.Instance.UserDataAsset.Data;
         audioController = AudioController.Instance;
         vibrateController = VibrateController.Instance;
         gameHelper = GameHelper.Instance;

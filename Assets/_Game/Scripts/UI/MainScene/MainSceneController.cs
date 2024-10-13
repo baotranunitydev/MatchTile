@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Loading;
 public class MainSceneController : MonoBehaviour
 {
     [SerializeField] private MainSceneView mainSceneView;
@@ -11,7 +11,7 @@ public class MainSceneController : MonoBehaviour
     private VibrateController vibrateController;
     private void Start()
     {
-        userData = DBController.Instance.USER_DATA;
+        userData = APIController.Instance.UserDataAsset.Data;
         audioController = AudioController.Instance;
         vibrateController = VibrateController.Instance;
         InitButtonPlay();
