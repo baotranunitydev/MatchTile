@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: BoosterSO
   m_EditorClassIdentifier: 
   lstBooster:
-  - boosterType: 0
+  - boosterType: 1
     sprBooster: {fileID: 21300000, guid: 01a34d9e0dade794188a273832564fb0, type: 3}
     amount: 3
-    price: 90
-  - boosterType: 1
+    price: 120
+  - boosterType: 2
     sprBooster: {fileID: 21300000, guid: 2be55834e2ff7b144a243413f2979787, type: 3}
     amount: 2
     price: 45

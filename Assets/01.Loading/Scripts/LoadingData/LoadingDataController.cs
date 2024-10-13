@@ -87,6 +87,10 @@ namespace Loading
             }
             else
             {
+                APIController.Instance.PopupWarning.SetActionHide(() =>
+                {
+                    LoadingSceneController.Instance.ChangeScene(SceneType.Loading);
+                });
                 Debug.Log("Login Fail");
             }
             Debug.Log("Done");

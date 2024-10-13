@@ -51,6 +51,7 @@ public class GamePlayController : MonoBehaviour
 
     private async void InitGamePlayScene()
     {
+        SetName();
         InitBtnPause();
         UpdateStarText();
         gamePlayView.SetLevelText(apiController.UserDataAsset.Data.level + 1);
@@ -59,6 +60,9 @@ public class GamePlayController : MonoBehaviour
         await InitGame();
         stateGame = StateGame.PlayGame;
         SetStatusImageCover(false);
+        //var getUserData = await APIController.Instance.UserDataAsset.LoadingData();
+        //if (getUserData == LoadingType.Fail) return;
+        //UpdateStarText();
     }
 
     private async UniTask InitGame()
@@ -87,9 +91,15 @@ public class GamePlayController : MonoBehaviour
         comboController.StartCombo();
     }
 
+    public void SetName()
+    {
+        var name = !string.IsNullOrEmpty(apiController.UserDataAsset.Data.userName) ? apiController.UserDataAsset.Data.userName : apiController.UserDataAsset.Data.firstName;
+        gamePlayView.SetName(name);
+    }
+
     public void UpdateStarText()
     {
-        gamePlayView.SetStarText(apiController.UserDataAsset.Data.level);
+        gamePlayView.SetStarText(apiController.UserDataAsset.Data.star);
     }
 
     public void AddScore()
@@ -109,7 +119,7 @@ public class GamePlayController : MonoBehaviour
             stateGame = StateGame.EndGame;
             audioController.PlaySound(SoundName.Win);
             var popupWin = gameHelper.PopupController.GetPopupByType(PopupType.PopupWin) as PopupWin;
-            popupWin.InitInfoPopupWin(score, APIController.Instance.UserDataAsset.Data.level - score);
+            popupWin.InitInfoPopupWin(score, APIController.Instance.UserDataAsset.Data.star - score);
             popupWin.ShowPopup(() =>
             {
                 SetStatusImageCover(false);

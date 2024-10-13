@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
 using UnityEngine.UI;
+using System;
 public enum PopupType
 {
     PopupSettings = 0,
@@ -11,6 +12,7 @@ public enum PopupType
     PopupWin = 2,
     PopupLose = 3,
     PopupBooster = 4,
+    PopupWarning = 5,
 }
 
 public abstract class PopupBase : MonoBehaviour
@@ -18,6 +20,7 @@ public abstract class PopupBase : MonoBehaviour
     [SerializeField] private PopupType popupType;
     [SerializeField] private Image imgFade;
     [SerializeField] private RectTransform rtfmPopup;
+    public Action onHide;
     private float timer = 0.5f;
 
     public PopupType PopupType { get => popupType; }
@@ -45,6 +48,7 @@ public abstract class PopupBase : MonoBehaviour
         {
             SetStatusPopup(false);
             onHideComplete?.Invoke();
+            onHide?.Invoke();
         });
     }
 

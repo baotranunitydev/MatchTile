@@ -15,6 +15,11 @@ public class LoginDataAsset : ServerDataAsset<LoginData>
 
     public UserInfo UserInfo { get => userInfo; }
 
+    public void SetIsNew()
+    {
+        data.isNew = false;
+    }
+
     public void SetUserInfo(UserInfo usrInfo)
     {
         this.userInfo = usrInfo;
@@ -26,8 +31,8 @@ public class LoginDataAsset : ServerDataAsset<LoginData>
         {
             firstName = userInfo.firstName,
             lastName = userInfo.lastName,
-            telegramId = userInfo.id.ToString(),
             userName = userInfo.userName,
+            telegramId = userInfo.id.ToString(),
         };
         var item = await DevNgaoAPI.PostAPI<LoginDataRequest, LoginData>(url, loginRequest);
         if (item.Item2)
@@ -48,6 +53,7 @@ public class LoginDataAsset : ServerDataAsset<LoginData>
 public struct LoginData
 {
     public UserData userData;
+    public bool isNew;
     public string accessToken;
     public string refreshToken;
 }
@@ -58,7 +64,7 @@ public struct LoginDataRequest
     public string firstName;
     [JsonProperty("lastName")]
     public string lastName;
-    [JsonProperty("userMame")]
+    [JsonProperty("userName")]
     public string userName;
     [JsonProperty("telegramId")]
     public string telegramId;

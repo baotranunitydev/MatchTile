@@ -14,6 +14,11 @@ public class MainSceneController : MonoBehaviour
         userData = APIController.Instance.UserDataAsset.Data;
         audioController = AudioController.Instance;
         vibrateController = VibrateController.Instance;
+        if (APIController.Instance.LoginDataAsset.Data.isNew)
+        {
+            APIController.Instance.PopupWelcome.ShowPopup();
+            APIController.Instance.LoginDataAsset.SetIsNew();
+        }
         InitButtonPlay();
         InitButtonSettings();
     }

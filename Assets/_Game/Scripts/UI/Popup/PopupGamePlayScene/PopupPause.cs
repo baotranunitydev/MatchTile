@@ -5,9 +5,11 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Loading;
+using TMPro;
 public class PopupPause : PopupBase
 {
     [SerializeField] private UserSettingsAsset _userSettingsAsset;
+    [SerializeField] private TextMeshProUGUI txtTelegramId;
     [Header("Image")]
     [SerializeField] private Image imgToggleMusic;
     [SerializeField] private Image imgToggleSound;
@@ -36,6 +38,10 @@ public class PopupPause : PopupBase
         InitButtonSound();
         InitButtonVibrate();
         base.InitPopup();
+    }
+    public void SetTelegramId()
+    {
+        txtTelegramId.text = $"TelegramId: {APIController.Instance.UserDataAsset.Data.telegramId}";
     }
     private void InitBtnRestart()
     {
@@ -124,6 +130,7 @@ public class PopupPause : PopupBase
     public override void ShowPopup(UnityAction onShowComplete = null)
     {
         CheckStatusToggle();
+        SetTelegramId();
         base.ShowPopup(onShowComplete);
     }
 

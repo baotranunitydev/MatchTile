@@ -1,3 +1,4 @@
+using PopupLoading;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -61,7 +62,6 @@ public class PopupBooster : PopupBase
         {
             vibrateController.Vibrate();
             audioController.PlaySound(SoundName.Coin);
-            HidePopup(() => gameHelper.GamePlayController.StateGame = StateGame.PlayGame);
             if (isCanBuy())
             {
                 var itemType = (int)boosterType;
@@ -72,19 +72,33 @@ public class PopupBooster : PopupBase
                     GameHelper.Instance.BoosterController.SetAmountTextByBoosterType(boosterType);
                 }
             }
+            else
+            {
+                var popupLoading = PopupLoading.Enum.PopupController.Instance;
+                popupLoading.ShowLoading(new List<PopupLoading.Enum.TypeResponse> { PopupLoading.Enum.TypeResponse.GetUserData });
+                var reloadData = await APIController.Instance.UserDataAsset.LoadingData();
+                if (reloadData == LoadingType.Fail)
+                {
+                    APIController.Instance.PopupWarning.ShowPopup();
+                    return;
+                }
+                GameHelper.Instance.GamePlayController.UpdateStarText();
+                popupLoading.HideLoading(PopupLoading.Enum.TypeResponse.GetUserData);
+            }
+            HidePopup(() => gameHelper.GamePlayController.StateGame = StateGame.PlayGame);
         });
     }
 
     public void InitPopupbooster(BoosterType boosterType, Sprite sprIconBooster, int amount, int price)
     {
+        this.boosterType = boosterType;
+        this.amount = amount;
+        this.price = price;
         btnBuy.interactable = isCanBuy();
         SetIconBooster(sprIconBooster);
         SetNameBooster(boosterType.ToString());
         SetAmountBoosterBuy(amount);
         SetSpriceBuy(price);
-        this.boosterType = boosterType;
-        this.amount = amount;
-        this.price = price;
     }
 
     private void SetIconBooster(Sprite sprIconBooster)

@@ -1,3 +1,4 @@
+using PopupLoading;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
@@ -45,14 +46,25 @@ public class BoosterController : MonoBehaviour
             var booster = lstBooster[i];
             booster.InitBooster(async () =>
             {
+                var popupLoading = PopupLoading.Enum.PopupController.Instance;
+                popupLoading.ShowLoading(new List<PopupLoading.Enum.TypeResponse> { PopupLoading.Enum.TypeResponse.GetUserData });
+                var getUserData = await APIController.Instance.UserDataAsset.LoadingData();
+                popupLoading.HideLoading(PopupLoading.Enum.TypeResponse.GetUserData);
+                if (getUserData == LoadingType.Fail)
+                {
+                    APIController.Instance.PopupWarning.ShowPopup();
+                    return;
+                }
+                GameHelper.Instance.GamePlayController.UpdateStarText();
                 VibrateController.Instance.Vibrate();
                 AudioController.Instance.PlaySound(SoundName.ClickBtn);
                 var amount = GetAmountBooster(booster.BoosterType, userData);
+                Debug.Log($"Amount - {amount}");
                 if (amount > 0)
                 {
                     var itemType = (int)booster.BoosterType;
                     var result = await APIController.Instance.PostUseItem(itemType);
-                    if(result)
+                    if (result)
                     {
                         booster.UseBooster();
                         SetAmountTextByBoosterType(booster.BoosterType);
@@ -61,7 +73,7 @@ public class BoosterController : MonoBehaviour
                 else
                 {
                     var result = await APIController.Instance.GetItemConfig();
-                    if(result)
+                    if (result)
                     {
                         var boosterModel = boosterSO.GetBoosterByType(booster.BoosterType);
                         if (popupBooster == null || booster == null) return;

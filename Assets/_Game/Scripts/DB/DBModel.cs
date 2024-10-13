@@ -43,11 +43,13 @@ public struct UserData
 {
     public string firstName;
     public string lastName;
+    public string userName;
     public string telegramId;
     public int level;
     public int star;
     public int amountHint;
     public int amountBomb;
+    public bool isNew;
 
     public void LevelUp()
     {
