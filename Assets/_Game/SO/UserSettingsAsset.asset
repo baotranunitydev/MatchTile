@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: UserSettingsAsset
   m_EditorClassIdentifier: 
   data:
-    isMusic: 0
-    isSound: 0
-    isVibrate: 0
+    isMusic: 1
+    isSound: 1
+    isVibrate: 1
   isCheckFail: 0
   nameSaveLocal: matchtile3d_settings

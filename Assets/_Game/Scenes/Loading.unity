@@ -304,7 +304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7258910147726221424, guid: e20124ca0c358a94ca07437eaeabba14, type: 3}
       propertyPath: isLocal
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7258910147726221424, guid: e20124ca0c358a94ca07437eaeabba14, type: 3}
       propertyPath: _loginDataAsset
