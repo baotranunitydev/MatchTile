@@ -9,6 +9,7 @@ namespace DevNgao.API
         None,
         //NEW ECCHO
         GetUserData,
+        GetConfig,
     }
 
     public enum TypePostRequest
@@ -38,6 +39,9 @@ namespace DevNgao.API
                     break;
                 case TypeGetRequest.GetUserData:
                     url = "/get-user-data";
+                    break;
+                case TypeGetRequest.GetConfig:
+                    url = "/get-item-config";
                     break;
             }
             return LoadingDataController.URL_HOST_GAME + url;

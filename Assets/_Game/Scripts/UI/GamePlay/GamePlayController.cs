@@ -22,15 +22,14 @@ public class GamePlayController : MonoBehaviour
     private GameHelper gameHelper;
     private AudioController audioController;
     private VibrateController vibrateController;
-    private UserData userData;
     public StateGame StateGame { get => stateGame; set => stateGame = value; }
+    public APIController apiController => APIController.Instance;
 
     private void Start()
     {
         gameHelper = GameHelper.Instance;
         audioController = AudioController.Instance;
         vibrateController = VibrateController.Instance;
-        userData = APIController.Instance.UserDataAsset.Data;
         InitGamePlayScene();
     }
     private void Update()
@@ -54,7 +53,7 @@ public class GamePlayController : MonoBehaviour
     {
         InitBtnPause();
         UpdateStarText();
-        gamePlayView.SetLevelText(userData.level + 1);
+        gamePlayView.SetLevelText(apiController.UserDataAsset.Data.level + 1);
         SetStatusImageCover(true);
         scoreController.InitScore();
         await InitGame();
@@ -64,7 +63,7 @@ public class GamePlayController : MonoBehaviour
 
     private async UniTask InitGame()
     {
-        var lstTileID = gameHelper.LevelController.GetLstTileID(userData.level);
+        var lstTileID = gameHelper.LevelController.GetLstTileID(apiController.UserDataAsset.Data.level);
         gameHelper.BoardController.InitBoard();
         await gameHelper.BoardController.SpawnTile(lstTileID);
     }
@@ -90,7 +89,7 @@ public class GamePlayController : MonoBehaviour
 
     public void UpdateStarText()
     {
-        gamePlayView.SetStarText(userData.star);
+        gamePlayView.SetStarText(apiController.UserDataAsset.Data.level);
     }
 
     public void AddScore()
@@ -99,22 +98,24 @@ public class GamePlayController : MonoBehaviour
         scoreController.AddScore(score);
     }
 
-    public void Win()
+    public async void Win()
     {
-        //userData.LevelUp();
         var score = scoreController.Score;
-        //userData.InscreaseResource(ResourceType.Star, score);
-        UpdateStarText();
-        SetStatusImageCover(true);
-        stateGame = StateGame.EndGame;
-        audioController.PlaySound(SoundName.Win);
-        var popupWin = gameHelper.PopupController.GetPopupByType(PopupType.PopupWin) as PopupWin;
-        popupWin.InitInfoPopupWin(score, userData.star - score);
-        popupWin.ShowPopup(() =>
+        var result = await APIController.Instance.PostWin(score);
+        if (result)
         {
-            SetStatusImageCover(false);
-            popupWin.AnimationText();
-        });
+            UpdateStarText();
+            SetStatusImageCover(true);
+            stateGame = StateGame.EndGame;
+            audioController.PlaySound(SoundName.Win);
+            var popupWin = gameHelper.PopupController.GetPopupByType(PopupType.PopupWin) as PopupWin;
+            popupWin.InitInfoPopupWin(score, APIController.Instance.UserDataAsset.Data.level - score);
+            popupWin.ShowPopup(() =>
+            {
+                SetStatusImageCover(false);
+                popupWin.AnimationText();
+            });
+        }
     }
 
     public void Lose()

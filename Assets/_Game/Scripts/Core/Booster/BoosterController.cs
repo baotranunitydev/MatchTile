@@ -11,26 +11,14 @@ public class BoosterController : MonoBehaviour
     private BoosterHint boosterHint;
     private PopupBooster popupBooster;
     private GameHelper gameHelper;
-    private UserData userData;
+    private UserData userData => APIController.Instance.UserDataAsset.Data;
     private BoosterBase GetBoosterByBoosterType(BoosterType boosterType) => lstBooster.Find(booster => booster.BoosterType == boosterType);
     private void Start()
     {
-        userData = APIController.Instance.UserDataAsset.Data;
         gameHelper = GameHelper.Instance;
         SetBoosterHint();
         SetPopupBooster();
         InitBooster();
-        GameEvent.onUpdateUserData += OnUpdateUserData;
-    }
-
-    private void OnDestroy()
-    {
-        GameEvent.onUpdateUserData -= OnUpdateUserData;
-    }
-
-    private void OnUpdateUserData(UserData userData)
-    {
-        this.userData = userData;
     }
 
     private void SetBoosterHint()
@@ -55,25 +43,33 @@ public class BoosterController : MonoBehaviour
         for (int i = 0; i < lstBooster.Count; i++)
         {
             var booster = lstBooster[i];
-            booster.InitBooster(() =>
+            booster.InitBooster(async () =>
             {
                 VibrateController.Instance.Vibrate();
                 AudioController.Instance.PlaySound(SoundName.ClickBtn);
                 var amount = GetAmountBooster(booster.BoosterType, userData);
                 if (amount > 0)
                 {
-                    booster.UseBooster();
-                    //DescreaseBooster(booster.BoosterType, 1);
-                    SetAmountTextByBoosterType(booster.BoosterType);
+                    var itemType = (int)booster.BoosterType;
+                    var result = await APIController.Instance.PostUseItem(itemType);
+                    if(result)
+                    {
+                        booster.UseBooster();
+                        SetAmountTextByBoosterType(booster.BoosterType);
+                    }
                 }
                 else
                 {
-                    var boosterModel = boosterSO.GetBoosterByType(booster.BoosterType);
-                    if (popupBooster == null || booster == null) return;
-                    popupBooster.InitPopupbooster(boosterModel.boosterType, boosterModel.sprBooster, boosterModel.amount, boosterModel.price);
-                    gameHelper.GamePlayController.StateGame = StateGame.PauseGame;
-                    popupBooster.gameObject.SetActive(true);
-                    popupBooster.ShowPopup();
+                    var result = await APIController.Instance.GetItemConfig();
+                    if(result)
+                    {
+                        var boosterModel = boosterSO.GetBoosterByType(booster.BoosterType);
+                        if (popupBooster == null || booster == null) return;
+                        popupBooster.InitPopupbooster(boosterModel.boosterType, boosterModel.sprBooster, boosterModel.amount, boosterModel.price);
+                        gameHelper.GamePlayController.StateGame = StateGame.PauseGame;
+                        popupBooster.gameObject.SetActive(true);
+                        popupBooster.ShowPopup();
+                    }
                 }
             });
             SetAmountTextByBoosterType(booster.BoosterType);

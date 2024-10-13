@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public enum BoosterType
 {
-    Hint = 0,
-    Bomb = 1,
+    Hint = 1,
+    Bomb = 2,
 }
 
 

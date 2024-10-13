@@ -15,14 +15,14 @@ public class PopupBooster : PopupBase
     [SerializeField] private Button btnBuy;
     private AudioController audioController;
     private VibrateController vibrateController;
-    private UserData userData;
+    private UserData userData => APIController.Instance.UserDataAsset.Data;
     private GameHelper gameHelper;
     private BoosterType boosterType;
     private int price;
     private int amount;
+    private APIController apiController => APIController.Instance;
     public override void InitPopup()
     {
-        userData = APIController.Instance.UserDataAsset.Data;
         audioController = AudioController.Instance;
         vibrateController = VibrateController.Instance;
         gameHelper = GameHelper.Instance;
@@ -53,36 +53,24 @@ public class PopupBooster : PopupBase
         return isCanBuy;
     }
 
-    private ResourceType GetResourceTypeByBoosterType(BoosterType boosterType)
-    {
-        ResourceType resourceType = ResourceType.Hint;
-        switch (boosterType)
-        {
-            case BoosterType.Hint:
-                resourceType = ResourceType.Hint;
-                break;
-            case BoosterType.Bomb:
-                resourceType = ResourceType.Bomb;
-                break;
-        }
-        return resourceType;
-    }
 
     private void InitBtnBuy()
     {
         btnBuy.onClick.RemoveAllListeners();
-        btnBuy.onClick.AddListener(() =>
+        btnBuy.onClick.AddListener(async () =>
         {
             vibrateController.Vibrate();
             audioController.PlaySound(SoundName.Coin);
             HidePopup(() => gameHelper.GamePlayController.StateGame = StateGame.PlayGame);
             if (isCanBuy())
             {
-                var resourceType = GetResourceTypeByBoosterType(boosterType);
-                userData.InscreaseResource(resourceType, amount);
-                userData.DescreaseResource(ResourceType.Star, price);
-                GameHelper.Instance.GamePlayController.UpdateStarText();
-                GameHelper.Instance.BoosterController.SetAmountTextByBoosterType(boosterType);
+                var itemType = (int)boosterType;
+                var result = await APIController.Instance.PostBuyItem(itemType);
+                if (result)
+                {
+                    GameHelper.Instance.GamePlayController.UpdateStarText();
+                    GameHelper.Instance.BoosterController.SetAmountTextByBoosterType(boosterType);
+                }
             }
         });
     }
