@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Runtime.InteropServices;
 using AOT;
 
-namespace UnigramPayment.Core
+namespace TelegramPayment
 {
     public enum TypeHaptic
     {
@@ -172,7 +172,7 @@ namespace UnigramPayment.Core
         }
 
         internal static void OpenPurchaseInvoice(string url,
-            Action<string, string> onInvoiceSuccessfullyPaid, Action<string> onInvoicePayFailed)
+            Action<string, string> onInvoiceSuccessfullyPaid = null, Action<string> onInvoicePayFailed = null)
         {
             _onInvoiceSuccessfullyPaid = (status, paymentReceipt) =>
             {

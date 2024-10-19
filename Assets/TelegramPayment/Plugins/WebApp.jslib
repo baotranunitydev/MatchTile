@@ -119,11 +119,8 @@ const webAppLibrary = {
             var invoiceLink = UTF8ToString(link);
 
             Telegram.WebApp.openInvoice(invoiceLink, function(status) {
-                console.log("Status action ssss",status)
-                //sendMessage('TelegramInvoiceController', 'HandlePaymentStatus', status);
-                    window.dispatchEvent(
-                    new CustomEvent("SendMessageToReactStar", { detail: status })
-                    );
+                console.log("Status action invoice: ",status)
+                unityInstance.sendMessage('TelegramInvoiceController', 'HandlePaymentStatus', status);
                 Telegram.WebApp.onEvent('invoiceClosed', function(event) {
                     var statusPtr = allocate(intArrayFromString(event.status), ALLOC_NORMAL);
 
