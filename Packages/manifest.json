@@ -1,8 +1,8 @@
 {
   "dependencies": {
+    "com.dev.ultils": "https://github.com/baotranunitydev/Packages.git#devultills-1.0.7",
     "com.sirenix.odininspector": "https://github.com/baotranunitydev/Packages.git#odininspector-1.0.0",
     "com.tivadar.best": "https://github.com/baotranunitydev/Packages.git#bestbundle-1.0.0",
-    "com.dev.ultils": "https://github.com/baotranunitydev/Packages.git#devultills-1.0.7",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.ai.navigation": "2.0.4",
     "com.unity.collab-proxy": "2.5.2",
@@ -14,6 +14,7 @@
     "com.unity.nuget.newtonsoft-json": "3.2.1",
     "com.unity.test-framework": "1.4.5",
     "com.unity.timeline": "1.8.7",
+    "com.unity.toolchain.linux-x86_64": "2.0.9",
     "com.unity.toolchain.win-x86_64-linux-x86_64": "2.0.9",
     "com.unity.ugui": "2.0.0",
     "com.unity.visualscripting": "1.9.4",
