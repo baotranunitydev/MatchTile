@@ -11,6 +11,7 @@ public enum PopupType
     PopupWin = 2,
     PopupLose = 3,
     PopupBooster = 4,
+    PopupPurchase = 5,
 }
 
 public abstract class PopupBase : MonoBehaviour
@@ -36,6 +37,7 @@ public abstract class PopupBase : MonoBehaviour
         {
             onShowComplete?.Invoke();
         });
+        Debug.Log($"SHow Popup  - {gameObject.name}");
     }
 
     public virtual void HidePopup(UnityAction onHideComplete = null)

@@ -53,6 +53,7 @@ public class GamePlayController : MonoBehaviour
     private async void InitGamePlayScene()
     {
         InitBtnPause();
+        InitButtonStar();
         UpdateStarText();
         gamePlayView.SetLevelText(userData.level + 1);
         SetStatusImageCover(true);
@@ -78,6 +79,24 @@ public class GamePlayController : MonoBehaviour
             stateGame = StateGame.PauseGame;
             var popupSettings = gameHelper.PopupController.GetPopupByType(PopupType.PopupPause);
             popupSettings.ShowPopup();
+        });
+    }
+
+    private void InitButtonStar()
+    {
+        gamePlayView.InitButtonStar(() =>
+        {
+            vibrateController.Vibrate();
+            audioController.PlaySound(SoundName.ClickBtn);
+            stateGame = StateGame.PauseGame;
+            var popupPurchase = gameHelper.PopupController.GetPopupByType(PopupType.PopupPurchase) as PopupPurchase;
+            if (popupPurchase != null)
+            {
+                var amount = 300;
+                var price = 1999;
+                popupPurchase.InitPopupPurchase(amount, price);
+                popupPurchase.ShowPopup();
+            }
         });
     }
 
