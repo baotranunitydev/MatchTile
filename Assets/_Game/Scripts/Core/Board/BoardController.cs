@@ -44,7 +44,7 @@ public class BoardController : MonoBehaviour
         onSelectTile -= OnSelectTile;
     }
 
-    public async UnitaskVoid SpawnTile(List<int> lstTileID)
+    public async UniTask SpawnTile(List<int> lstTileID)
     {
         if (modelSO == null) return;
         for (int i = 0; i < lstTileID.Count; i++)
@@ -62,7 +62,7 @@ public class BoardController : MonoBehaviour
             var pos = tfmSpawnTile.transform.position;
             tile.transform.position = pos + new Vector3(posInsideCicle.x, 2f, posInsideCicle.y);
             lstTile.Add(tile);
-            await UnitaskVoid.WaitForSeconds(0.2f);
+            await UniTask.WaitForSeconds(0.2f);
         }
     }
 

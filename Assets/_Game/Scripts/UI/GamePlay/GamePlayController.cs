@@ -62,7 +62,7 @@ public class GamePlayController : MonoBehaviour
         SetStatusImageCover(false);
     }
 
-    private async UnitaskVoid InitGame()
+    private async UniTask InitGame()
     {
         var lstTileID = gameHelper.LevelController.GetLstTileID(userData.level);
         gameHelper.BoardController.InitBoard();

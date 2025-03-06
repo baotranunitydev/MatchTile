@@ -41,14 +41,14 @@ public class ComboController : MonoBehaviour
         }
     }
 
-    private async UnitaskVoid ComboCountDown(CancellationToken cancellationToken)
+    private async UniTaskVoid ComboCountDown(CancellationToken cancellationToken)
     {
         combo++;
         comboView.SetTextCombo(combo);
         float timer = timerCombo;
         while (timer >= 0)
         {
-            await UnitaskVoid.Yield(cancellationToken);
+            await UniTask.Yield(cancellationToken);
             if (gameHelper.GamePlayController.StateGame != StateGame.PlayGame) continue;
             timer -= Time.deltaTime;
             float value = timer / timerCombo;

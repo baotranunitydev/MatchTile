@@ -18,7 +18,7 @@ public class TileView : MonoBehaviour
         sprRendererTileIconBot.sprite = sprIcon;
     }
 
-    public async UnitaskVoid MoveTileToMergeBoard(Vector3 pos)
+    public async UniTask MoveTileToMergeBoard(Vector3 pos)
     {
         tileCollider.isTrigger = true;
         rg.isKinematic = true;
