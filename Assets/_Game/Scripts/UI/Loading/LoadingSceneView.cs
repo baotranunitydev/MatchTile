@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,12 @@ public class LoadingSceneView : MonoBehaviour
     [SerializeField] private Image imgFadeUI;
     [SerializeField] private GameObject gobjLoading;
     [SerializeField] private Image imgFill;
+    [SerializeField] private TextMeshProUGUI txtVersion;
+
+    private void Start()
+    {
+        txtVersion.text = $"v{Application.version}";
+    }
 
     public void FadeOutBlackScreen()
     {

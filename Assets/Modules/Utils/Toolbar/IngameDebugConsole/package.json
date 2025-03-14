@@ -1,0 +1,15 @@
+{
+  "name": "com.yasirkula.ingamedebug",
+  "displayName": "In-game Debug Console",
+  "description": "You can simply place the IngameDebugConsole prefab to your scene. Hovering the cursor over its properties in the Inspector will reveal explanatory tooltips.",
+  "version": "1.6.8",
+  "unity": "2019.4",
+  "documentationUrl": "https://github.com/yasirkula/UnityIngameDebugConsole",
+  "changelogUrl": "https://github.com/yasirkula/UnityIngameDebugConsole",
+  "licensesUrl": "https://github.com/yasirkula/UnityIngameDebugConsole#faq",
+  "author": {
+    "name": "yasirkula",
+    "url": "https://github.com/yasirkula/UnityIngameDebugConsole"
+  },
+  "keywords": [ "ingamedebug", "debug"]
+}

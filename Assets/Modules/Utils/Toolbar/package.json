@@ -1,0 +1,11 @@
+{
+  "name": "com.dev.ultils",
+  "displayName": "Dev Ultils",
+  "description": "Include Log toolbar, Scene toolbar, Ingamedebug",
+  "version": "1.0.0",
+  "unity": "2019.4",
+  "keywords": [
+    "devultils"
+  ],
+  "_fingerprint": "0398eef5a6e33dd4b9a386ee5d96cb647a69d76e"
+}

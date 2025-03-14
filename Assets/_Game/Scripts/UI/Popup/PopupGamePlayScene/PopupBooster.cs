@@ -79,7 +79,7 @@ public class PopupBooster : PopupBase
             if (isCanBuy())
             {
                 var resourceType = GetResourceTypeByBoosterType(boosterType);
-                userData.InscreaseResource(resourceType, amount);
+                userData.IncreaseResource(resourceType, amount);
                 userData.DescreaseResource(ResourceType.Star, price);
                 GameHelper.Instance.GamePlayController.UpdateStarText();
                 GameHelper.Instance.BoosterController.SetAmountTextByBoosterType(boosterType);

@@ -96,7 +96,7 @@ public class BoosterController : MonoBehaviour
         switch (boosterType)
         {
             case BoosterType.Hint:
-                userData.InscreaseResource(ResourceType.Hint, amount);
+                userData.IncreaseResource(ResourceType.Hint, amount);
                 break;
             case BoosterType.Bomb:
                 userData.DescreaseResource(ResourceType.Bomb, amount);

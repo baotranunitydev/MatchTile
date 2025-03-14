@@ -1,13 +1,14 @@
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using IAP;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PopupPurchase : PopupBase
 {
-    [SerializeField] private TextMeshProUGUI txtAmount;
-    [SerializeField] private TextMeshProUGUI txtPrice;
+    [SerializeField] private IAPItem iAPItem;
     [SerializeField] private Button btnClose;
-    [SerializeField] private Button btnBuy;
     private AudioController audioController;
     private VibrateController vibrateController;
     private UserData userData;
@@ -20,7 +21,7 @@ public class PopupPurchase : PopupBase
         vibrateController = VibrateController.Instance;
         gameHelper = GameHelper.Instance;
         InitBtnClose();
-        InitBtnBuy();
+        // InitBtnBuy();
         base.InitPopup();
     }
 
@@ -36,38 +37,25 @@ public class PopupPurchase : PopupBase
         });
     }
 
-    private void ActionBuySuccess()
+    public void ActionBuySuccess()
     {
         audioController.PlaySound(SoundName.Coin);
-        userData.InscreaseResource(ResourceType.Star, amount);
+        userData.IncreaseResource(ResourceType.Star, amount);
         GameHelper.Instance.GamePlayController.UpdateStarText();
+        Debug.Log("Success");
+    }
+
+    public void ActionBuyFail()
+    {
+        // gameHelper.GamePlayController.StateGame = StateGame.PlayGame;
+        // HidePopup();
     }
 
 
-    private void InitBtnBuy()
+    public async UniTask InitPopupPurchase()
     {
-        btnBuy.onClick.RemoveAllListeners();
-        btnBuy.onClick.AddListener(() =>
-        {
-            vibrateController.Vibrate();
-            Debug.Log("Buyy");
-        });
-    }
-
-    public void InitPopupPurchase(int amount, int price)
-    {
-        this.amount = amount;
-        SetAmount(amount);
-        SetPriceBuy(price);
-    }
-
-    private void SetAmount(int amount)
-    {
-        txtAmount.text = $"{amount}";
-    }
-
-    private void SetPriceBuy(int price)
-    {
-        txtPrice.text = $"{price} VND";
+        // await UniTask.WaitUntil(() => iAPItem.TypeStatusIAP != TypeStatusIAP.None);
+        // if (iAPItem.TypeStatusIAP == TypeStatusIAP.InitFailed) return;
+        await UniTask.CompletedTask;
     }
 }

@@ -70,7 +70,7 @@ public class UserData
         DBController.Instance.USER_DATA = this;
     }
 
-    public void InscreaseResource(ResourceType resourceType, int amount)
+    public void IncreaseResource(ResourceType resourceType, int amount)
     {
         switch (resourceType)
         {

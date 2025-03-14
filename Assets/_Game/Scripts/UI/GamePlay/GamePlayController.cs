@@ -84,7 +84,7 @@ public class GamePlayController : MonoBehaviour
 
     private void InitButtonStar()
     {
-        gamePlayView.InitButtonStar(() =>
+        gamePlayView.InitButtonStar(async () =>
         {
             vibrateController.Vibrate();
             audioController.PlaySound(SoundName.ClickBtn);
@@ -92,9 +92,7 @@ public class GamePlayController : MonoBehaviour
             var popupPurchase = gameHelper.PopupController.GetPopupByType(PopupType.PopupPurchase) as PopupPurchase;
             if (popupPurchase != null)
             {
-                var amount = 300;
-                var price = 1999;
-                popupPurchase.InitPopupPurchase(amount, price);
+                await popupPurchase.InitPopupPurchase();
                 popupPurchase.ShowPopup();
             }
         });
@@ -122,7 +120,7 @@ public class GamePlayController : MonoBehaviour
     {
         userData.LevelUp();
         var score = scoreController.Score;
-        userData.InscreaseResource(ResourceType.Star, score);
+        userData.IncreaseResource(ResourceType.Star, score);
         UpdateStarText();
         SetStatusImageCover(true);
         stateGame = StateGame.EndGame;
